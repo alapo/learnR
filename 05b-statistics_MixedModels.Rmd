@@ -129,7 +129,7 @@ You could [use](https://stats.stackexchange.com/questions/237512/how-to-perform-
 3. `multcomp::glht()`
 
 
-# Running your models
+#3 Running your models
 
 For starters I am a big fan of using something that allows me to run through several models to get an overall *feel* for the data. This usually involves either [broom](http://varianceexplained.org/r/broom-intro/) or [rstatix](https://rpkgs.datanovia.com/rstatix/) package which allows for pipe friendly modelling. I will commonly do this in order to evaluate if random factors should be included in my final model. If you are running mixed models you can use [broomExtra](https://indrajeetpatil.github.io/broomExtra/) or [broom.mixed](https://github.com/bbolker/broom.mixed). I would recommend broomExtra which depends on broom.mixed (so its hits 2 birds with one stone).
 
@@ -151,7 +151,7 @@ For a very complete guide on running ANOVAs in R for your first time. [This](htt
 
 You can see some exercises [here](https://stats.idre.ucla.edu/r/seminars/interactions-r/)
 
-# Modeling your data
+## Modeling your data
 
 To test the normality of your data you can use a few different methods
 
