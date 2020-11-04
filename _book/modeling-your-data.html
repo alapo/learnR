@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Modeling your data | Data Science In RStudio</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Modeling your data | Data Science In RStudio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Modeling your data | Data Science In RStudio" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Andrew P. Lapointe" />
+
+
+<meta name="date" content="2020-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="running-your-models.html"/>
+<link rel="next" href="mixed-models-1.html"/>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R_Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-add"><i class="fa fa-check"></i><b>1.1</b> Things to add</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#documentation-for-author"><i class="fa fa-check"></i><b>1.2</b> Documentation for Author</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#andrews-notes-ramblings"><i class="fa fa-check"></i><b>1.3</b> Andrew’s Notes / Ramblings</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#to-do"><i class="fa fa-check"></i><b>1.4</b> To Do</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#title-word-cloud"><i class="fa fa-check"></i><b>1.5</b> Title word cloud</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#copy-from-chapter-1-example"><i class="fa fa-check"></i><b>1.6</b> Copy from Chapter 1 Example</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#matlab-highlighting"><i class="fa fa-check"></i><b>1.7</b> MATLAB Highlighting</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#misc-codedata"><i class="fa fa-check"></i><b>1.8</b> Misc code/data</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>1.9</b> Other Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#preamble"><i class="fa fa-check"></i><b>2.1</b> Preamble</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-this-book-is-structured"><i class="fa fa-check"></i><b>2.2</b> How this book is structured</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#keys-to-learning"><i class="fa fa-check"></i><b>2.3</b> Keys to Learning</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#quick-introduction-to-reproducible-science"><i class="fa fa-check"></i><b>2.4</b> Quick Introduction to reproducible science</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#how-to-use-this-book"><i class="fa fa-check"></i><b>2.5</b> How to use this book</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#reproducible-science-link"><i class="fa fa-check"></i><b>2.6</b> Reproducible Science Link</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#how-to-make-a-provocative-conference-poster"><i class="fa fa-check"></i><b>2.7</b> How to make a provocative Conference Poster</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#misc-student-resources"><i class="fa fa-check"></i><b>2.8</b> Misc Student Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#starting-off"><i class="fa fa-check"></i><b>3.1</b> Starting Off</a></li>
+<li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#setting-up-rstudio-for-the-first-time"><i class="fa fa-check"></i><b>3.2</b> Setting up RStudio for the first time</a></li>
+<li class="chapter" data-level="3.3" data-path="installation.html"><a href="installation.html#installing-r-rstudio"><i class="fa fa-check"></i><b>3.3</b> Installing R + RStudio</a></li>
+<li class="chapter" data-level="3.4" data-path="installation.html"><a href="installation.html#already-have-r-and-rstudio-installed"><i class="fa fa-check"></i><b>3.4</b> Already have R and RStudio installed?</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="installation.html"><a href="installation.html#how-to-update-r"><i class="fa fa-check"></i><b>3.4.1</b> How to update R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html#update-rstudio"><i class="fa fa-check"></i><b>3.5</b> Update RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="installation.html"><a href="installation.html#how-to-use-packages"><i class="fa fa-check"></i><b>3.6</b> How to use packages</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="installation.html"><a href="installation.html#installing-packages-on-your-computer"><i class="fa fa-check"></i><b>3.6.1</b> Installing packages on your computer</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="installation.html"><a href="installation.html#alternatives-to-installing-loading-packages"><i class="fa fa-check"></i><b>3.7</b> Alternatives to installing / loading packages</a></li>
+<li class="chapter" data-level="3.8" data-path="installation.html"><a href="installation.html#trouble-installing-packages"><i class="fa fa-check"></i><b>3.8</b> Trouble installing packages</a></li>
+<li class="chapter" data-level="3.9" data-path="installation.html"><a href="installation.html#other-things-to-do-in-rstudio"><i class="fa fa-check"></i><b>3.9</b> Other things to do in RStudio</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="installation.html"><a href="installation.html#themes-bring-on-the-darkness"><i class="fa fa-check"></i><b>3.9.1</b> Themes: Bring on the darkness</a></li>
+<li class="chapter" data-level="3.9.2" data-path="installation.html"><a href="installation.html#shortcuts"><i class="fa fa-check"></i><b>3.9.2</b> Shortcuts</a></li>
+<li class="chapter" data-level="3.9.3" data-path="installation.html"><a href="installation.html#code-folding"><i class="fa fa-check"></i><b>3.9.3</b> Code Folding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="installation.html"><a href="installation.html#conclusion"><i class="fa fa-check"></i><b>3.10</b> Conclusion</a></li>
+<li class="chapter" data-level="3.11" data-path="installation.html"><a href="installation.html#chapter-1b-project-environment"><i class="fa fa-check"></i><b>3.11</b> Chapter 1b: Project Environment</a></li>
+<li class="chapter" data-level="3.12" data-path="installation.html"><a href="installation.html#setting-up-your-work-environment"><i class="fa fa-check"></i><b>3.12</b> Setting up your work environment</a>
+<ul>
+<li class="chapter" data-level="3.12.1" data-path="installation.html"><a href="installation.html#folder-organization"><i class="fa fa-check"></i><b>3.12.1</b> Folder Organization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-script.html"><a href="first-script.html"><i class="fa fa-check"></i><b>4</b> Creating your first script</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="first-script.html"><a href="first-script.html#part-1-loadinginstalling-packages-needed"><i class="fa fa-check"></i><b>4.1</b> Part 1: Loading/installing packages needed</a></li>
+<li class="chapter" data-level="4.2" data-path="first-script.html"><a href="first-script.html#part-2-loading-your-data"><i class="fa fa-check"></i><b>4.2</b> Part 2: Loading your data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="first-script.html"><a href="first-script.html#xlsx"><i class="fa fa-check"></i><b>4.2.1</b> xlsx</a></li>
+<li class="chapter" data-level="4.2.2" data-path="first-script.html"><a href="first-script.html#csv"><i class="fa fa-check"></i><b>4.2.2</b> csv</a></li>
+<li class="chapter" data-level="4.2.3" data-path="first-script.html"><a href="first-script.html#google-sheet"><i class="fa fa-check"></i><b>4.2.3</b> Google Sheet</a></li>
+<li class="chapter" data-level="4.2.4" data-path="first-script.html"><a href="first-script.html#sav-spss"><i class="fa fa-check"></i><b>4.2.4</b> sav (SPSS)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="first-script.html"><a href="first-script.html#cleaning-your-imported-data."><i class="fa fa-check"></i><b>4.3</b> Cleaning your imported data.</a></li>
+<li class="chapter" data-level="4.4" data-path="first-script.html"><a href="first-script.html#part-3-saving-outputs"><i class="fa fa-check"></i><b>4.4</b> Part 3: Saving Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datawrangling.html"><a href="datawrangling.html#intro-1"><i class="fa fa-check"></i><b>5.1</b> Intro</a></li>
+<li class="chapter" data-level="5.2" data-path="datawrangling.html"><a href="datawrangling.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="datawrangling.html"><a href="datawrangling.html#creating-report-with-dataexplorer"><i class="fa fa-check"></i><b>5.3</b> Creating Report with DataExplorer</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datawrangling.html"><a href="datawrangling.html#reading-material-exploratory-data-analysis"><i class="fa fa-check"></i><b>5.3.1</b> Reading Material : Exploratory Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datawrangling.html"><a href="datawrangling.html#tasks"><i class="fa fa-check"></i><b>5.4</b> Tasks</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="datawrangling.html"><a href="datawrangling.html#inspecting-the-imported-data"><i class="fa fa-check"></i><b>5.4.1</b> Inspecting the imported data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="datawrangling.html"><a href="datawrangling.html#choosing-good-column-names"><i class="fa fa-check"></i><b>5.4.2</b> Choosing good column names</a></li>
+<li class="chapter" data-level="5.4.3" data-path="datawrangling.html"><a href="datawrangling.html#replace-strings-using-pipes"><i class="fa fa-check"></i><b>5.4.3</b> replace strings using pipes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="datawrangling.html"><a href="datawrangling.html#useful-links"><i class="fa fa-check"></i><b>5.4.4</b> Useful Links</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="datawrangling.html"><a href="datawrangling.html#for-item-based-data"><i class="fa fa-check"></i><b>5.5</b> For Item-based data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="creating-tables.html"><a href="creating-tables.html"><i class="fa fa-check"></i><b>6</b> Creating tables</a></li>
+<li class="chapter" data-level="7" data-path="plotting-using-ggplot.html"><a href="plotting-using-ggplot.html"><i class="fa fa-check"></i><b>7</b> Plotting using ggplot</a></li>
+<li class="chapter" data-level="8" data-path="basic-statistics.html"><a href="basic-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic Statistics</a></li>
+<li class="chapter" data-level="9" data-path="running-your-models.html"><a href="running-your-models.html"><i class="fa fa-check"></i><b>9</b> Running your models</a></li>
+<li class="chapter" data-level="10" data-path="modeling-your-data.html"><a href="modeling-your-data.html"><i class="fa fa-check"></i><b>10</b> Modeling your data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modeling-your-data.html"><a href="modeling-your-data.html#statistics---resources"><i class="fa fa-check"></i><b>10.1</b> Statistics - Resources</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="modeling-your-data.html"><a href="modeling-your-data.html#correlations-in-rrandom_slopes"><i class="fa fa-check"></i><b>10.1.1</b> Correlations in R/random_slopes</a></li>
+<li class="chapter" data-level="10.1.2" data-path="modeling-your-data.html"><a href="modeling-your-data.html#correlation-plots"><i class="fa fa-check"></i><b>10.1.2</b> Correlation Plots:</a></li>
+<li class="chapter" data-level="10.1.3" data-path="modeling-your-data.html"><a href="modeling-your-data.html#general-good-sites"><i class="fa fa-check"></i><b>10.1.3</b> General Good Sites</a></li>
+<li class="chapter" data-level="10.1.4" data-path="modeling-your-data.html"><a href="modeling-your-data.html#learn-about-residuals"><i class="fa fa-check"></i><b>10.1.4</b> Learn about Residuals:</a></li>
+<li class="chapter" data-level="10.1.5" data-path="modeling-your-data.html"><a href="modeling-your-data.html#regression-diagnostics"><i class="fa fa-check"></i><b>10.1.5</b> Regression Diagnostics</a></li>
+<li class="chapter" data-level="10.1.6" data-path="modeling-your-data.html"><a href="modeling-your-data.html#bland-altman-plots"><i class="fa fa-check"></i><b>10.1.6</b> Bland-Altman Plots</a></li>
+<li class="chapter" data-level="10.1.7" data-path="modeling-your-data.html"><a href="modeling-your-data.html#anova"><i class="fa fa-check"></i><b>10.1.7</b> ANOVA</a></li>
+<li class="chapter" data-level="10.1.8" data-path="modeling-your-data.html"><a href="modeling-your-data.html#mixed-models"><i class="fa fa-check"></i><b>10.1.8</b> Mixed Models</a></li>
+<li class="chapter" data-level="10.1.9" data-path="modeling-your-data.html"><a href="modeling-your-data.html#cluster-analysis-see-bottom-of-the-page-for-more-links"><i class="fa fa-check"></i><b>10.1.9</b> Cluster Analysis (see bottom of the page for more links)</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="modeling-your-data.html"><a href="modeling-your-data.html#looking-at-interactions"><i class="fa fa-check"></i><b>10.2</b> Looking at interactions ——</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="modeling-your-data.html"><a href="modeling-your-data.html#packages"><i class="fa fa-check"></i><b>10.2.1</b> Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mixed-models-1.html"><a href="mixed-models-1.html"><i class="fa fa-check"></i><b>11</b> Mixed Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mixed-models-1.html"><a href="mixed-models-1.html#to-do-1"><i class="fa fa-check"></i><b>11.1</b> To-Do</a></li>
+<li class="chapter" data-level="11.2" data-path="mixed-models-1.html"><a href="mixed-models-1.html#preamble-1"><i class="fa fa-check"></i><b>11.2</b> Preamble</a></li>
+<li class="chapter" data-level="11.3" data-path="mixed-models-1.html"><a href="mixed-models-1.html#post-hoc-in-mixed-models"><i class="fa fa-check"></i><b>11.3</b> Post-hoc in mixed models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="running-your-models-1.html"><a href="running-your-models-1.html"><i class="fa fa-check"></i><b>12</b> Running your models</a></li>
+<li class="chapter" data-level="13" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html"><i class="fa fa-check"></i><b>13</b> Modeling your data</a>
+<ul>
+<li class="chapter" data-level="13.0.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#mixed-models-misc-info"><i class="fa fa-check"></i><b>13.0.1</b> Mixed Models: Misc Info</a></li>
+<li class="chapter" data-level="13.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#looking-at-interactions-1"><i class="fa fa-check"></i><b>13.1</b> Looking at interactions</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#packages-1"><i class="fa fa-check"></i><b>13.1.1</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#why-should-i-do-this"><i class="fa fa-check"></i><b>13.2</b> Why should I do this?</a></li>
+<li class="chapter" data-level="13.3" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#installing-zotero"><i class="fa fa-check"></i><b>13.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="13.4" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#yaml-explained"><i class="fa fa-check"></i><b>13.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html"><i class="fa fa-check"></i><b>14</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#results"><i class="fa fa-check"></i><b>14.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-table"><i class="fa fa-check"></i><b>14.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="14.1.2" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-figure"><i class="fa fa-check"></i><b>14.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="14.2" data-path="references.html"><a href="references.html#useful-links-1"><i class="fa fa-check"></i><b>14.2</b> Useful Links</a></li>
+<li class="chapter" data-level="14.3" data-path="references.html"><a href="references.html#installing-zotero-1"><i class="fa fa-check"></i><b>14.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="14.4" data-path="references.html"><a href="references.html#yaml-explained-1"><i class="fa fa-check"></i><b>14.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html"><i class="fa fa-check"></i><b>15</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#results-1"><i class="fa fa-check"></i><b>15.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-table-1"><i class="fa fa-check"></i><b>15.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="15.1.2" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-figure-1"><i class="fa fa-check"></i><b>15.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="how-to-create-a-github-key.html"><a href="how-to-create-a-github-key.html"><i class="fa fa-check"></i><b>16</b> How to create a GitHub key</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science In RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modeling-your-data" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Modeling your data</h1>
+<p>To test the normality of your data you can use a few different methods</p>
+<p><a href="http://www.sthda.com/english/wiki/normality-test-in-r" class="uri">http://www.sthda.com/english/wiki/normality-test-in-r</a></p>
+<p><a href="https://rstudio-pubs-static.s3.amazonaws.com/2002_1f803b2bc84c46008d3599a07867a95a.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/2002_1f803b2bc84c46008d3599a07867a95a.html</a></p>
+<p><a href="https://www.datanovia.com/en/lessons/anova-in-r/" class="uri">https://www.datanovia.com/en/lessons/anova-in-r/</a></p>
+<ol style="list-style-type: decimal">
+<li>Plot your data</li>
+<li>Check skewness and kurtosis</li>
+<li>Shapiro test.</li>
+</ol>
+<p>In order to visualize your linear model I use 3 packages/BlandAltmanLeh/vignettes/Intro</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://cran.r-project.org/web/packages/jtools/vignettes/summ.html">jtools</a></li>
+<li><a href="https://github.com/jacob-long/interactions">interactions</a></li>
+<li><a href="https://strengejacke.github.io/ggeffects/%5D">ggeffects</a> (used less)</li>
+<li>To visualize lmer mixed models see <a href="https://rstudio-pubs-static.s3.amazonaws.com/38628_54b19baf70b64eb5936a3f1f84beb7da.html">here</a></li>
+<li>To follow up a mixed-model <a href="https://benwhalley.github.io/just-enough-r/contrasts-lmer.html">here</a></li>
+</ol>
+<p>If you want a very quick way to look at your data, using <a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a> is my #1 recommendation.</p>
+<p><a href="https://indrajeetpatil.github.io/ggstatsplot_slides/slides/ggstatsplot_presentation.html#1">ggstatsplot</a> is a nice package that gets around a few problems you may run into.</p>
+<p>The <a href="http://varianceexplained.org/r/broom-intro/"><code>broom</code></a> package for visualising models</p>
+<div id="statistics---resources" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Statistics - Resources</h2>
+<div id="correlations-in-rrandom_slopes" class="section level3" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Correlations in R/random_slopes</h3>
+<pre><code>http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5383908/</code></pre>
+<p><a href="https://cran.r-project.org/web/packages/sjPlot/vignettes/sjtitemanalysis.html" class="uri">https://cran.r-project.org/web/packages/sjPlot/vignettes/sjtitemanalysis.html</a></p>
+</div>
+<div id="correlation-plots" class="section level3" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Correlation Plots:</h3>
+<pre><code>    http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram</code></pre>
+</div>
+<div id="general-good-sites" class="section level3" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> General Good Sites</h3>
+<pre><code>https://statisticsbyjim.com/jim_frost/</code></pre>
+</div>
+<div id="learn-about-residuals" class="section level3" number="10.1.4">
+<h3><span class="header-section-number">10.1.4</span> Learn about Residuals:</h3>
+<pre><code>http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/
+https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/
+https://rpubs.com/iabrady/residual-analysis</code></pre>
+</div>
+<div id="regression-diagnostics" class="section level3" number="10.1.5">
+<h3><span class="header-section-number">10.1.5</span> Regression Diagnostics</h3>
+<pre><code>    https://www.statmethods.net/stats/rdiagnostics.html
+        
+    tidymodels : https://www.tidymodels.org/
+        </code></pre>
+</div>
+<div id="bland-altman-plots" class="section level3" number="10.1.6">
+<h3><span class="header-section-number">10.1.6</span> Bland-Altman Plots</h3>
+<pre><code>    https://cran.r-project.org/web/packages/BlandAltmanLeh/vignettes/Intro.html</code></pre>
+</div>
+<div id="anova" class="section level3" number="10.1.7">
+<h3><span class="header-section-number">10.1.7</span> ANOVA</h3>
+<pre><code>https://www.datanovia.com/en/lessons/anova-in-r/</code></pre>
+</div>
+<div id="mixed-models" class="section level3" number="10.1.8">
+<h3><span class="header-section-number">10.1.8</span> Mixed Models</h3>
+<p>Good introduction: <a href="https://ourcodingclub.github.io/tutorials/mixed-models/" class="uri">https://ourcodingclub.github.io/tutorials/mixed-models/</a>
+More intro: <a href="https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r" class="uri">https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r</a>
+<a href="https://dynamicecology.wordpress.com/2015/02/05/how-many-terms-in-your-model-before-statistical-machismo/" class="uri">https://dynamicecology.wordpress.com/2015/02/05/how-many-terms-in-your-model-before-statistical-machismo/</a>
+<a href="https://m-clark.github.io/mixed-models-with-R/random_slopes.html" class="uri">https://m-clark.github.io/mixed-models-with-R/random_slopes.html</a>
+Package that gives pseudo-R^2 for mixed models –&gt; <a href="https://cran.r-project.org/web/packages/jtools/vignettes/summ.html#report_robust_standard_errors" class="uri">https://cran.r-project.org/web/packages/jtools/vignettes/summ.html#report_robust_standard_errors</a>
+<a href="https://rinterested.github.io/statistics/mixed_effects_comparison.html" class="uri">https://rinterested.github.io/statistics/mixed_effects_comparison.html</a></p>
+</div>
+<div id="cluster-analysis-see-bottom-of-the-page-for-more-links" class="section level3" number="10.1.9">
+<h3><span class="header-section-number">10.1.9</span> Cluster Analysis (see bottom of the page for more links)</h3>
+<p><a href="https://www.datanovia.com/en/product/practical-guide-to-cluster-analysis-in-r/" class="uri">https://www.datanovia.com/en/product/practical-guide-to-cluster-analysis-in-r/</a></p>
+</div>
+</div>
+<div id="looking-at-interactions" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Looking at interactions ——</h2>
+<p>src: <a href="https://cran.r-project.org/web/packages/emmeans/vignettes/interactions.html" class="uri">https://cran.r-project.org/web/packages/emmeans/vignettes/interactions.html</a></p>
+<div id="packages" class="section level3" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Packages</h3>
+<p>mertool is a gui for modelling –&gt; <a href="https://www.jaredknowles.com/journal/2015/8/12/announcing-mertools" class="uri">https://www.jaredknowles.com/journal/2015/8/12/announcing-mertools</a>
+tidymodels: <a href="https://www.tidymodels.org/learn/statistics/tidy-analysis/" class="uri">https://www.tidymodels.org/learn/statistics/tidy-analysis/</a></p>
+<p>To assess model performance I use the <a href="https://easystats.github.io/performance/">performance</a> package. You can visualize your model using this <a href="https://easystats.github.io/modelbased/articles/estimate_contrasts.html">vignette</a></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modeling-your-data.html#cb50-1"></a><span class="co"># Running an ANOVA ----------------</span></span>
+<span id="cb50-2"><a href="modeling-your-data.html#cb50-2"></a><span class="co"># testing to see if the type of service has an effect on the Journey Time </span></span>
+<span id="cb50-3"><a href="modeling-your-data.html#cb50-3"></a><span class="co">#model &lt;- lm(journey_time_avg ~ service, data=df)</span></span>
+<span id="cb50-4"><a href="modeling-your-data.html#cb50-4"></a>model &lt;-<span class="st"> </span><span class="kw">aov</span>(journey_time_avg <span class="op">~</span><span class="st"> </span>service, <span class="dt">data=</span>df)</span>
+<span id="cb50-5"><a href="modeling-your-data.html#cb50-5"></a>modsum &lt;-<span class="st"> </span><span class="kw">summary</span>(model)</span>
+<span id="cb50-6"><a href="modeling-your-data.html#cb50-6"></a><span class="co">#anova(model) #show me the answer in an ANOVA table</span></span>
+<span id="cb50-7"><a href="modeling-your-data.html#cb50-7"></a>modsum</span>
+<span id="cb50-8"><a href="modeling-your-data.html#cb50-8"></a></span>
+<span id="cb50-9"><a href="modeling-your-data.html#cb50-9"></a><span class="co"># ANOVA w/ Type III SS --------------</span></span>
+<span id="cb50-10"><a href="modeling-your-data.html#cb50-10"></a><span class="co"># requires the &quot;car&quot; library</span></span>
+<span id="cb50-11"><a href="modeling-your-data.html#cb50-11"></a>model &lt;-<span class="st"> </span><span class="kw">Anova</span>(<span class="kw">lm</span>(Measure <span class="op">~</span><span class="st"> </span>Group <span class="op">+</span><span class="st"> </span>Brain_Region <span class="op">+</span><span class="st"> </span>Group<span class="op">*</span>Brain_Region, <span class="dt">data =</span> df, <span class="dt">contrasts=</span><span class="kw">list</span>(<span class="dt">Group=</span>contr.sum, <span class="dt">Brain_Region=</span>contr.sum), <span class="dt">type=</span><span class="dv">3</span>))</span>
+<span id="cb50-12"><a href="modeling-your-data.html#cb50-12"></a><span class="kw">report</span>(model) <span class="co">#requires easystats</span></span>
+<span id="cb50-13"><a href="modeling-your-data.html#cb50-13"></a><span class="kw">describe.aov</span>(model, <span class="st">&#39;Group:Brain_Region&#39;</span>, <span class="dt">sstype =</span> <span class="dv">2</span>) <span class="co">#requires apastats</span></span>
+<span id="cb50-14"><a href="modeling-your-data.html#cb50-14"></a></span>
+<span id="cb50-15"><a href="modeling-your-data.html#cb50-15"></a><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb50-16"><a href="modeling-your-data.html#cb50-16"></a><span class="kw">Anova</span>(model, <span class="dt">type=</span><span class="st">&quot;III&quot;</span>)  <span class="co"># Type III tests</span></span>
+<span id="cb50-17"><a href="modeling-your-data.html#cb50-17"></a></span>
+<span id="cb50-18"><a href="modeling-your-data.html#cb50-18"></a></span>
+<span id="cb50-19"><a href="modeling-your-data.html#cb50-19"></a><span class="co"># Post-Hoc according to Field&#39;s Book ---------</span></span>
+<span id="cb50-20"><a href="modeling-your-data.html#cb50-20"></a>  <span class="kw">contrasts</span>(df<span class="op">$</span>Group)=<span class="kw">contr.poly</span>(<span class="dv">3</span>)</span>
+<span id="cb50-21"><a href="modeling-your-data.html#cb50-21"></a>  <span class="co">#model.1=aov(dv~covariate+factorvariable, data=dataname)</span></span>
+<span id="cb50-22"><a href="modeling-your-data.html#cb50-22"></a>  model<span class="fl">.1</span>=<span class="kw">aov</span>(Measure <span class="op">~</span><span class="st"> </span>Baseline <span class="op">+</span><span class="st"> </span>Group <span class="op">+</span><span class="st"> </span>Brain_Region <span class="op">+</span><span class="st"> </span>Group<span class="op">*</span>Brain_Region, <span class="dt">data =</span> df)</span>
+<span id="cb50-23"><a href="modeling-your-data.html#cb50-23"></a>  <span class="kw">Anova</span>(model<span class="fl">.1</span>, <span class="dt">type=</span><span class="st">&quot;III&quot;</span>) </span>
+<span id="cb50-24"><a href="modeling-your-data.html#cb50-24"></a>  <span class="co"># Make sure you use capital &quot;A&quot; Anova here and not anova. This will give results using type III SS.</span></span>
+<span id="cb50-25"><a href="modeling-your-data.html#cb50-25"></a>  posthoc=<span class="kw">glht</span>(model<span class="fl">.1</span>, <span class="dt">linfct=</span><span class="kw">mcp</span>(<span class="dt">Group=</span><span class="st">&quot;Tukey&quot;</span>))  <span class="co">##gives the post-hoc Tukey analysis</span></span>
+<span id="cb50-26"><a href="modeling-your-data.html#cb50-26"></a>  <span class="kw">summary</span>(posthoc) <span class="co">##shows the output in a nice format.</span></span>
+<span id="cb50-27"><a href="modeling-your-data.html#cb50-27"></a>  </span>
+<span id="cb50-28"><a href="modeling-your-data.html#cb50-28"></a>  <span class="kw">confint</span>(posthoc) <span class="co"># Give me the confidence intervals for the post-hoc tests</span></span>
+<span id="cb50-29"><a href="modeling-your-data.html#cb50-29"></a>  <span class="kw">effect</span>(<span class="st">&quot;Group&quot;</span>, model<span class="fl">.1</span>) <span class="co"># Give me the group effects</span></span></code></pre></div>
+<p>Below is another loop</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modeling-your-data.html#cb51-1"></a><span class="co"># Run Several models using sapply --------------------</span></span>
+<span id="cb51-2"><a href="modeling-your-data.html#cb51-2"></a><span class="co"># IVs and covariates </span></span>
+<span id="cb51-3"><a href="modeling-your-data.html#cb51-3"></a>ivs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Neurological_Infection&quot;</span>)</span>
+<span id="cb51-4"><a href="modeling-your-data.html#cb51-4"></a>covariates &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Etiology_of_Injury&quot;</span>, <span class="st">&quot;Open_Closed_Injury&quot;</span>, <span class="st">&quot;SDH&quot;</span>, <span class="st">&quot;EDH&quot;</span>, <span class="st">&quot;Intracranial_monitors&quot;</span>, <span class="st">&quot;Non_neurologic_surgery&quot;</span>, <span class="st">&quot;Skull_fracture&quot;</span>, <span class="st">&quot;ICU_LOS_in_days&quot;</span>, <span class="st">&quot;Time_to_surgery&quot;</span>, <span class="st">&quot;Site_of_surgery&quot;</span>, <span class="st">&quot;Craniotomy&quot;</span>, <span class="st">&quot;Craniotomy_OR_duration&quot;</span>, <span class="st">&quot;Craniectomy&quot;</span>, <span class="st">&quot;Craniectomy_OR_duration&quot;</span>, <span class="st">&quot;Bone_removal_surgeries&quot;</span>, <span class="st">&quot;Initial_Cranioplasty&quot;</span>, <span class="st">&quot;Days_to_initial_cranioplasty&quot;</span>, <span class="st">&quot;Initial_Cranioplasty_OR_Duration&quot;</span>, <span class="st">&quot;Initial_Cranioplasty_bone_material&quot;</span>, <span class="st">&quot;Bone_replacement_surgeries&quot;</span>, <span class="st">&quot;Duraplasty_material&quot;</span>, <span class="st">&quot;Other_Infection&quot;</span>, <span class="st">&quot;Non_periop_antibiotics&quot;</span>, <span class="st">&quot;Time_of_day_of_initial_surgery&quot;</span>, <span class="st">&quot;Week_weekend_of_initial_surgery&quot;</span>, <span class="st">&quot;Hydrocephalus&quot;</span>, <span class="st">&quot;Post_op_complications&quot;</span>, <span class="st">&quot;EtOH_substance_abuse&quot;</span>, <span class="st">&quot;Anticoagulation&quot;</span>, <span class="st">&quot;Seizure&quot;</span>, <span class="st">&quot;HTN&quot;</span>, <span class="st">&quot;Smoker&quot;</span>, <span class="st">&quot;Diabetes&quot;</span>, <span class="st">&quot;Heart_disease&quot;</span>, <span class="st">&quot;Liver_disease&quot;</span>, <span class="st">&quot;Kidney_disease&quot;</span>, <span class="st">&quot;Previous_brain_injury_surgery&quot;</span>)</span>
+<span id="cb51-5"><a href="modeling-your-data.html#cb51-5"></a></span>
+<span id="cb51-6"><a href="modeling-your-data.html#cb51-6"></a>univ_formulas &lt;-<span class="st"> </span><span class="kw">sapply</span>(covariates,</span>
+<span id="cb51-7"><a href="modeling-your-data.html#cb51-7"></a>                        <span class="cf">function</span>(x) <span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&#39;Neurological_Infection~&#39;</span>, x)))</span>
+<span id="cb51-8"><a href="modeling-your-data.html#cb51-8"></a></span>
+<span id="cb51-9"><a href="modeling-your-data.html#cb51-9"></a>univ_models &lt;-<span class="st"> </span><span class="kw">lapply</span>( univ_formulas, <span class="cf">function</span>(x){<span class="kw">glm</span>(x, ,<span class="dt">family=</span><span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&#39;logit&#39;</span>),<span class="dt">data=</span>df1)})</span>
+<span id="cb51-10"><a href="modeling-your-data.html#cb51-10"></a><span class="co"># Making a loop to run several stats and saving them as a table --------</span></span>
+<span id="cb51-11"><a href="modeling-your-data.html#cb51-11"></a><span class="co"># I have an example of this in JumpCut projects</span></span>
+<span id="cb51-12"><a href="modeling-your-data.html#cb51-12"></a>cond =<span class="st"> </span><span class="kw">levels</span>(erp<span class="op">$</span>Condition)</span>
+<span id="cb51-13"><a href="modeling-your-data.html#cb51-13"></a>comp =<span class="st"> </span><span class="kw">levels</span>(erp<span class="op">$</span>ERP_component)</span>
+<span id="cb51-14"><a href="modeling-your-data.html#cb51-14"></a>erp<span class="op">$</span>NumUndiagConc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(erp<span class="op">$</span>NumUndiagConc)</span>
+<span id="cb51-15"><a href="modeling-your-data.html#cb51-15"></a>erp<span class="op">$</span>NumPriorConc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(erp<span class="op">$</span>NumPriorConc)</span>
+<span id="cb51-16"><a href="modeling-your-data.html#cb51-16"></a></span>
+<span id="cb51-17"><a href="modeling-your-data.html#cb51-17"></a>res &lt;-<span class="st"> </span><span class="kw">data.frame</span>()</span>
+<span id="cb51-18"><a href="modeling-your-data.html#cb51-18"></a><span class="cf">for</span> (yy <span class="cf">in</span> (<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(cond)))) {</span>
+<span id="cb51-19"><a href="modeling-your-data.html#cb51-19"></a>  data &lt;-<span class="st"> </span><span class="kw">subset</span>(erp, Condition <span class="op">==</span><span class="st"> </span>cond[yy])</span>
+<span id="cb51-20"><a href="modeling-your-data.html#cb51-20"></a>  <span class="cf">if</span> ((cond[yy]<span class="op">==</span><span class="st">&quot;rGoC&quot;</span>) <span class="op">|</span><span class="st"> </span>(cond[yy]<span class="op">==</span><span class="st">&quot;rNgW&quot;</span>)){</span>
+<span id="cb51-21"><a href="modeling-your-data.html#cb51-21"></a>    comp &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ERN_Amp&quot;</span>,<span class="st">&quot;ERN_Lat&quot;</span>,<span class="st">&quot;Pe_Amp&quot;</span>,<span class="st">&quot;Pe_Lat&quot;</span>)</span>
+<span id="cb51-22"><a href="modeling-your-data.html#cb51-22"></a>  } <span class="cf">else</span> <span class="cf">if</span> ((cond[yy]<span class="op">!=</span><span class="st">&quot;rGoC&quot;</span>) <span class="op">|</span><span class="st"> </span>(cond[yy]<span class="op">!=</span><span class="st">&quot;rNgW&quot;</span>)){</span>
+<span id="cb51-23"><a href="modeling-your-data.html#cb51-23"></a>    comp =<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;N2_Amp&quot;</span>,  <span class="st">&quot;N2_Lat&quot;</span>,  <span class="st">&quot;P3a_Amp&quot;</span>,<span class="st">&quot;P3a_Lat&quot;</span>, <span class="st">&quot;P3b_Amp&quot;</span>, <span class="st">&quot;P3b_Lat&quot;</span>)</span>
+<span id="cb51-24"><a href="modeling-your-data.html#cb51-24"></a>  }</span>
+<span id="cb51-25"><a href="modeling-your-data.html#cb51-25"></a>  res1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>() <span class="co">#reset after each condition loop</span></span>
+<span id="cb51-26"><a href="modeling-your-data.html#cb51-26"></a>  <span class="cf">for</span> (zz <span class="cf">in</span> (<span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(comp)))) {</span>
+<span id="cb51-27"><a href="modeling-your-data.html#cb51-27"></a>    compData &lt;-<span class="st"> </span><span class="kw">subset</span>(data,ERP_component <span class="op">==</span><span class="st"> </span>comp[zz])</span>
+<span id="cb51-28"><a href="modeling-your-data.html#cb51-28"></a>    electNum =<span class="st"> </span>compData<span class="op">$</span>electNum</span>
+<span id="cb51-29"><a href="modeling-your-data.html#cb51-29"></a>    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(electNum))<span class="op">==</span><span class="dv">1</span>){</span>
+<span id="cb51-30"><a href="modeling-your-data.html#cb51-30"></a>      fm1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(ERP_value<span class="op">~</span>AthleteType <span class="op">+</span><span class="st"> </span>Time <span class="op">+</span><span class="st"> </span>AthleteType<span class="op">*</span>Time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>id) ,<span class="dt">data=</span>compData)</span>
+<span id="cb51-31"><a href="modeling-your-data.html#cb51-31"></a>    } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(electNum))<span class="op">&gt;=</span><span class="dv">1</span>){</span>
+<span id="cb51-32"><a href="modeling-your-data.html#cb51-32"></a>      fm1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(ERP_value<span class="op">~</span>AthleteType <span class="op">+</span><span class="st"> </span>NumPriorConc<span class="op">+</span><span class="st"> </span>AthleteType<span class="op">*</span>Time <span class="op">+</span>AthleteType<span class="op">*</span>NumPriorConc<span class="op">*</span>Time  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>id) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>electNum),<span class="dt">data=</span>compData)</span>
+<span id="cb51-33"><a href="modeling-your-data.html#cb51-33"></a>    }</span>
+<span id="cb51-34"><a href="modeling-your-data.html#cb51-34"></a>    <span class="kw">assign</span>(<span class="kw">paste</span>(<span class="st">&quot;mod&quot;</span>, cond[yy],<span class="kw">gsub</span>(<span class="st">&quot;_&quot;</span>,<span class="st">&quot;&quot;</span>,comp[zz]), <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>), fm1) <span class="co">#save it in the form of modsum_GoC_N2Amp</span></span>
+<span id="cb51-35"><a href="modeling-your-data.html#cb51-35"></a>    <span class="kw">assign</span>(<span class="kw">paste</span>(<span class="st">&quot;modsum&quot;</span>, cond[yy],<span class="kw">gsub</span>(<span class="st">&quot;_&quot;</span>,<span class="st">&quot;&quot;</span>,comp[zz]), <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>), <span class="kw">summary</span>(fm1)) <span class="co">#save it in the form of modsum_GoC_N2Amp</span></span>
+<span id="cb51-36"><a href="modeling-your-data.html#cb51-36"></a>    tmod &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">summary</span>(fm1)<span class="op">$</span>coefficients)</span>
+<span id="cb51-37"><a href="modeling-your-data.html#cb51-37"></a>    tmod &lt;-<span class="st"> </span><span class="kw">round</span>(tmod[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>), ],<span class="dv">3</span>)</span>
+<span id="cb51-38"><a href="modeling-your-data.html#cb51-38"></a>    tmod &lt;-<span class="st"> </span><span class="kw">subset</span>(tmod,<span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span><span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.1</span>)</span>
+<span id="cb51-39"><a href="modeling-your-data.html#cb51-39"></a>    <span class="cf">if</span> (<span class="kw">nrow</span>(tmod)<span class="op">==</span><span class="dv">0</span>){</span>
+<span id="cb51-40"><a href="modeling-your-data.html#cb51-40"></a>      a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb51-41"><a href="modeling-your-data.html#cb51-41"></a>    } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">nrow</span>(tmod)<span class="op">&gt;=</span><span class="dv">0</span>){</span>
+<span id="cb51-42"><a href="modeling-your-data.html#cb51-42"></a>      Test &lt;-<span class="st"> </span><span class="kw">rownames</span>(tmod)</span>
+<span id="cb51-43"><a href="modeling-your-data.html#cb51-43"></a>      tmod &lt;-<span class="st"> </span><span class="kw">cbind</span>(Test,tmod)</span>
+<span id="cb51-44"><a href="modeling-your-data.html#cb51-44"></a>      <span class="kw">rownames</span>(tmod) &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb51-45"><a href="modeling-your-data.html#cb51-45"></a>      <span class="co">#Component &lt;- c(rep_len(paste(cond[yy],&#39; &#39;,comp[zz]),length.out = length(Test)))#comp[zz]</span></span>
+<span id="cb51-46"><a href="modeling-your-data.html#cb51-46"></a>      Component &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep_len</span>(<span class="kw">paste</span>(comp[zz]),<span class="dt">length.out =</span> <span class="kw">length</span>(Test)))<span class="co">#comp[zz]</span></span>
+<span id="cb51-47"><a href="modeling-your-data.html#cb51-47"></a>      tmod &lt;-<span class="st"> </span><span class="kw">cbind</span>(Component,tmod)</span>
+<span id="cb51-48"><a href="modeling-your-data.html#cb51-48"></a>      res &lt;-<span class="st"> </span><span class="kw">rbind</span>(res,tmod)</span>
+<span id="cb51-49"><a href="modeling-your-data.html#cb51-49"></a>      tmod<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>[ tmod<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span> <span class="op">&lt;</span><span class="fl">0.001</span>] &lt;-<span class="st"> &quot;&lt;0.001&quot;</span></span>
+<span id="cb51-50"><a href="modeling-your-data.html#cb51-50"></a>      tmod<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;[0].&quot;</span>, <span class="st">&quot;.&quot;</span>, tmod<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>) </span>
+<span id="cb51-51"><a href="modeling-your-data.html#cb51-51"></a>      <span class="co">#tmod$`t value` &lt;- round(tmod$`t value`,digits=2)</span></span>
+<span id="cb51-52"><a href="modeling-your-data.html#cb51-52"></a>      tmod<span class="op">$</span>Result &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;t(&quot;</span>, <span class="kw">round</span>(tmod<span class="op">$</span>df,<span class="dv">0</span>), <span class="st">&quot;)=&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%.2f&quot;</span>, tmod<span class="op">$</span><span class="st">`</span><span class="dt">t value</span><span class="st">`</span>), <span class="st">&quot;, p=&quot;</span>, tmod<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>)</span>
+<span id="cb51-53"><a href="modeling-your-data.html#cb51-53"></a>      tmod &lt;-<span class="st"> </span><span class="kw">subset</span>(tmod,<span class="dt">select=</span><span class="kw">c</span>(<span class="st">&quot;Component&quot;</span>, <span class="st">&quot;Test&quot;</span>,<span class="st">&quot;Result&quot;</span>))</span>
+<span id="cb51-54"><a href="modeling-your-data.html#cb51-54"></a>      tmod<span class="op">$</span>Test &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;AthleteType.L&quot;</span>,<span class="st">&quot;Athlete Type&quot;</span>,tmod<span class="op">$</span>Test)</span>
+<span id="cb51-55"><a href="modeling-your-data.html#cb51-55"></a>      tmod<span class="op">$</span>Test &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;:&quot;</span>,<span class="st">&quot;$</span><span class="ch">\\</span><span class="st">times$&quot;</span>, tmod<span class="op">$</span>Test, <span class="dt">fixed=</span><span class="ot">TRUE</span>)</span>
+<span id="cb51-56"><a href="modeling-your-data.html#cb51-56"></a>      tmod<span class="op">$</span>Component &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;_&quot;</span>,<span class="st">&quot; &quot;</span>,tmod<span class="op">$</span>Component)</span>
+<span id="cb51-57"><a href="modeling-your-data.html#cb51-57"></a>      tmod<span class="op">$</span>Test &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;Time&quot;</span>,<span class="st">&quot;Time &quot;</span>,tmod<span class="op">$</span>Test)</span>
+<span id="cb51-58"><a href="modeling-your-data.html#cb51-58"></a>      res1 &lt;-<span class="st"> </span><span class="kw">rbind</span>(res1,tmod)</span>
+<span id="cb51-59"><a href="modeling-your-data.html#cb51-59"></a>    }</span>
+<span id="cb51-60"><a href="modeling-your-data.html#cb51-60"></a>    <span class="kw">assign</span>(<span class="kw">paste0</span>(cond[yy],<span class="st">&quot;statsTable&quot;</span>), res1) <span class="co">#save it in the form of modsum_GoC_N2Amp</span></span>
+<span id="cb51-61"><a href="modeling-your-data.html#cb51-61"></a>  }</span>
+<span id="cb51-62"><a href="modeling-your-data.html#cb51-62"></a>}</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="running-your-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mixed-models-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-statistics.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Lab-Bible.pdf", "Lab-Bible.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

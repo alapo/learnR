@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Data Science In RStudio</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Data Science In RStudio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="alapo/fNIRS" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science In RStudio" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Andrew P. Lapointe" />
+
+
+<meta name="date" content="2020-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="intro.html"/>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R_Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-add"><i class="fa fa-check"></i><b>1.1</b> Things to add</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#documentation-for-author"><i class="fa fa-check"></i><b>1.2</b> Documentation for Author</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#andrews-notes-ramblings"><i class="fa fa-check"></i><b>1.3</b> Andrew’s Notes / Ramblings</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#to-do"><i class="fa fa-check"></i><b>1.4</b> To Do</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#title-word-cloud"><i class="fa fa-check"></i><b>1.5</b> Title word cloud</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#copy-from-chapter-1-example"><i class="fa fa-check"></i><b>1.6</b> Copy from Chapter 1 Example</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#matlab-highlighting"><i class="fa fa-check"></i><b>1.7</b> MATLAB Highlighting</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#misc-codedata"><i class="fa fa-check"></i><b>1.8</b> Misc code/data</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>1.9</b> Other Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#preamble"><i class="fa fa-check"></i><b>2.1</b> Preamble</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-this-book-is-structured"><i class="fa fa-check"></i><b>2.2</b> How this book is structured</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#keys-to-learning"><i class="fa fa-check"></i><b>2.3</b> Keys to Learning</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#quick-introduction-to-reproducible-science"><i class="fa fa-check"></i><b>2.4</b> Quick Introduction to reproducible science</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#how-to-use-this-book"><i class="fa fa-check"></i><b>2.5</b> How to use this book</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#reproducible-science-link"><i class="fa fa-check"></i><b>2.6</b> Reproducible Science Link</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#how-to-make-a-provocative-conference-poster"><i class="fa fa-check"></i><b>2.7</b> How to make a provocative Conference Poster</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#misc-student-resources"><i class="fa fa-check"></i><b>2.8</b> Misc Student Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#starting-off"><i class="fa fa-check"></i><b>3.1</b> Starting Off</a></li>
+<li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#setting-up-rstudio-for-the-first-time"><i class="fa fa-check"></i><b>3.2</b> Setting up RStudio for the first time</a></li>
+<li class="chapter" data-level="3.3" data-path="installation.html"><a href="installation.html#installing-r-rstudio"><i class="fa fa-check"></i><b>3.3</b> Installing R + RStudio</a></li>
+<li class="chapter" data-level="3.4" data-path="installation.html"><a href="installation.html#already-have-r-and-rstudio-installed"><i class="fa fa-check"></i><b>3.4</b> Already have R and RStudio installed?</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="installation.html"><a href="installation.html#how-to-update-r"><i class="fa fa-check"></i><b>3.4.1</b> How to update R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html#update-rstudio"><i class="fa fa-check"></i><b>3.5</b> Update RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="installation.html"><a href="installation.html#how-to-use-packages"><i class="fa fa-check"></i><b>3.6</b> How to use packages</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="installation.html"><a href="installation.html#installing-packages-on-your-computer"><i class="fa fa-check"></i><b>3.6.1</b> Installing packages on your computer</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="installation.html"><a href="installation.html#alternatives-to-installing-loading-packages"><i class="fa fa-check"></i><b>3.7</b> Alternatives to installing / loading packages</a></li>
+<li class="chapter" data-level="3.8" data-path="installation.html"><a href="installation.html#trouble-installing-packages"><i class="fa fa-check"></i><b>3.8</b> Trouble installing packages</a></li>
+<li class="chapter" data-level="3.9" data-path="installation.html"><a href="installation.html#other-things-to-do-in-rstudio"><i class="fa fa-check"></i><b>3.9</b> Other things to do in RStudio</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="installation.html"><a href="installation.html#themes-bring-on-the-darkness"><i class="fa fa-check"></i><b>3.9.1</b> Themes: Bring on the darkness</a></li>
+<li class="chapter" data-level="3.9.2" data-path="installation.html"><a href="installation.html#shortcuts"><i class="fa fa-check"></i><b>3.9.2</b> Shortcuts</a></li>
+<li class="chapter" data-level="3.9.3" data-path="installation.html"><a href="installation.html#code-folding"><i class="fa fa-check"></i><b>3.9.3</b> Code Folding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="installation.html"><a href="installation.html#conclusion"><i class="fa fa-check"></i><b>3.10</b> Conclusion</a></li>
+<li class="chapter" data-level="3.11" data-path="installation.html"><a href="installation.html#chapter-1b-project-environment"><i class="fa fa-check"></i><b>3.11</b> Chapter 1b: Project Environment</a></li>
+<li class="chapter" data-level="3.12" data-path="installation.html"><a href="installation.html#setting-up-your-work-environment"><i class="fa fa-check"></i><b>3.12</b> Setting up your work environment</a>
+<ul>
+<li class="chapter" data-level="3.12.1" data-path="installation.html"><a href="installation.html#folder-organization"><i class="fa fa-check"></i><b>3.12.1</b> Folder Organization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-script.html"><a href="first-script.html"><i class="fa fa-check"></i><b>4</b> Creating your first script</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="first-script.html"><a href="first-script.html#part-1-loadinginstalling-packages-needed"><i class="fa fa-check"></i><b>4.1</b> Part 1: Loading/installing packages needed</a></li>
+<li class="chapter" data-level="4.2" data-path="first-script.html"><a href="first-script.html#part-2-loading-your-data"><i class="fa fa-check"></i><b>4.2</b> Part 2: Loading your data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="first-script.html"><a href="first-script.html#xlsx"><i class="fa fa-check"></i><b>4.2.1</b> xlsx</a></li>
+<li class="chapter" data-level="4.2.2" data-path="first-script.html"><a href="first-script.html#csv"><i class="fa fa-check"></i><b>4.2.2</b> csv</a></li>
+<li class="chapter" data-level="4.2.3" data-path="first-script.html"><a href="first-script.html#google-sheet"><i class="fa fa-check"></i><b>4.2.3</b> Google Sheet</a></li>
+<li class="chapter" data-level="4.2.4" data-path="first-script.html"><a href="first-script.html#sav-spss"><i class="fa fa-check"></i><b>4.2.4</b> sav (SPSS)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="first-script.html"><a href="first-script.html#cleaning-your-imported-data."><i class="fa fa-check"></i><b>4.3</b> Cleaning your imported data.</a></li>
+<li class="chapter" data-level="4.4" data-path="first-script.html"><a href="first-script.html#part-3-saving-outputs"><i class="fa fa-check"></i><b>4.4</b> Part 3: Saving Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datawrangling.html"><a href="datawrangling.html#intro-1"><i class="fa fa-check"></i><b>5.1</b> Intro</a></li>
+<li class="chapter" data-level="5.2" data-path="datawrangling.html"><a href="datawrangling.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="datawrangling.html"><a href="datawrangling.html#creating-report-with-dataexplorer"><i class="fa fa-check"></i><b>5.3</b> Creating Report with DataExplorer</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datawrangling.html"><a href="datawrangling.html#reading-material-exploratory-data-analysis"><i class="fa fa-check"></i><b>5.3.1</b> Reading Material : Exploratory Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datawrangling.html"><a href="datawrangling.html#tasks"><i class="fa fa-check"></i><b>5.4</b> Tasks</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="datawrangling.html"><a href="datawrangling.html#inspecting-the-imported-data"><i class="fa fa-check"></i><b>5.4.1</b> Inspecting the imported data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="datawrangling.html"><a href="datawrangling.html#choosing-good-column-names"><i class="fa fa-check"></i><b>5.4.2</b> Choosing good column names</a></li>
+<li class="chapter" data-level="5.4.3" data-path="datawrangling.html"><a href="datawrangling.html#replace-strings-using-pipes"><i class="fa fa-check"></i><b>5.4.3</b> replace strings using pipes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="datawrangling.html"><a href="datawrangling.html#useful-links"><i class="fa fa-check"></i><b>5.4.4</b> Useful Links</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="datawrangling.html"><a href="datawrangling.html#for-item-based-data"><i class="fa fa-check"></i><b>5.5</b> For Item-based data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="creating-tables.html"><a href="creating-tables.html"><i class="fa fa-check"></i><b>6</b> Creating tables</a></li>
+<li class="chapter" data-level="7" data-path="plotting-using-ggplot.html"><a href="plotting-using-ggplot.html"><i class="fa fa-check"></i><b>7</b> Plotting using ggplot</a></li>
+<li class="chapter" data-level="8" data-path="basic-statistics.html"><a href="basic-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basic-statistics.html"><a href="basic-statistics.html#preamble-1"><i class="fa fa-check"></i><b>8.1</b> Preamble</a></li>
+<li class="chapter" data-level="8.2" data-path="basic-statistics.html"><a href="basic-statistics.html#running-your-models"><i class="fa fa-check"></i><b>8.2</b> Running your models</a></li>
+<li class="chapter" data-level="8.3" data-path="basic-statistics.html"><a href="basic-statistics.html#modeling-your-data"><i class="fa fa-check"></i><b>8.3</b> Modeling your data</a></li>
+<li class="chapter" data-level="8.4" data-path="basic-statistics.html"><a href="basic-statistics.html#statistics---resources"><i class="fa fa-check"></i><b>8.4</b> Statistics - Resources</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="basic-statistics.html"><a href="basic-statistics.html#correlations-in-rrandom_slopes"><i class="fa fa-check"></i><b>8.4.1</b> Correlations in R/random_slopes</a></li>
+<li class="chapter" data-level="8.4.2" data-path="basic-statistics.html"><a href="basic-statistics.html#correlation-plots"><i class="fa fa-check"></i><b>8.4.2</b> Correlation Plots:</a></li>
+<li class="chapter" data-level="8.4.3" data-path="basic-statistics.html"><a href="basic-statistics.html#general-good-sites"><i class="fa fa-check"></i><b>8.4.3</b> General Good Sites</a></li>
+<li class="chapter" data-level="8.4.4" data-path="basic-statistics.html"><a href="basic-statistics.html#learn-about-residuals"><i class="fa fa-check"></i><b>8.4.4</b> Learn about Residuals:</a></li>
+<li class="chapter" data-level="8.4.5" data-path="basic-statistics.html"><a href="basic-statistics.html#regression-diagnostics"><i class="fa fa-check"></i><b>8.4.5</b> Regression Diagnostics</a></li>
+<li class="chapter" data-level="8.4.6" data-path="basic-statistics.html"><a href="basic-statistics.html#bland-altman-plots"><i class="fa fa-check"></i><b>8.4.6</b> Bland-Altman Plots</a></li>
+<li class="chapter" data-level="8.4.7" data-path="basic-statistics.html"><a href="basic-statistics.html#anova"><i class="fa fa-check"></i><b>8.4.7</b> ANOVA</a></li>
+<li class="chapter" data-level="8.4.8" data-path="basic-statistics.html"><a href="basic-statistics.html#mixed-models"><i class="fa fa-check"></i><b>8.4.8</b> Mixed Models</a></li>
+<li class="chapter" data-level="8.4.9" data-path="basic-statistics.html"><a href="basic-statistics.html#cluster-analysis-see-bottom-of-the-page-for-more-links"><i class="fa fa-check"></i><b>8.4.9</b> Cluster Analysis (see bottom of the page for more links)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="basic-statistics.html"><a href="basic-statistics.html#looking-at-interactions"><i class="fa fa-check"></i><b>8.5</b> Looking at interactions ——</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="basic-statistics.html"><a href="basic-statistics.html#packages"><i class="fa fa-check"></i><b>8.5.1</b> Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mixed-models-1.html"><a href="mixed-models-1.html"><i class="fa fa-check"></i><b>9</b> Mixed Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="mixed-models-1.html"><a href="mixed-models-1.html#to-do-1"><i class="fa fa-check"></i><b>9.1</b> To-Do</a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-models-1.html"><a href="mixed-models-1.html#preamble-2"><i class="fa fa-check"></i><b>9.2</b> Preamble</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-models-1.html"><a href="mixed-models-1.html#post-hoc-in-mixed-models"><i class="fa fa-check"></i><b>9.3</b> Post-hoc in mixed models</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="running-your-models-1.html"><a href="running-your-models-1.html"><i class="fa fa-check"></i><b>10</b> Running your models</a></li>
+<li class="chapter" data-level="11" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html"><i class="fa fa-check"></i><b>11</b> Modeling your data</a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#mixed-models-misc-info"><i class="fa fa-check"></i><b>11.0.1</b> Mixed Models: Misc Info</a></li>
+<li class="chapter" data-level="11.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#looking-at-interactions-1"><i class="fa fa-check"></i><b>11.1</b> Looking at interactions</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#packages-1"><i class="fa fa-check"></i><b>11.1.1</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#why-should-i-do-this"><i class="fa fa-check"></i><b>11.2</b> Why should I do this?</a></li>
+<li class="chapter" data-level="11.3" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#installing-zotero"><i class="fa fa-check"></i><b>11.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="11.4" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#yaml-explained"><i class="fa fa-check"></i><b>11.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html"><i class="fa fa-check"></i><b>12</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#results"><i class="fa fa-check"></i><b>12.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-table"><i class="fa fa-check"></i><b>12.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="12.1.2" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-figure"><i class="fa fa-check"></i><b>12.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="12.2" data-path="references.html"><a href="references.html#useful-links-1"><i class="fa fa-check"></i><b>12.2</b> Useful Links</a></li>
+<li class="chapter" data-level="12.3" data-path="references.html"><a href="references.html#installing-zotero-1"><i class="fa fa-check"></i><b>12.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="12.4" data-path="references.html"><a href="references.html#yaml-explained-1"><i class="fa fa-check"></i><b>12.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html"><i class="fa fa-check"></i><b>13</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#results-1"><i class="fa fa-check"></i><b>13.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-table-1"><i class="fa fa-check"></i><b>13.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="13.1.2" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-figure-1"><i class="fa fa-check"></i><b>13.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="how-to-create-a-github-key.html"><a href="how-to-create-a-github-key.html"><i class="fa fa-check"></i><b>14</b> How to create a GitHub key</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science In RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Data Science In RStudio</h1>
+<p class="author"><em>Andrew P. Lapointe</em></p>
+<p class="date"><em>2020-11-03</em></p>
+</div>
+<div id="index" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Index</h1>
+<div id="things-to-add" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Things to add</h2>
+<p>Signe recommended students run a live tutorial in <a href="https://swirlstats.com/students.html">swirl</a></p>
+</div>
+<div id="documentation-for-author" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Documentation for Author</h2>
+</div>
+<div id="andrews-notes-ramblings" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Andrew’s Notes / Ramblings</h2>
+<p>To render the book used the following code, you must do this before knitting the GitBook (webpage)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::pdf_book&quot;</span>, <span class="dt">encoding=</span><span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb1-3"><a href="index.html#cb1-3"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::epub_book&quot;</span>)</span></code></pre></div>
+<p>The <code>_output.yml</code> contains the header arguments. I would but them here so its cleaner and easier to read the code.</p>
+</div>
+<div id="to-do" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> To Do</h2>
+<ul>
+<li><p>Is there a way I can have matlab code syntax highlighted properly? Maybe <a href="https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html?tabs=tabid-1%2Ctabid-a">here</a></p></li>
+<li><p>Get Camera to take nice pictures</p></li>
+<li><p>Get example dataset that I can run through</p></li>
+<li><p>Can I export this to github.io? The GitHub Repository for this guidebook can be found <a href="https://github.com/alapo/fnirs">here</a></p></li>
+<li><p>Add highlight arg to <code>_output.yml</code></p></li>
+<li><p>Upload the MATLAB packages required to GitHub directory</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />
+Finish my changes</p></li>
+<li><p><input type="checkbox" disabled="" />
+Push my commits to GitHub</p></li>
+<li><p><input type="checkbox" disabled="" />
+Open a pull request</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />
+Cleaned the main directory to make it easier to interpret for beginners</p></li>
+</ul>
+<p>For Chapter <a href="datawrangling.html#datawrangling">5</a></p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+steal logo from <a href="https://bioconnector.github.io/workshops/r-dplyr-yeast.html">here</a>. It would be great to have a logo here that was cowboy themed</li>
+<li><input type="checkbox" disabled="" />
+<a href="https://github.com/gadenbuie/tidyexplain">These</a> animations would be great at explaining some key concepts</li>
+</ul>
+</div>
+<div id="title-word-cloud" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Title word cloud</h2>
+<p>Titles: inquiry-based R for researchers in a hurry Reproducible science</p>
+</div>
+<div id="copy-from-chapter-1-example" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Copy from Chapter 1 Example</h2>
+<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <code>\@ref(intro)</code>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <code>\@ref(methods)</code>.</p>
+<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</span>
+<span id="cb2-2"><a href="index.html#cb2-2"></a><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <code>\@ref(fig:nice-fig)</code>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <code>\@ref(tab:nice-tab)</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb3-2"><a href="index.html#cb3-2"></a>  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb3-3"><a href="index.html#cb3-3"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
+<span id="cb3-4"><a href="index.html#cb3-4"></a>)</span></code></pre></div>
+<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package in this sample book, which was built on top of R Markdown and <strong>knitr</strong> .</p>
+</div>
+<div id="matlab-highlighting" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> MATLAB Highlighting</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb4-1"><a href="index.html#cb4-1"></a><span class="co">% This is a comment in MATLAB</span></span>
+<span id="cb4-2"><a href="index.html#cb4-2"></a><span class="kw">function</span> <span class="va">y</span> <span class="op">=</span> <span class="va">average</span>(<span class="va">x</span>)</span>
+<span id="cb4-3"><a href="index.html#cb4-3"></a><span class="kw">if</span> <span class="op">~</span><span class="va">isvector</span>(<span class="va">x</span>)</span>
+<span id="cb4-4"><a href="index.html#cb4-4"></a>   <span class="va">error</span>(<span class="ss">&#39;Input must be a vector&#39;</span>)</span>
+<span id="cb4-5"><a href="index.html#cb4-5"></a><span class="kw">end</span></span>
+<span id="cb4-6"><a href="index.html#cb4-6"></a><span class="va">y</span> <span class="op">=</span> <span class="va">sum</span>(<span class="va">x</span>)<span class="op">/</span><span class="va">length</span>(<span class="va">x</span>)<span class="op">;</span> </span>
+<span id="cb4-7"><a href="index.html#cb4-7"></a><span class="kw">end</span></span></code></pre></div>
+<p>So could <a href="https://amber.rbind.io/blog/2017/11/15/syntax-highlighting/">this</a></p>
+</div>
+<div id="misc-codedata" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Misc code/data</h2>
+<pre><code>gitbook(fig_caption = TRUE, number_sections = TRUE, self_contained = FALSE, 
+   lib_dir = &quot;libs&quot;, pandoc_args = NULL, ..., template = &quot;default&quot;, 
+   split_by = c(&quot;chapter&quot;, &quot;chapter+number&quot;, &quot;section&quot;, &quot;section+number&quot;, 
+       &quot;rmd&quot;, &quot;none&quot;), split_bib = TRUE, config = list(), table_css = TRUE)</code></pre>
+</div>
+<div id="other-resources" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Other Resources</h2>
+<p><a href="https://medium.com/@huixiangvoice/the-hidden-story-behind-the-suicide-phd-candidate-huixiang-chen-236cd39f79d3?fbclid=IwAR3zJ0zHAhNaHhRdXkiHfHOJV9RjZWDW6KReN6FB9lkxGeWwzWsDoYYTv10" class="uri">https://medium.com/@huixiangvoice/the-hidden-story-behind-the-suicide-phd-candidate-huixiang-chen-236cd39f79d3?fbclid=IwAR3zJ0zHAhNaHhRdXkiHfHOJV9RjZWDW6KReN6FB9lkxGeWwzWsDoYYTv10</a></p>
+<p>Book called <a href="https://benwhalley.github.io/just-enough-r/datasets-dataframes.html">Just Enough R</a></p>
+<p>To test the normality of your data you can use a few different methods</p>
+<ul>
+<li><a href="http://www.sthda.com/english/wiki/normality-test-in-r" class="uri">http://www.sthda.com/english/wiki/normality-test-in-r</a></li>
+<li><a href="https://rstudio-pubs-static.s3.amazonaws.com/2002_1f803b2bc84c46008d3599a07867a95a.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/2002_1f803b2bc84c46008d3599a07867a95a.html</a></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Plot your data</li>
+<li>Check skewness and kurtosis</li>
+<li>Shapiro test.</li>
+</ol>
+<p>There should be a section on general access to your df. How to manipulate it effectively (perhaps in the data wrangling section) This would include things like using <code>df$colname to access a column</code></p>
+<!-- # ```{r child = 'appendix.Rmd'} -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Lab-Bible.pdf", "Lab-Bible.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

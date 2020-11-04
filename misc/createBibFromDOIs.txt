@@ -1,0 +1,23 @@
+pacman::p_load(curl,readr, tidyverse) # load required packages
+# Read in the data
+# yo <- read.list(file = "DOIs to import.txt")
+x <- scan("DOIs to import.txt", what="", sep="\n")
+# Separate elements by one or more whitepace
+urls <- strsplit(x, "[[:space:]]+")
+
+
+# urls <- y# Ibu change this so its your list of dois
+ url1 <- "https://doi.org/10.1016/j.tvjl.2017.12.021"
+ url2 <- "https://doi.org/10.1016/j.yqres.2013.10.005"
+ urls <- list(url1, url2) # Ibu change this so its your list of dois
+
+h <- new_handle()
+handle_setheaders(h, "accept" = "application/x-bibtex")
+
+walk(urls, ~ {
+  try(curl(., handle = h) %>%
+    readLines(warn = FALSE) %>%
+    write(file = "C:\\Users\\Gertrude\\Desktop\\test.bib", append = TRUE)) # Ibu change the path here 
+})
+
+read_delim("C:\\Users\\Gertrude\\Desktop\\test.bib", delim = "\n") # this will add break lines to your bib file you created

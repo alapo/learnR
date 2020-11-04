@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Data Wrangling | Data Science In RStudio</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Data Wrangling | Data Science In RStudio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="alapo/fNIRS" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Data Wrangling | Data Science In RStudio" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Andrew P. Lapointe" />
+
+
+<meta name="date" content="2020-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="first-script.html"/>
+<link rel="next" href="creating-tables.html"/>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R_Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-add"><i class="fa fa-check"></i><b>1.1</b> Things to add</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#documentation-for-author"><i class="fa fa-check"></i><b>1.2</b> Documentation for Author</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#andrews-notes-ramblings"><i class="fa fa-check"></i><b>1.3</b> Andrew’s Notes / Ramblings</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#to-do"><i class="fa fa-check"></i><b>1.4</b> To Do</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#title-word-cloud"><i class="fa fa-check"></i><b>1.5</b> Title word cloud</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#copy-from-chapter-1-example"><i class="fa fa-check"></i><b>1.6</b> Copy from Chapter 1 Example</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#matlab-highlighting"><i class="fa fa-check"></i><b>1.7</b> MATLAB Highlighting</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#misc-codedata"><i class="fa fa-check"></i><b>1.8</b> Misc code/data</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>1.9</b> Other Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#preamble"><i class="fa fa-check"></i><b>2.1</b> Preamble</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-this-book-is-structured"><i class="fa fa-check"></i><b>2.2</b> How this book is structured</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#keys-to-learning"><i class="fa fa-check"></i><b>2.3</b> Keys to Learning</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#quick-introduction-to-reproducible-science"><i class="fa fa-check"></i><b>2.4</b> Quick Introduction to reproducible science</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#how-to-use-this-book"><i class="fa fa-check"></i><b>2.5</b> How to use this book</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#reproducible-science-link"><i class="fa fa-check"></i><b>2.6</b> Reproducible Science Link</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#how-to-make-a-provocative-conference-poster"><i class="fa fa-check"></i><b>2.7</b> How to make a provocative Conference Poster</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#misc-student-resources"><i class="fa fa-check"></i><b>2.8</b> Misc Student Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#starting-off"><i class="fa fa-check"></i><b>3.1</b> Starting Off</a></li>
+<li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#setting-up-rstudio-for-the-first-time"><i class="fa fa-check"></i><b>3.2</b> Setting up RStudio for the first time</a></li>
+<li class="chapter" data-level="3.3" data-path="installation.html"><a href="installation.html#installing-r-rstudio"><i class="fa fa-check"></i><b>3.3</b> Installing R + RStudio</a></li>
+<li class="chapter" data-level="3.4" data-path="installation.html"><a href="installation.html#already-have-r-and-rstudio-installed"><i class="fa fa-check"></i><b>3.4</b> Already have R and RStudio installed?</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="installation.html"><a href="installation.html#how-to-update-r"><i class="fa fa-check"></i><b>3.4.1</b> How to update R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html#update-rstudio"><i class="fa fa-check"></i><b>3.5</b> Update RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="installation.html"><a href="installation.html#how-to-use-packages"><i class="fa fa-check"></i><b>3.6</b> How to use packages</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="installation.html"><a href="installation.html#installing-packages-on-your-computer"><i class="fa fa-check"></i><b>3.6.1</b> Installing packages on your computer</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="installation.html"><a href="installation.html#alternatives-to-installing-loading-packages"><i class="fa fa-check"></i><b>3.7</b> Alternatives to installing / loading packages</a></li>
+<li class="chapter" data-level="3.8" data-path="installation.html"><a href="installation.html#trouble-installing-packages"><i class="fa fa-check"></i><b>3.8</b> Trouble installing packages</a></li>
+<li class="chapter" data-level="3.9" data-path="installation.html"><a href="installation.html#other-things-to-do-in-rstudio"><i class="fa fa-check"></i><b>3.9</b> Other things to do in RStudio</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="installation.html"><a href="installation.html#themes-bring-on-the-darkness"><i class="fa fa-check"></i><b>3.9.1</b> Themes: Bring on the darkness</a></li>
+<li class="chapter" data-level="3.9.2" data-path="installation.html"><a href="installation.html#shortcuts"><i class="fa fa-check"></i><b>3.9.2</b> Shortcuts</a></li>
+<li class="chapter" data-level="3.9.3" data-path="installation.html"><a href="installation.html#code-folding"><i class="fa fa-check"></i><b>3.9.3</b> Code Folding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="installation.html"><a href="installation.html#conclusion"><i class="fa fa-check"></i><b>3.10</b> Conclusion</a></li>
+<li class="chapter" data-level="3.11" data-path="installation.html"><a href="installation.html#chapter-1b-project-environment"><i class="fa fa-check"></i><b>3.11</b> Chapter 1b: Project Environment</a></li>
+<li class="chapter" data-level="3.12" data-path="installation.html"><a href="installation.html#setting-up-your-work-environment"><i class="fa fa-check"></i><b>3.12</b> Setting up your work environment</a>
+<ul>
+<li class="chapter" data-level="3.12.1" data-path="installation.html"><a href="installation.html#folder-organization"><i class="fa fa-check"></i><b>3.12.1</b> Folder Organization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-script.html"><a href="first-script.html"><i class="fa fa-check"></i><b>4</b> Creating your first script</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="first-script.html"><a href="first-script.html#part-1-loadinginstalling-packages-needed"><i class="fa fa-check"></i><b>4.1</b> Part 1: Loading/installing packages needed</a></li>
+<li class="chapter" data-level="4.2" data-path="first-script.html"><a href="first-script.html#part-2-loading-your-data"><i class="fa fa-check"></i><b>4.2</b> Part 2: Loading your data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="first-script.html"><a href="first-script.html#xlsx"><i class="fa fa-check"></i><b>4.2.1</b> xlsx</a></li>
+<li class="chapter" data-level="4.2.2" data-path="first-script.html"><a href="first-script.html#csv"><i class="fa fa-check"></i><b>4.2.2</b> csv</a></li>
+<li class="chapter" data-level="4.2.3" data-path="first-script.html"><a href="first-script.html#google-sheet"><i class="fa fa-check"></i><b>4.2.3</b> Google Sheet</a></li>
+<li class="chapter" data-level="4.2.4" data-path="first-script.html"><a href="first-script.html#sav-spss"><i class="fa fa-check"></i><b>4.2.4</b> sav (SPSS)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="first-script.html"><a href="first-script.html#cleaning-your-imported-data."><i class="fa fa-check"></i><b>4.3</b> Cleaning your imported data.</a></li>
+<li class="chapter" data-level="4.4" data-path="first-script.html"><a href="first-script.html#part-3-saving-outputs"><i class="fa fa-check"></i><b>4.4</b> Part 3: Saving Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datawrangling.html"><a href="datawrangling.html#intro-1"><i class="fa fa-check"></i><b>5.1</b> Intro</a></li>
+<li class="chapter" data-level="5.2" data-path="datawrangling.html"><a href="datawrangling.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="datawrangling.html"><a href="datawrangling.html#creating-report-with-dataexplorer"><i class="fa fa-check"></i><b>5.3</b> Creating Report with DataExplorer</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datawrangling.html"><a href="datawrangling.html#reading-material-exploratory-data-analysis"><i class="fa fa-check"></i><b>5.3.1</b> Reading Material : Exploratory Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datawrangling.html"><a href="datawrangling.html#tasks"><i class="fa fa-check"></i><b>5.4</b> Tasks</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="datawrangling.html"><a href="datawrangling.html#inspecting-the-imported-data"><i class="fa fa-check"></i><b>5.4.1</b> Inspecting the imported data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="datawrangling.html"><a href="datawrangling.html#choosing-good-column-names"><i class="fa fa-check"></i><b>5.4.2</b> Choosing good column names</a></li>
+<li class="chapter" data-level="5.4.3" data-path="datawrangling.html"><a href="datawrangling.html#replace-strings-using-pipes"><i class="fa fa-check"></i><b>5.4.3</b> replace strings using pipes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="datawrangling.html"><a href="datawrangling.html#useful-links"><i class="fa fa-check"></i><b>5.4.4</b> Useful Links</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="datawrangling.html"><a href="datawrangling.html#for-item-based-data"><i class="fa fa-check"></i><b>5.5</b> For Item-based data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="creating-tables.html"><a href="creating-tables.html"><i class="fa fa-check"></i><b>6</b> Creating tables</a></li>
+<li class="chapter" data-level="7" data-path="plotting-using-ggplot.html"><a href="plotting-using-ggplot.html"><i class="fa fa-check"></i><b>7</b> Plotting using ggplot</a></li>
+<li class="chapter" data-level="8" data-path="basic-statistics.html"><a href="basic-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basic-statistics.html"><a href="basic-statistics.html#preamble-1"><i class="fa fa-check"></i><b>8.1</b> Preamble</a></li>
+<li class="chapter" data-level="8.2" data-path="basic-statistics.html"><a href="basic-statistics.html#running-your-models"><i class="fa fa-check"></i><b>8.2</b> Running your models</a></li>
+<li class="chapter" data-level="8.3" data-path="basic-statistics.html"><a href="basic-statistics.html#modeling-your-data"><i class="fa fa-check"></i><b>8.3</b> Modeling your data</a></li>
+<li class="chapter" data-level="8.4" data-path="basic-statistics.html"><a href="basic-statistics.html#statistics---resources"><i class="fa fa-check"></i><b>8.4</b> Statistics - Resources</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="basic-statistics.html"><a href="basic-statistics.html#correlations-in-rrandom_slopes"><i class="fa fa-check"></i><b>8.4.1</b> Correlations in R/random_slopes</a></li>
+<li class="chapter" data-level="8.4.2" data-path="basic-statistics.html"><a href="basic-statistics.html#correlation-plots"><i class="fa fa-check"></i><b>8.4.2</b> Correlation Plots:</a></li>
+<li class="chapter" data-level="8.4.3" data-path="basic-statistics.html"><a href="basic-statistics.html#general-good-sites"><i class="fa fa-check"></i><b>8.4.3</b> General Good Sites</a></li>
+<li class="chapter" data-level="8.4.4" data-path="basic-statistics.html"><a href="basic-statistics.html#learn-about-residuals"><i class="fa fa-check"></i><b>8.4.4</b> Learn about Residuals:</a></li>
+<li class="chapter" data-level="8.4.5" data-path="basic-statistics.html"><a href="basic-statistics.html#regression-diagnostics"><i class="fa fa-check"></i><b>8.4.5</b> Regression Diagnostics</a></li>
+<li class="chapter" data-level="8.4.6" data-path="basic-statistics.html"><a href="basic-statistics.html#bland-altman-plots"><i class="fa fa-check"></i><b>8.4.6</b> Bland-Altman Plots</a></li>
+<li class="chapter" data-level="8.4.7" data-path="basic-statistics.html"><a href="basic-statistics.html#anova"><i class="fa fa-check"></i><b>8.4.7</b> ANOVA</a></li>
+<li class="chapter" data-level="8.4.8" data-path="basic-statistics.html"><a href="basic-statistics.html#mixed-models"><i class="fa fa-check"></i><b>8.4.8</b> Mixed Models</a></li>
+<li class="chapter" data-level="8.4.9" data-path="basic-statistics.html"><a href="basic-statistics.html#cluster-analysis-see-bottom-of-the-page-for-more-links"><i class="fa fa-check"></i><b>8.4.9</b> Cluster Analysis (see bottom of the page for more links)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="basic-statistics.html"><a href="basic-statistics.html#looking-at-interactions"><i class="fa fa-check"></i><b>8.5</b> Looking at interactions ——</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="basic-statistics.html"><a href="basic-statistics.html#packages"><i class="fa fa-check"></i><b>8.5.1</b> Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mixed-models-1.html"><a href="mixed-models-1.html"><i class="fa fa-check"></i><b>9</b> Mixed Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="mixed-models-1.html"><a href="mixed-models-1.html#to-do-1"><i class="fa fa-check"></i><b>9.1</b> To-Do</a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-models-1.html"><a href="mixed-models-1.html#preamble-2"><i class="fa fa-check"></i><b>9.2</b> Preamble</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-models-1.html"><a href="mixed-models-1.html#post-hoc-in-mixed-models"><i class="fa fa-check"></i><b>9.3</b> Post-hoc in mixed models</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="running-your-models-1.html"><a href="running-your-models-1.html"><i class="fa fa-check"></i><b>10</b> Running your models</a></li>
+<li class="chapter" data-level="11" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html"><i class="fa fa-check"></i><b>11</b> Modeling your data</a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#mixed-models-misc-info"><i class="fa fa-check"></i><b>11.0.1</b> Mixed Models: Misc Info</a></li>
+<li class="chapter" data-level="11.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#looking-at-interactions-1"><i class="fa fa-check"></i><b>11.1</b> Looking at interactions</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#packages-1"><i class="fa fa-check"></i><b>11.1.1</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#why-should-i-do-this"><i class="fa fa-check"></i><b>11.2</b> Why should I do this?</a></li>
+<li class="chapter" data-level="11.3" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#installing-zotero"><i class="fa fa-check"></i><b>11.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="11.4" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#yaml-explained"><i class="fa fa-check"></i><b>11.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html"><i class="fa fa-check"></i><b>12</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#results"><i class="fa fa-check"></i><b>12.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-table"><i class="fa fa-check"></i><b>12.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="12.1.2" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-figure"><i class="fa fa-check"></i><b>12.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="12.2" data-path="references.html"><a href="references.html#useful-links-1"><i class="fa fa-check"></i><b>12.2</b> Useful Links</a></li>
+<li class="chapter" data-level="12.3" data-path="references.html"><a href="references.html#installing-zotero-1"><i class="fa fa-check"></i><b>12.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="12.4" data-path="references.html"><a href="references.html#yaml-explained-1"><i class="fa fa-check"></i><b>12.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html"><i class="fa fa-check"></i><b>13</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#results-1"><i class="fa fa-check"></i><b>13.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-table-1"><i class="fa fa-check"></i><b>13.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="13.1.2" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-figure-1"><i class="fa fa-check"></i><b>13.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="how-to-create-a-github-key.html"><a href="how-to-create-a-github-key.html"><i class="fa fa-check"></i><b>14</b> How to create a GitHub key</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science In RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="datawrangling" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Data Wrangling</h1>
+<div id="intro-1" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Intro</h2>
+<p>Data Wrangling is the process of cleaning and manipulating your data.frame. I have never obtained a dataset that did not need to be cleaned or organized in some fashion (if you have I am quite jealous).</p>
+<p>The <code>DataExplorer</code> <a href="https://github.com/boxuancui/DataExplorer">package</a> allows you to get a preliminary look at your data. It will check for missing data</p>
+</div>
+<div id="exploratory-data-analysis" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Exploratory Data Analysis</h2>
+<p>Phase I of my “statistics” is usually termed “Data Exploration” or “Exploratory Data Analysis”</p>
+<p>The goal of this step is to gain valuable insights through the data so that one can know what is going on with the data, which part needs to be cleaned, what new features can be built, build hypotheses to be tested during the model creation/validation phase, or even just knowing some fun facts about the data (<a href="https://towardsdatascience.com/powerful-packages-to-boost-your-exploratory-data-analysis-performance-bb0db4744530">src</a>).</p>
+<p>My 2 favorite packages to get a glimpse of the data are</p>
+<ol style="list-style-type: decimal">
+<li>SmartEDA</li>
+<li><a href="https://github.com/boxuancui/DataExplorer">DataExplorer</a></li>
+<li>summarytools</li>
+<li>dataMaid</li>
+<li><a href="https://sfirke.github.io/janitor/articles/janitor.html">janitor</a> and <a href="https://github.com/sfirke/janitor">here</a></li>
+</ol>
+</div>
+<div id="creating-report-with-dataexplorer" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Creating Report with DataExplorer</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="datawrangling.html#cb31-1"></a>  <span class="kw">create_report</span>(</span>
+<span id="cb31-2"><a href="datawrangling.html#cb31-2"></a>    df.fa, <span class="co"># the name of your dataframe </span></span>
+<span id="cb31-3"><a href="datawrangling.html#cb31-3"></a>    <span class="co">#y = &#39;heart_disease&#39;,</span></span>
+<span id="cb31-4"><a href="datawrangling.html#cb31-4"></a>    <span class="dt">output_dir   =</span> <span class="st">&#39;output&#39;</span>, <span class="co"># where do you want it to be saved relative to your project directory</span></span>
+<span id="cb31-5"><a href="datawrangling.html#cb31-5"></a>    <span class="dt">output_file  =</span> <span class="st">&#39;data_explorer_fa_report.html&#39;</span>, <span class="co"># the filename for the report</span></span>
+<span id="cb31-6"><a href="datawrangling.html#cb31-6"></a>    <span class="dt">report_title =</span> <span class="st">&#39;DTI (FA) Data Description&#39;</span> <span class="co"># the Title of your report</span></span>
+<span id="cb31-7"><a href="datawrangling.html#cb31-7"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="datawrangling.html#cb32-1"></a>SmartEDA<span class="op">::</span><span class="kw">ExpNumStat</span>(tbl.desc, <span class="dt">round =</span> <span class="dv">1</span>)</span>
+<span id="cb32-2"><a href="datawrangling.html#cb32-2"></a>        </span>
+<span id="cb32-3"><a href="datawrangling.html#cb32-3"></a>       <span class="kw">ExpNumStat</span>(</span>
+<span id="cb32-4"><a href="datawrangling.html#cb32-4"></a>         tbl.desc,</span>
+<span id="cb32-5"><a href="datawrangling.html#cb32-5"></a>         <span class="dt">by =</span> <span class="st">&quot;GA&quot;</span>,</span>
+<span id="cb32-6"><a href="datawrangling.html#cb32-6"></a>         <span class="dt">gp =</span> <span class="st">&quot;Group&quot;</span>,</span>
+<span id="cb32-7"><a href="datawrangling.html#cb32-7"></a>         <span class="dt">Qnt =</span> <span class="kw">c</span>(.<span class="dv">1</span>, <span class="fl">.9</span>),</span>
+<span id="cb32-8"><a href="datawrangling.html#cb32-8"></a>         <span class="dt">Outlier =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb32-9"><a href="datawrangling.html#cb32-9"></a>         <span class="dt">round =</span> <span class="dv">1</span></span>
+<span id="cb32-10"><a href="datawrangling.html#cb32-10"></a>       )</span>
+<span id="cb32-11"><a href="datawrangling.html#cb32-11"></a>       </span>
+<span id="cb32-12"><a href="datawrangling.html#cb32-12"></a>       <span class="kw">ExpNumViz</span>(tbl.desc, <span class="dt">target =</span> <span class="st">&#39;Group&#39;</span>)</span>
+<span id="cb32-13"><a href="datawrangling.html#cb32-13"></a>       </span>
+<span id="cb32-14"><a href="datawrangling.html#cb32-14"></a>       </span>
+<span id="cb32-15"><a href="datawrangling.html#cb32-15"></a>       summarytools<span class="op">::</span><span class="kw">dfSummary</span>(</span>
+<span id="cb32-16"><a href="datawrangling.html#cb32-16"></a>         tbl.desc,</span>
+<span id="cb32-17"><a href="datawrangling.html#cb32-17"></a>         <span class="dt">varnumbers =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb32-18"><a href="datawrangling.html#cb32-18"></a>         <span class="dt">round.digits =</span> <span class="dv">2</span>,</span>
+<span id="cb32-19"><a href="datawrangling.html#cb32-19"></a>         <span class="dt">plain.ascii =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb32-20"><a href="datawrangling.html#cb32-20"></a>         <span class="dt">style =</span> <span class="st">&quot;grid&quot;</span>,</span>
+<span id="cb32-21"><a href="datawrangling.html#cb32-21"></a>         <span class="dt">graph.magnif =</span> <span class="fl">.33</span>,</span>
+<span id="cb32-22"><a href="datawrangling.html#cb32-22"></a>         <span class="dt">valid.col =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb32-23"><a href="datawrangling.html#cb32-23"></a>         <span class="dt">tmp.img.dir =</span> <span class="st">&quot;img&quot;</span></span>
+<span id="cb32-24"><a href="datawrangling.html#cb32-24"></a>       )</span></code></pre></div>
+<div id="reading-material-exploratory-data-analysis" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Reading Material : Exploratory Data Analysis</h3>
+<ol style="list-style-type: decimal">
+<li><a href="https://m-clark.github.io/exploratory-data-analysis-tools/" class="uri">https://m-clark.github.io/exploratory-data-analysis-tools/</a></li>
+<li><a href="https://blog.revolutionanalytics.com/2018/02/dataexplorer.html" class="uri">https://blog.revolutionanalytics.com/2018/02/dataexplorer.html</a></li>
+<li><a href="https://www.avery-robbins.com/2020/06/01/first-post-ever/" class="uri">https://www.avery-robbins.com/2020/06/01/first-post-ever/</a></li>
+</ol>
+</div>
+</div>
+<div id="tasks" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Tasks</h2>
+<div id="inspecting-the-imported-data" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Inspecting the imported data</h3>
+<p>Among the issues you may encounter with your data is inconsistencies in columnnames. This can be rather annoying. In order to alleviate this, I like to pick one format and stick with it. When I receive a dataset from another researcher I will often use <a href="https://github.com/Tazinho/snakecase">snakecase</a> to modify their dataset accordingly.</p>
+</div>
+<div id="choosing-good-column-names" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Choosing good column names</h3>
+<ol style="list-style-type: decimal">
+<li>Avoid using spaces. This makes it more tedious to refer or call a column later on. In the example below our task is to rename the column “Group Level”. It should also be noted that things can get tricky when you are using certain packages and will over time, be a large burden to you. Hence, my advice is to remove spaces. Consider going into snakecase.</li>
+</ol>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="datawrangling.html#cb33-1"></a>df<span class="op">$</span><span class="st">`</span><span class="dt">Group Level</span><span class="st">`</span> <span class="co"># Column name with spaces</span></span>
+<span id="cb33-2"><a href="datawrangling.html#cb33-2"></a></span>
+<span id="cb33-3"><a href="datawrangling.html#cb33-3"></a>df<span class="op">$</span>GroupLevel <span class="co"># Column name without spaces</span></span></code></pre></div>
+</div>
+<div id="replace-strings-using-pipes" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> replace strings using pipes</h3>
+<p>In the code below I want to replace text in the “Test” column. Notice how I call the column once and then use the pipe operator to list the rest</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="datawrangling.html#cb34-1"></a>df <span class="op">%&gt;%</span></span>
+<span id="cb34-2"><a href="datawrangling.html#cb34-2"></a><span class="kw">mutate</span>(<span class="dt">Test =</span> <span class="kw">str_replace_all</span>(Test, <span class="st">&quot;:&quot;</span>, <span class="st">&quot;×&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb34-3"><a href="datawrangling.html#cb34-3"></a><span class="st">         </span><span class="kw">str_replace_all</span>(<span class="st">&quot;group2.L&quot;</span>, <span class="st">&quot;Group&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb34-4"><a href="datawrangling.html#cb34-4"></a><span class="st">         </span><span class="kw">str_replace_all</span>(<span class="st">&quot;mriloc2&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb34-5"><a href="datawrangling.html#cb34-5"></a><span class="st">         </span><span class="kw">str_replace_all</span>(<span class="st">&quot;hemisphereLeft&quot;</span>, <span class="st">&quot;LeftHemi&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb34-6"><a href="datawrangling.html#cb34-6"></a><span class="st">         </span><span class="kw">str_replace_all</span>(<span class="st">&quot;hemisphereRight&quot;</span>, <span class="st">&quot;RightHemi&quot;</span>) </span>
+<span id="cb34-7"><a href="datawrangling.html#cb34-7"></a>)</span></code></pre></div>
+</div>
+<div id="useful-links" class="section level3" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> Useful Links</h3>
+<p>Below is a list of pages I have collected that have come in very useful for beginners</p>
+<div id="selecting-using-the-tidyverse" class="section level4" number="5.4.4.1">
+<h4><span class="header-section-number">5.4.4.1</span> Selecting using the tidyverse</h4>
+<p><a href="https://suzan.rbind.io/2018/02/dplyr-tutorial-3/#filtering-based-on-a-exact-character-variable-matches" class="uri">https://suzan.rbind.io/2018/02/dplyr-tutorial-3/#filtering-based-on-a-exact-character-variable-matches</a></p>
+</div>
+<div id="working-with-dates" class="section level4" number="5.4.4.2">
+<h4><span class="header-section-number">5.4.4.2</span> Working with dates</h4>
+<p>We won’t cover working with dates much in this guide, because its not typical. However, should you need them the link below provides a general walkthrough.
+<a href="https://www.r-bloggers.com/a-comprehensive-introduction-to-handling-date-time-in-r-2/" class="uri">https://www.r-bloggers.com/a-comprehensive-introduction-to-handling-date-time-in-r-2/</a></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="datawrangling.html#cb35-1"></a><span class="co"># Adding Names to Columns ==================</span></span>
+<span id="cb35-2"><a href="datawrangling.html#cb35-2"></a><span class="co"># This can be required when using certain plotting functions like &quot;likert&quot; --&gt; see ALPH likert4.R</span></span>
+<span id="cb35-3"><a href="datawrangling.html#cb35-3"></a><span class="kw">names</span>(items) &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb35-4"><a href="datawrangling.html#cb35-4"></a>  <span class="dt">symptoms_decLOC=</span><span class="st">&quot;Did the patient have loss of consciousness?&quot;</span>,</span>
+<span id="cb35-5"><a href="datawrangling.html#cb35-5"></a>  <span class="dt">symptoms_headache=</span><span class="st">&quot;Did the patient have headaches?&quot;</span>,</span>
+<span id="cb35-6"><a href="datawrangling.html#cb35-6"></a>  <span class="dt">symptoms_nausea_vomitting=</span><span class="st">&quot;Did the patient have nausea/vomiting?&quot;</span>,</span>
+<span id="cb35-7"><a href="datawrangling.html#cb35-7"></a>  <span class="dt">symptoms_cranialNerve_paresis=</span><span class="st">&quot;Did the patient have cranial nerve paresis?&quot;</span>,</span>
+<span id="cb35-8"><a href="datawrangling.html#cb35-8"></a>  <span class="dt">symptoms_gait_disturbance=</span><span class="st">&quot;Did the patient have any gait disturbances?&quot;</span>)</span>
+<span id="cb35-9"><a href="datawrangling.html#cb35-9"></a><span class="co"># Data Wrangling ----------------</span></span>
+<span id="cb35-10"><a href="datawrangling.html#cb35-10"></a>df1<span class="op">$</span>Group &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Body&quot;</span>, <span class="kw">length</span>(df1<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>))</span>
+<span id="cb35-11"><a href="datawrangling.html#cb35-11"></a>df2<span class="op">$</span>Group &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Genu&quot;</span>, <span class="kw">length</span>(df2<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>))</span>
+<span id="cb35-12"><a href="datawrangling.html#cb35-12"></a>df3<span class="op">$</span>Group &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;Splenium&quot;</span>, <span class="kw">length</span>(df3<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>))</span>
+<span id="cb35-13"><a href="datawrangling.html#cb35-13"></a></span>
+<span id="cb35-14"><a href="datawrangling.html#cb35-14"></a>idx &lt;-<span class="st"> </span><span class="kw">unique</span>(df3l<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>) <span class="op">==</span><span class="st"> </span>df1<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span></span>
+<span id="cb35-15"><a href="datawrangling.html#cb35-15"></a></span>
+<span id="cb35-16"><a href="datawrangling.html#cb35-16"></a>dfx &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span></span>
+<span id="cb35-17"><a href="datawrangling.html#cb35-17"></a><span class="st">  </span><span class="kw">select_if</span>(df1<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span> <span class="op">==</span><span class="st"> </span><span class="kw">unique</span>(df3<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>))  </span>
+<span id="cb35-18"><a href="datawrangling.html#cb35-18"></a>combinedDF &lt;-<span class="st"> </span><span class="kw">rbind</span>(df1,df2,df3)</span>
+<span id="cb35-19"><a href="datawrangling.html#cb35-19"></a></span>
+<span id="cb35-20"><a href="datawrangling.html#cb35-20"></a>df1[<span class="op">!</span>(df1<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span> <span class="op">%in%</span><span class="st"> </span>df3<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>)]</span>
+<span id="cb35-21"><a href="datawrangling.html#cb35-21"></a></span>
+<span id="cb35-22"><a href="datawrangling.html#cb35-22"></a>idx &lt;-<span class="st"> </span><span class="kw">setdiff</span>(df1<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>, df2<span class="op">$</span><span class="st">`</span><span class="dt">File name</span><span class="st">`</span>)</span>
+<span id="cb35-23"><a href="datawrangling.html#cb35-23"></a>df1 &lt;-<span class="st"> </span>df1[,idx]</span>
+<span id="cb35-24"><a href="datawrangling.html#cb35-24"></a></span>
+<span id="cb35-25"><a href="datawrangling.html#cb35-25"></a><span class="co"># Convert several columns to numeric ----------</span></span>
+<span id="cb35-26"><a href="datawrangling.html#cb35-26"></a> cols &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;CC_F|Left|Right&quot;</span>, <span class="dt">x =</span> <span class="kw">names</span>(df), <span class="dt">value =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb35-27"><a href="datawrangling.html#cb35-27"></a> df[, cols] &lt;-<span class="st"> </span><span class="kw">lapply</span>(df[ , cols], <span class="cf">function</span>(x) <span class="kw">suppressWarnings</span>(<span class="kw">as.numeric</span>(x))) <span class="co">#supressWarnings is so you don&#39;t get &quot;NAs introduced by coercion&quot; in your console output</span></span>
+<span id="cb35-28"><a href="datawrangling.html#cb35-28"></a><span class="co"># Count the number of NA&#39;s in each column of a dataframe ----------</span></span>
+<span id="cb35-29"><a href="datawrangling.html#cb35-29"></a><span class="kw">sapply</span>(df, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="co">#this is different than &quot;summary(df)&quot; which gives you information on more than NA&#39;s</span></span>
+<span id="cb35-30"><a href="datawrangling.html#cb35-30"></a></span>
+<span id="cb35-31"><a href="datawrangling.html#cb35-31"></a><span class="co"># Add column in specific spot ========</span></span>
+<span id="cb35-32"><a href="datawrangling.html#cb35-32"></a>df &lt;-<span class="st"> </span><span class="kw">add_column</span>(df, <span class="st">&quot;DMT_line2&quot;</span> =<span class="st"> </span>df<span class="op">$</span>DMT_line, <span class="dt">.after =</span> <span class="st">&quot;DMT_line&quot;</span>)</span>
+<span id="cb35-33"><a href="datawrangling.html#cb35-33"></a></span>
+<span id="cb35-34"><a href="datawrangling.html#cb35-34"></a><span class="co"># Add a blank column in a specific spot =====</span></span>
+<span id="cb35-35"><a href="datawrangling.html#cb35-35"></a>  items &lt;-<span class="st"> </span><span class="kw">add_column</span>(items, <span class="st">&quot;Avg&quot;</span> =<span class="st"> </span><span class="kw">replicate</span>(<span class="kw">length</span>(items<span class="op">$</span>value.D1), <span class="ot">NA</span>) , <span class="dt">.after =</span> <span class="st">&quot;value.D7&quot;</span>)</span>
+<span id="cb35-36"><a href="datawrangling.html#cb35-36"></a></span>
+<span id="cb35-37"><a href="datawrangling.html#cb35-37"></a><span class="co"># Remove blank rows in a specific column =======</span></span>
+<span id="cb35-38"><a href="datawrangling.html#cb35-38"></a>df &lt;-<span class="st"> </span>df[<span class="op">-</span><span class="kw">which</span>(df<span class="op">$</span>start_pc <span class="op">==</span><span class="st"> &quot;&quot;</span>), ]</span>
+<span id="cb35-39"><a href="datawrangling.html#cb35-39"></a></span>
+<span id="cb35-40"><a href="datawrangling.html#cb35-40"></a><span class="co"># Removing a column based on a string match =========</span></span>
+<span id="cb35-41"><a href="datawrangling.html#cb35-41"></a>        df &lt;-<span class="st"> </span><span class="kw">filter</span>(df, C <span class="op">!=</span><span class="st"> &quot;Foo&quot;</span>)</span>
+<span id="cb35-42"><a href="datawrangling.html#cb35-42"></a>  <span class="co"># Renaming a variable in a column : str_replace (this won&#39;t take exact strings)=============</span></span>
+<span id="cb35-43"><a href="datawrangling.html#cb35-43"></a>  df1<span class="op">$</span>ID &lt;-<span class="st"> </span>df<span class="op">$</span>ID   <span class="op">%&gt;%</span></span>
+<span id="cb35-44"><a href="datawrangling.html#cb35-44"></a><span class="st">    </span><span class="kw">str_replace</span>(<span class="st">&quot;pi6437934_2&quot;</span>, <span class="st">&quot;S2&quot;</span>)</span>
+<span id="cb35-45"><a href="datawrangling.html#cb35-45"></a>  </span>
+<span id="cb35-46"><a href="datawrangling.html#cb35-46"></a>  <span class="co"># Replace an exact string -------------</span></span>
+<span id="cb35-47"><a href="datawrangling.html#cb35-47"></a>  data<span class="op">$</span>OpenBCI_FileName &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">&lt;y</span><span class="ch">\\</span><span class="st">&gt;&quot;</span>,<span class="st">&quot;&quot;</span>, data<span class="op">$</span>OpenBCI_FileName) <span class="co"># replaces cols with &quot;y&quot; but won&#39;t touch something like &quot;My Drive&quot;</span></span>
+<span id="cb35-48"><a href="datawrangling.html#cb35-48"></a></span>
+<span id="cb35-49"><a href="datawrangling.html#cb35-49"></a>  <span class="co"># if you have multiple strings to replace you can use the pipe operator to get everything done in one shot</span></span>
+<span id="cb35-50"><a href="datawrangling.html#cb35-50"></a>  df<span class="op">$</span>ID &lt;-<span class="st"> </span>df<span class="op">$</span>ID    <span class="op">%&gt;%</span></span>
+<span id="cb35-51"><a href="datawrangling.html#cb35-51"></a><span class="st">    </span><span class="kw">str_replace</span>(<span class="st">&quot;pi_14344894_9&quot;</span>, <span class="st">&quot;S9&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#oldstring, newstring</span></span>
+<span id="cb35-52"><a href="datawrangling.html#cb35-52"></a><span class="st">      </span><span class="kw">str_replace</span>(<span class="st">&quot;pi_3478_03o4_15&quot;</span>, <span class="st">&quot;S15&quot;</span>)</span>
+<span id="cb35-53"><a href="datawrangling.html#cb35-53"></a></span>
+<span id="cb35-54"><a href="datawrangling.html#cb35-54"></a>  <span class="co"># Partial String match in a column----------</span></span>
+<span id="cb35-55"><a href="datawrangling.html#cb35-55"></a>    <span class="co"># __Method 1: str_detect ========</span></span>
+<span id="cb35-56"><a href="datawrangling.html#cb35-56"></a>      mtcars <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb35-57"><a href="datawrangling.html#cb35-57"></a><span class="st">        </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(rowname, <span class="st">&quot;Merc&quot;</span>)) <span class="co"># this will filter everything that has the pattern &quot;Merc&quot; in the column</span></span>
+<span id="cb35-58"><a href="datawrangling.html#cb35-58"></a>  </span>
+<span id="cb35-59"><a href="datawrangling.html#cb35-59"></a>    <span class="co"># __Method 2 : grepl ==========</span></span>
+<span id="cb35-60"><a href="datawrangling.html#cb35-60"></a>    dplyr<span class="op">::</span><span class="kw">filter</span>(mtcars, <span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;Toyota|Mazda&#39;</span>, type)) <span class="co"># Using grepl</span></span>
+<span id="cb35-61"><a href="datawrangling.html#cb35-61"></a>    cols &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;symptoms|Previous_shunt&quot;</span>, <span class="dt">x =</span> <span class="kw">names</span>(df), <span class="dt">value =</span> <span class="ot">TRUE</span>) <span class="co">#Select columns that start with symptoms</span></span>
+<span id="cb35-62"><a href="datawrangling.html#cb35-62"></a>    df[cols] &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">lapply</span>(df[cols],<span class="cf">function</span>(x) {<span class="kw">factor</span>(x,<span class="dt">levels=</span>mylevels, <span class="dt">exclude=</span><span class="st">&quot;&quot;</span>)}))</span>
+<span id="cb35-63"><a href="datawrangling.html#cb35-63"></a>  </span>
+<span id="cb35-64"><a href="datawrangling.html#cb35-64"></a>    <span class="co">#__Method 3 : grep (similar to grepl) =====</span></span>
+<span id="cb35-65"><a href="datawrangling.html#cb35-65"></a>    cols &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;symptoms&quot;</span>, <span class="dt">x =</span> <span class="kw">names</span>(df2), <span class="dt">value =</span> <span class="ot">TRUE</span>) <span class="co">#Select columns that start with symptoms</span></span>
+<span id="cb35-66"><a href="datawrangling.html#cb35-66"></a></span>
+<span id="cb35-67"><a href="datawrangling.html#cb35-67"></a>  </span>
+<span id="cb35-68"><a href="datawrangling.html#cb35-68"></a>  <span class="co"># Renaming a column ================</span></span>
+<span id="cb35-69"><a href="datawrangling.html#cb35-69"></a>  df &lt;-<span class="st"> </span>df  <span class="op">%&gt;%</span></span>
+<span id="cb35-70"><a href="datawrangling.html#cb35-70"></a><span class="st">  </span>df &lt;-<span class="st"> </span>df  <span class="op">%&gt;%</span></span>
+<span id="cb35-71"><a href="datawrangling.html#cb35-71"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">rename</span>(</span>
+<span id="cb35-72"><a href="datawrangling.html#cb35-72"></a>      <span class="co">#‘New Column Name’= ‘Old Name’</span></span>
+<span id="cb35-73"><a href="datawrangling.html#cb35-73"></a>      <span class="st">&quot;month&quot;</span>=<span class="st"> &quot;Month&quot;</span></span>
+<span id="cb35-74"><a href="datawrangling.html#cb35-74"></a>    )</span>
+<span id="cb35-75"><a href="datawrangling.html#cb35-75"></a></span>
+<span id="cb35-76"><a href="datawrangling.html#cb35-76"></a>  <span class="co"># Removing NA&#39;s-----------</span></span>
+<span id="cb35-77"><a href="datawrangling.html#cb35-77"></a>    <span class="co"># __Method 1: is.na() ====</span></span>
+<span id="cb35-78"><a href="datawrangling.html#cb35-78"></a>    df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></span>
+<span id="cb35-79"><a href="datawrangling.html#cb35-79"></a><span class="st">      </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(columnName)) <span class="co"># give me a new dataframe with only the international services.</span></span>
+<span id="cb35-80"><a href="datawrangling.html#cb35-80"></a>    </span>
+<span id="cb35-81"><a href="datawrangling.html#cb35-81"></a>    <span class="co"># __Method 2: na.omit() ====</span></span>
+<span id="cb35-82"><a href="datawrangling.html#cb35-82"></a>    df1 &lt;-<span class="st"> </span><span class="kw">na.omit</span>(df1)</span>
+<span id="cb35-83"><a href="datawrangling.html#cb35-83"></a></span>
+<span id="cb35-84"><a href="datawrangling.html#cb35-84"></a>  <span class="co"># Filtering our data that fits a condition: filter=========</span></span>
+<span id="cb35-85"><a href="datawrangling.html#cb35-85"></a>  new_df &lt;-<span class="st"> </span><span class="kw">filter</span>(df, service<span class="op">==</span><span class="st">&quot;International&quot;</span>) <span class="co"># give me a new dataframe with only the international services.</span></span></code></pre></div>
+<p>To rename parts of a column using <code>%&gt;%</code> you need to use <code>mutate</code></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="datawrangling.html#cb36-1"></a><span class="co"># normal way to replace strings in a column</span></span>
+<span id="cb36-2"><a href="datawrangling.html#cb36-2"></a>df<span class="op">$</span>columnName =<span class="st"> </span><span class="kw">str_replace_all</span>(df<span class="op">$</span>columnName, <span class="st">&quot;Contribution_&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb36-3"><a href="datawrangling.html#cb36-3"></a></span>
+<span id="cb36-4"><a href="datawrangling.html#cb36-4"></a><span class="co"># Using pipe</span></span>
+<span id="cb36-5"><a href="datawrangling.html#cb36-5"></a>df <span class="op">%&gt;%</span></span>
+<span id="cb36-6"><a href="datawrangling.html#cb36-6"></a><span class="kw">mutate</span>(<span class="dt">columnName =</span> <span class="kw">str_replace_all</span>(columnName, <span class="st">&quot;Contribution_&quot;</span>, <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="for-item-based-data" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> For Item-based data</h2>
+<p>The <a href="https://cran.r-project.org/web/packages/sjPlot/vignettes/sjtitemanalysis.html"><code>likert</code></a> package seems great. I have used it to great success in past projects.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="first-script.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creating-tables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-data_wrangling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Lab-Bible.pdf", "Lab-Bible.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

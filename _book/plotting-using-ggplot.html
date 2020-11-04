@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Plotting using ggplot | Data Science In RStudio</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Plotting using ggplot | Data Science In RStudio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="alapo/fNIRS" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Plotting using ggplot | Data Science In RStudio" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Andrew P. Lapointe" />
+
+
+<meta name="date" content="2020-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="creating-tables.html"/>
+<link rel="next" href="basic-statistics.html"/>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R_Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#things-to-add"><i class="fa fa-check"></i><b>1.1</b> Things to add</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#documentation-for-author"><i class="fa fa-check"></i><b>1.2</b> Documentation for Author</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#andrews-notes-ramblings"><i class="fa fa-check"></i><b>1.3</b> Andrew’s Notes / Ramblings</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#to-do"><i class="fa fa-check"></i><b>1.4</b> To Do</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#title-word-cloud"><i class="fa fa-check"></i><b>1.5</b> Title word cloud</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#copy-from-chapter-1-example"><i class="fa fa-check"></i><b>1.6</b> Copy from Chapter 1 Example</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#matlab-highlighting"><i class="fa fa-check"></i><b>1.7</b> MATLAB Highlighting</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#misc-codedata"><i class="fa fa-check"></i><b>1.8</b> Misc code/data</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>1.9</b> Other Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#preamble"><i class="fa fa-check"></i><b>2.1</b> Preamble</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#how-this-book-is-structured"><i class="fa fa-check"></i><b>2.2</b> How this book is structured</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#keys-to-learning"><i class="fa fa-check"></i><b>2.3</b> Keys to Learning</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#quick-introduction-to-reproducible-science"><i class="fa fa-check"></i><b>2.4</b> Quick Introduction to reproducible science</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#how-to-use-this-book"><i class="fa fa-check"></i><b>2.5</b> How to use this book</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#reproducible-science-link"><i class="fa fa-check"></i><b>2.6</b> Reproducible Science Link</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#how-to-make-a-provocative-conference-poster"><i class="fa fa-check"></i><b>2.7</b> How to make a provocative Conference Poster</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#misc-student-resources"><i class="fa fa-check"></i><b>2.8</b> Misc Student Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#starting-off"><i class="fa fa-check"></i><b>3.1</b> Starting Off</a></li>
+<li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#setting-up-rstudio-for-the-first-time"><i class="fa fa-check"></i><b>3.2</b> Setting up RStudio for the first time</a></li>
+<li class="chapter" data-level="3.3" data-path="installation.html"><a href="installation.html#installing-r-rstudio"><i class="fa fa-check"></i><b>3.3</b> Installing R + RStudio</a></li>
+<li class="chapter" data-level="3.4" data-path="installation.html"><a href="installation.html#already-have-r-and-rstudio-installed"><i class="fa fa-check"></i><b>3.4</b> Already have R and RStudio installed?</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="installation.html"><a href="installation.html#how-to-update-r"><i class="fa fa-check"></i><b>3.4.1</b> How to update R</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="installation.html"><a href="installation.html#update-rstudio"><i class="fa fa-check"></i><b>3.5</b> Update RStudio</a></li>
+<li class="chapter" data-level="3.6" data-path="installation.html"><a href="installation.html#how-to-use-packages"><i class="fa fa-check"></i><b>3.6</b> How to use packages</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="installation.html"><a href="installation.html#installing-packages-on-your-computer"><i class="fa fa-check"></i><b>3.6.1</b> Installing packages on your computer</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="installation.html"><a href="installation.html#alternatives-to-installing-loading-packages"><i class="fa fa-check"></i><b>3.7</b> Alternatives to installing / loading packages</a></li>
+<li class="chapter" data-level="3.8" data-path="installation.html"><a href="installation.html#trouble-installing-packages"><i class="fa fa-check"></i><b>3.8</b> Trouble installing packages</a></li>
+<li class="chapter" data-level="3.9" data-path="installation.html"><a href="installation.html#other-things-to-do-in-rstudio"><i class="fa fa-check"></i><b>3.9</b> Other things to do in RStudio</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="installation.html"><a href="installation.html#themes-bring-on-the-darkness"><i class="fa fa-check"></i><b>3.9.1</b> Themes: Bring on the darkness</a></li>
+<li class="chapter" data-level="3.9.2" data-path="installation.html"><a href="installation.html#shortcuts"><i class="fa fa-check"></i><b>3.9.2</b> Shortcuts</a></li>
+<li class="chapter" data-level="3.9.3" data-path="installation.html"><a href="installation.html#code-folding"><i class="fa fa-check"></i><b>3.9.3</b> Code Folding</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="installation.html"><a href="installation.html#conclusion"><i class="fa fa-check"></i><b>3.10</b> Conclusion</a></li>
+<li class="chapter" data-level="3.11" data-path="installation.html"><a href="installation.html#chapter-1b-project-environment"><i class="fa fa-check"></i><b>3.11</b> Chapter 1b: Project Environment</a></li>
+<li class="chapter" data-level="3.12" data-path="installation.html"><a href="installation.html#setting-up-your-work-environment"><i class="fa fa-check"></i><b>3.12</b> Setting up your work environment</a>
+<ul>
+<li class="chapter" data-level="3.12.1" data-path="installation.html"><a href="installation.html#folder-organization"><i class="fa fa-check"></i><b>3.12.1</b> Folder Organization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-script.html"><a href="first-script.html"><i class="fa fa-check"></i><b>4</b> Creating your first script</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="first-script.html"><a href="first-script.html#part-1-loadinginstalling-packages-needed"><i class="fa fa-check"></i><b>4.1</b> Part 1: Loading/installing packages needed</a></li>
+<li class="chapter" data-level="4.2" data-path="first-script.html"><a href="first-script.html#part-2-loading-your-data"><i class="fa fa-check"></i><b>4.2</b> Part 2: Loading your data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="first-script.html"><a href="first-script.html#xlsx"><i class="fa fa-check"></i><b>4.2.1</b> xlsx</a></li>
+<li class="chapter" data-level="4.2.2" data-path="first-script.html"><a href="first-script.html#csv"><i class="fa fa-check"></i><b>4.2.2</b> csv</a></li>
+<li class="chapter" data-level="4.2.3" data-path="first-script.html"><a href="first-script.html#google-sheet"><i class="fa fa-check"></i><b>4.2.3</b> Google Sheet</a></li>
+<li class="chapter" data-level="4.2.4" data-path="first-script.html"><a href="first-script.html#sav-spss"><i class="fa fa-check"></i><b>4.2.4</b> sav (SPSS)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="first-script.html"><a href="first-script.html#cleaning-your-imported-data."><i class="fa fa-check"></i><b>4.3</b> Cleaning your imported data.</a></li>
+<li class="chapter" data-level="4.4" data-path="first-script.html"><a href="first-script.html#part-3-saving-outputs"><i class="fa fa-check"></i><b>4.4</b> Part 3: Saving Outputs</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datawrangling.html"><a href="datawrangling.html#intro-1"><i class="fa fa-check"></i><b>5.1</b> Intro</a></li>
+<li class="chapter" data-level="5.2" data-path="datawrangling.html"><a href="datawrangling.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>5.2</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="datawrangling.html"><a href="datawrangling.html#creating-report-with-dataexplorer"><i class="fa fa-check"></i><b>5.3</b> Creating Report with DataExplorer</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datawrangling.html"><a href="datawrangling.html#reading-material-exploratory-data-analysis"><i class="fa fa-check"></i><b>5.3.1</b> Reading Material : Exploratory Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datawrangling.html"><a href="datawrangling.html#tasks"><i class="fa fa-check"></i><b>5.4</b> Tasks</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="datawrangling.html"><a href="datawrangling.html#inspecting-the-imported-data"><i class="fa fa-check"></i><b>5.4.1</b> Inspecting the imported data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="datawrangling.html"><a href="datawrangling.html#choosing-good-column-names"><i class="fa fa-check"></i><b>5.4.2</b> Choosing good column names</a></li>
+<li class="chapter" data-level="5.4.3" data-path="datawrangling.html"><a href="datawrangling.html#replace-strings-using-pipes"><i class="fa fa-check"></i><b>5.4.3</b> replace strings using pipes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="datawrangling.html"><a href="datawrangling.html#useful-links"><i class="fa fa-check"></i><b>5.4.4</b> Useful Links</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="datawrangling.html"><a href="datawrangling.html#for-item-based-data"><i class="fa fa-check"></i><b>5.5</b> For Item-based data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="creating-tables.html"><a href="creating-tables.html"><i class="fa fa-check"></i><b>6</b> Creating tables</a></li>
+<li class="chapter" data-level="7" data-path="plotting-using-ggplot.html"><a href="plotting-using-ggplot.html"><i class="fa fa-check"></i><b>7</b> Plotting using ggplot</a></li>
+<li class="chapter" data-level="8" data-path="basic-statistics.html"><a href="basic-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic Statistics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basic-statistics.html"><a href="basic-statistics.html#preamble-1"><i class="fa fa-check"></i><b>8.1</b> Preamble</a></li>
+<li class="chapter" data-level="8.2" data-path="basic-statistics.html"><a href="basic-statistics.html#running-your-models"><i class="fa fa-check"></i><b>8.2</b> Running your models</a></li>
+<li class="chapter" data-level="8.3" data-path="basic-statistics.html"><a href="basic-statistics.html#modeling-your-data"><i class="fa fa-check"></i><b>8.3</b> Modeling your data</a></li>
+<li class="chapter" data-level="8.4" data-path="basic-statistics.html"><a href="basic-statistics.html#statistics---resources"><i class="fa fa-check"></i><b>8.4</b> Statistics - Resources</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="basic-statistics.html"><a href="basic-statistics.html#correlations-in-rrandom_slopes"><i class="fa fa-check"></i><b>8.4.1</b> Correlations in R/random_slopes</a></li>
+<li class="chapter" data-level="8.4.2" data-path="basic-statistics.html"><a href="basic-statistics.html#correlation-plots"><i class="fa fa-check"></i><b>8.4.2</b> Correlation Plots:</a></li>
+<li class="chapter" data-level="8.4.3" data-path="basic-statistics.html"><a href="basic-statistics.html#general-good-sites"><i class="fa fa-check"></i><b>8.4.3</b> General Good Sites</a></li>
+<li class="chapter" data-level="8.4.4" data-path="basic-statistics.html"><a href="basic-statistics.html#learn-about-residuals"><i class="fa fa-check"></i><b>8.4.4</b> Learn about Residuals:</a></li>
+<li class="chapter" data-level="8.4.5" data-path="basic-statistics.html"><a href="basic-statistics.html#regression-diagnostics"><i class="fa fa-check"></i><b>8.4.5</b> Regression Diagnostics</a></li>
+<li class="chapter" data-level="8.4.6" data-path="basic-statistics.html"><a href="basic-statistics.html#bland-altman-plots"><i class="fa fa-check"></i><b>8.4.6</b> Bland-Altman Plots</a></li>
+<li class="chapter" data-level="8.4.7" data-path="basic-statistics.html"><a href="basic-statistics.html#anova"><i class="fa fa-check"></i><b>8.4.7</b> ANOVA</a></li>
+<li class="chapter" data-level="8.4.8" data-path="basic-statistics.html"><a href="basic-statistics.html#mixed-models"><i class="fa fa-check"></i><b>8.4.8</b> Mixed Models</a></li>
+<li class="chapter" data-level="8.4.9" data-path="basic-statistics.html"><a href="basic-statistics.html#cluster-analysis-see-bottom-of-the-page-for-more-links"><i class="fa fa-check"></i><b>8.4.9</b> Cluster Analysis (see bottom of the page for more links)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="basic-statistics.html"><a href="basic-statistics.html#looking-at-interactions"><i class="fa fa-check"></i><b>8.5</b> Looking at interactions ——</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="basic-statistics.html"><a href="basic-statistics.html#packages"><i class="fa fa-check"></i><b>8.5.1</b> Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mixed-models-1.html"><a href="mixed-models-1.html"><i class="fa fa-check"></i><b>9</b> Mixed Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="mixed-models-1.html"><a href="mixed-models-1.html#to-do-1"><i class="fa fa-check"></i><b>9.1</b> To-Do</a></li>
+<li class="chapter" data-level="9.2" data-path="mixed-models-1.html"><a href="mixed-models-1.html#preamble-2"><i class="fa fa-check"></i><b>9.2</b> Preamble</a></li>
+<li class="chapter" data-level="9.3" data-path="mixed-models-1.html"><a href="mixed-models-1.html#post-hoc-in-mixed-models"><i class="fa fa-check"></i><b>9.3</b> Post-hoc in mixed models</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="running-your-models-1.html"><a href="running-your-models-1.html"><i class="fa fa-check"></i><b>10</b> Running your models</a></li>
+<li class="chapter" data-level="11" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html"><i class="fa fa-check"></i><b>11</b> Modeling your data</a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#mixed-models-misc-info"><i class="fa fa-check"></i><b>11.0.1</b> Mixed Models: Misc Info</a></li>
+<li class="chapter" data-level="11.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#looking-at-interactions-1"><i class="fa fa-check"></i><b>11.1</b> Looking at interactions</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#packages-1"><i class="fa fa-check"></i><b>11.1.1</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#why-should-i-do-this"><i class="fa fa-check"></i><b>11.2</b> Why should I do this?</a></li>
+<li class="chapter" data-level="11.3" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#installing-zotero"><i class="fa fa-check"></i><b>11.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="11.4" data-path="modeling-your-data-1.html"><a href="modeling-your-data-1.html#yaml-explained"><i class="fa fa-check"></i><b>11.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html"><i class="fa fa-check"></i><b>12</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#results"><i class="fa fa-check"></i><b>12.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-table"><i class="fa fa-check"></i><b>12.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="12.1.2" data-path="example-reproducible-document.html"><a href="example-reproducible-document.html#referencing-a-figure"><i class="fa fa-check"></i><b>12.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="12.2" data-path="references.html"><a href="references.html#useful-links-1"><i class="fa fa-check"></i><b>12.2</b> Useful Links</a></li>
+<li class="chapter" data-level="12.3" data-path="references.html"><a href="references.html#installing-zotero-1"><i class="fa fa-check"></i><b>12.3</b> Installing Zotero</a></li>
+<li class="chapter" data-level="12.4" data-path="references.html"><a href="references.html#yaml-explained-1"><i class="fa fa-check"></i><b>12.4</b> YAML Explained</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html"><i class="fa fa-check"></i><b>13</b> Example Reproducible Document</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#results-1"><i class="fa fa-check"></i><b>13.1</b> Results</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-table-1"><i class="fa fa-check"></i><b>13.1.1</b> Referencing a table</a></li>
+<li class="chapter" data-level="13.1.2" data-path="example-reproducible-document-1.html"><a href="example-reproducible-document-1.html#referencing-a-figure-1"><i class="fa fa-check"></i><b>13.1.2</b> Referencing a Figure</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="how-to-create-a-github-key.html"><a href="how-to-create-a-github-key.html"><i class="fa fa-check"></i><b>14</b> How to create a GitHub key</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science In RStudio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="plotting-using-ggplot" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Plotting using ggplot</h1>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+Insert the paper comparing grammar of graphics vs MATLAB</li>
+<li><input type="checkbox" disabled="" />
+You can look at this <a href="http://robertgrantstats.co.uk/drawmydata.html">page</a> to create weird data</li>
+</ul>
+<p>When inserting images into your RMarkdown document you can use the (<a href="https://andrew.hedges.name/experiments/aspect_ratio/">Aspect Ratio Calculator</a>]
+This chapter could be a book on its own, but we are going to go over a few different principles. First without many exceptions, we use <code>ggplot2</code> to create plots in R. There are a few other packages that depend on <code>ggplot2</code> which I use to model statistical data, but we will get to those at a later time.</p>
+<p>For inspiration here are a couple of sites you can browse through</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.r-graph-gallery.com/interactive-charts.html">R-Graph Gallery</a></li>
+<li><a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Scatterplot">Top 50 ggplot Visualizations</a></li>
+</ol>
+<p><a href="https://ggforce.data-imaginist.com/reference/index.html">ggforce</a> might be a good package to use for my 10-20 figures</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="https://i.imgur.com/7PuGUEt.gif" alt="My experience with MATLAB plots" width="100%" />
+<p class="caption">
+Figure 7.1: My experience with MATLAB plots
+</p>
+</div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="plotting-using-ggplot.html#cb39-1"></a><span class="co"># Plotting -------------</span></span>
+<span id="cb39-2"><a href="plotting-using-ggplot.html#cb39-2"></a>journey_time<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">as.factor</span>(journey_time<span class="op">$</span>year)</span>
+<span id="cb39-3"><a href="plotting-using-ggplot.html#cb39-3"></a></span>
+<span id="cb39-4"><a href="plotting-using-ggplot.html#cb39-4"></a>    <span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(<span class="dt">x=</span> ..., <span class="dt">y =</span> ..., <span class="dt">color =</span> , )) </span>
+<span id="cb39-5"><a href="plotting-using-ggplot.html#cb39-5"></a>  </span>
+<span id="cb39-6"><a href="plotting-using-ggplot.html#cb39-6"></a>plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(journey_time) <span class="op">+</span></span>
+<span id="cb39-7"><a href="plotting-using-ggplot.html#cb39-7"></a><span class="st"> </span><span class="kw">aes</span>(<span class="dt">x =</span> service, <span class="dt">fill =</span> year, <span class="dt">weight =</span> journey_time_avg) <span class="op">+</span></span>
+<span id="cb39-8"><a href="plotting-using-ggplot.html#cb39-8"></a><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></span>
+<span id="cb39-9"><a href="plotting-using-ggplot.html#cb39-9"></a><span class="st"> </span><span class="kw">scale_fill_hue</span>() <span class="op">+</span></span>
+<span id="cb39-10"><a href="plotting-using-ggplot.html#cb39-10"></a><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Service&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Journey Time Average&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;My Plot Name&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Year&quot;</span>) <span class="op">+</span></span>
+<span id="cb39-11"><a href="plotting-using-ggplot.html#cb39-11"></a><span class="st"> </span><span class="kw">theme_minimal</span>()</span>
+<span id="cb39-12"><a href="plotting-using-ggplot.html#cb39-12"></a></span>
+<span id="cb39-13"><a href="plotting-using-ggplot.html#cb39-13"></a>  <span class="co"># Save the plot we created in &quot;/images&quot; folder ====================</span></span>
+<span id="cb39-14"><a href="plotting-using-ggplot.html#cb39-14"></a>    <span class="kw">ggsave</span>(<span class="st">&quot;images/plot1.png&quot;</span>,plot1, <span class="dt">width=</span><span class="dv">11</span>, <span class="dt">height=</span><span class="fl">8.5</span>, <span class="dt">dpi=</span><span class="dv">300</span>)</span></code></pre></div>
+<p>If you find yourself using the same attributes over and over again you can save them in a list beforehand and then call them</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="plotting-using-ggplot.html#cb40-1"></a> gglayers &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb40-2"><a href="plotting-using-ggplot.html#cb40-2"></a>    <span class="kw">geom_boxplot</span>() ,</span>
+<span id="cb40-3"><a href="plotting-using-ggplot.html#cb40-3"></a>      <span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">15</span>, <span class="kw">aes</span>(<span class="dt">shape =</span> Gender, <span class="dt">color =</span> group2)) ,</span>
+<span id="cb40-4"><a href="plotting-using-ggplot.html#cb40-4"></a>      <span class="kw">scale_shape_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;👧&quot;</span>,<span class="st">&quot;👦&quot;</span>), <span class="dt">name =</span> <span class="st">&quot;Sex&quot;</span>) , <span class="co"># I need 9 values (I for each ID)</span></span>
+<span id="cb40-5"><a href="plotting-using-ggplot.html#cb40-5"></a>      <span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&#39;springgreen4&#39;</span>, <span class="st">&#39;red4&#39;</span>), <span class="dt">name =</span> <span class="st">&quot;Group&quot;</span>, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Orthopedic-injured&quot;</span>, <span class="st">&quot;Brain-injured&quot;</span>)) ,</span>
+<span id="cb40-6"><a href="plotting-using-ggplot.html#cb40-6"></a>      <span class="kw">scale_fill_manual</span>(<span class="dt">values =</span><span class="kw">c</span>(<span class="st">&#39;springgreen4&#39;</span>, <span class="st">&#39;red4&#39;</span>), <span class="dt">guide =</span> F) ,</span>
+<span id="cb40-7"><a href="plotting-using-ggplot.html#cb40-7"></a>      <span class="co">#facet_wrap(~hemisphere),</span></span>
+<span id="cb40-8"><a href="plotting-using-ggplot.html#cb40-8"></a>      <span class="kw">theme_minimal</span>() ,</span>
+<span id="cb40-9"><a href="plotting-using-ggplot.html#cb40-9"></a>      <span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb40-10"><a href="plotting-using-ggplot.html#cb40-10"></a>            <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>),</span>
+<span id="cb40-11"><a href="plotting-using-ggplot.html#cb40-11"></a>            <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb40-12"><a href="plotting-using-ggplot.html#cb40-12"></a>            <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>),</span>
+<span id="cb40-13"><a href="plotting-using-ggplot.html#cb40-13"></a>            <span class="co">#legend.key = element_rect(colour = &#39;white&#39;, fill = &#39;white&#39;, size = 0.5, linetype=&#39;dashed&#39;),</span></span>
+<span id="cb40-14"><a href="plotting-using-ggplot.html#cb40-14"></a>            <span class="co">#legend.key.size = unit(2, &quot;cm&quot;),</span></span>
+<span id="cb40-15"><a href="plotting-using-ggplot.html#cb40-15"></a>            <span class="co">#legend.key.width = unit(2, &quot;cm&quot;),</span></span>
+<span id="cb40-16"><a href="plotting-using-ggplot.html#cb40-16"></a>            <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)),</span>
+<span id="cb40-17"><a href="plotting-using-ggplot.html#cb40-17"></a>    <span class="kw">guides</span>(<span class="dt">shape =</span> <span class="kw">guide_legend</span>(<span class="dt">override.aes =</span> <span class="kw">list</span>(<span class="dt">size =</span> <span class="dv">5</span>)),</span>
+<span id="cb40-18"><a href="plotting-using-ggplot.html#cb40-18"></a>           <span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">override.aes =</span> <span class="kw">list</span>(<span class="dt">size =</span> <span class="dv">5</span>)))</span>
+<span id="cb40-19"><a href="plotting-using-ggplot.html#cb40-19"></a>  ) </span>
+<span id="cb40-20"><a href="plotting-using-ggplot.html#cb40-20"></a> </span>
+<span id="cb40-21"><a href="plotting-using-ggplot.html#cb40-21"></a> <span class="kw">ggplot</span>(<span class="dt">data =</span> df.hemi <span class="op">%&gt;%</span></span>
+<span id="cb40-22"><a href="plotting-using-ggplot.html#cb40-22"></a><span class="st">           </span><span class="kw">filter</span>(mriloc2 <span class="op">==</span><span class="st"> &quot;CingC&quot;</span>, metric <span class="op">==</span><span class="st"> &quot;MD&quot;</span>)) <span class="op">+</span></span>
+<span id="cb40-23"><a href="plotting-using-ggplot.html#cb40-23"></a><span class="st">    </span><span class="kw">aes</span>(<span class="dt">x =</span> hemisphere, <span class="dt">y =</span> dtiChange) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-24"><a href="plotting-using-ggplot.html#cb40-24"></a><span class="st">   </span>gglayers</span></code></pre></div>
+<p>Below is another example using a loop, which is a common task you might need to accomplish</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="plotting-using-ggplot.html#cb41-1"></a><span class="co"># Making a loop to plot several items --------</span></span>
+<span id="cb41-2"><a href="plotting-using-ggplot.html#cb41-2"></a><span class="co"># I have an example of this in JumpCut projects</span></span>
+<span id="cb41-3"><a href="plotting-using-ggplot.html#cb41-3"></a>  <span class="co"># Example 1 =====================</span></span>
+<span id="cb41-4"><a href="plotting-using-ggplot.html#cb41-4"></a>  <span class="co">#Now this will be for(i in 1:length(ERP_Component)) &amp;&amp; each electNum</span></span>
+<span id="cb41-5"><a href="plotting-using-ggplot.html#cb41-5"></a>  electName &lt;-<span class="st"> </span><span class="kw">unique</span>(erp<span class="op">$</span>electNum)</span>
+<span id="cb41-6"><a href="plotting-using-ggplot.html#cb41-6"></a>  erpComp &lt;-<span class="st"> </span><span class="kw">unique</span>(erp<span class="op">$</span>ERP_component) </span>
+<span id="cb41-7"><a href="plotting-using-ggplot.html#cb41-7"></a>  cond &lt;-<span class="st"> </span><span class="kw">unique</span>(erp<span class="op">$</span>Condition)</span>
+<span id="cb41-8"><a href="plotting-using-ggplot.html#cb41-8"></a>  cond &lt;-<span class="st"> </span>cond[<span class="kw">sort.list</span>(cond)]</span>
+<span id="cb41-9"><a href="plotting-using-ggplot.html#cb41-9"></a>  </span>
+<span id="cb41-10"><a href="plotting-using-ggplot.html#cb41-10"></a>  <span class="cf">for</span>(ii <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(erpComp))) {</span>
+<span id="cb41-11"><a href="plotting-using-ggplot.html#cb41-11"></a>    <span class="cf">for</span>(xx <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(electName))) {</span>
+<span id="cb41-12"><a href="plotting-using-ggplot.html#cb41-12"></a>      tmp_erp &lt;-<span class="st"> </span><span class="kw">subset</span>(erp, ERP_component <span class="op">==</span><span class="st"> </span>erpComp[ii] <span class="op">&amp;</span><span class="st"> </span>electNum <span class="op">==</span><span class="st"> </span>electName[xx]) </span>
+<span id="cb41-13"><a href="plotting-using-ggplot.html#cb41-13"></a>      <span class="co">#tmp_erp &lt;- subset(erp, ERP_component == &quot;P3b_Lat&quot; &amp; electNum == &quot;E015&quot;) </span></span>
+<span id="cb41-14"><a href="plotting-using-ggplot.html#cb41-14"></a>      </span>
+<span id="cb41-15"><a href="plotting-using-ggplot.html#cb41-15"></a>      <span class="co">#Now get each condition</span></span>
+<span id="cb41-16"><a href="plotting-using-ggplot.html#cb41-16"></a>      lay =<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)) <span class="co">#sets up the layout of my arranged plots</span></span>
+<span id="cb41-17"><a href="plotting-using-ggplot.html#cb41-17"></a>      plot_list =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb41-18"><a href="plotting-using-ggplot.html#cb41-18"></a>      <span class="co">#p1 &lt;- ggplot(data.frame(tmp2), aes(x=AthleteType), fill = AthleteType) + xlab(&quot;Athlete Type&quot;)</span></span>
+<span id="cb41-19"><a href="plotting-using-ggplot.html#cb41-19"></a>      </span>
+<span id="cb41-20"><a href="plotting-using-ggplot.html#cb41-20"></a>      <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(<span class="kw">length</span>(cond))) {</span>
+<span id="cb41-21"><a href="plotting-using-ggplot.html#cb41-21"></a>        tmp2 &lt;-<span class="st"> </span><span class="kw">subset</span>(tmp_erp, Condition <span class="op">==</span><span class="st"> </span>cond[i]) <span class="co">#Creates a subset that has only GoC data when i=1</span></span>
+<span id="cb41-22"><a href="plotting-using-ggplot.html#cb41-22"></a>        tmp3 &lt;-<span class="st"> </span>tmp2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Timet, AthleteType) <span class="op">%&gt;%</span></span>
+<span id="cb41-23"><a href="plotting-using-ggplot.html#cb41-23"></a><span class="st">          </span><span class="kw">summarise</span>(<span class="dt">mean=</span><span class="kw">ci</span>(ERP_value)[<span class="dv">1</span>], <span class="dt">lowCI=</span><span class="kw">ci</span>(ERP_value)[<span class="dv">2</span>], <span class="dt">hiCI=</span><span class="kw">ci</span>(ERP_value)[<span class="dv">3</span>], <span class="dt">sd=</span><span class="kw">ci</span>(ERP_value)[<span class="dv">4</span>])</span>
+<span id="cb41-24"><a href="plotting-using-ggplot.html#cb41-24"></a>        p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(tmp3, <span class="kw">aes_string</span>(<span class="dt">x=</span><span class="kw">names</span>(tmp3)[<span class="dv">2</span>],<span class="dt">y=</span><span class="kw">names</span>(tmp3)[<span class="dv">3</span>],<span class="dt">fill=</span><span class="kw">names</span>(tmp3)[<span class="dv">2</span>]))  <span class="co">#dl[2] = Group</span></span>
+<span id="cb41-25"><a href="plotting-using-ggplot.html#cb41-25"></a>        p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>lowCI, <span class="dt">ymax=</span>hiCI),<span class="dt">width=</span>.<span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Timet) <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_grey</span>() <span class="op">+</span></span>
+<span id="cb41-26"><a href="plotting-using-ggplot.html#cb41-26"></a><span class="st">          </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>, <span class="dt">axis.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">8</span>),<span class="dt">axis.title.x=</span><span class="kw">element_blank</span>(), <span class="dt">axis.title.y=</span><span class="kw">element_blank</span>(),<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb41-27"><a href="plotting-using-ggplot.html#cb41-27"></a>        p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span></span>
+<span id="cb41-28"><a href="plotting-using-ggplot.html#cb41-28"></a><span class="st">        </span><span class="kw">geom_jitter</span>(<span class="dt">data=</span>tmp2,<span class="dt">mapping=</span> <span class="kw">aes_string</span>(<span class="dt">x=</span><span class="kw">names</span>(tmp2)[<span class="dv">10</span>], <span class="dt">y =</span> <span class="kw">names</span>(tmp2)[<span class="dv">8</span>], <span class="dt">color =</span> <span class="kw">names</span>(tmp2)[<span class="dv">1</span>]),<span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="dt">width=</span>.<span class="dv">25</span>, <span class="dt">height=</span><span class="dv">0</span>),<span class="dt">size =</span> <span class="fl">2.9</span>, <span class="dt">alpha =</span> <span class="dv">9</span><span class="op">/</span><span class="dv">10</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb41-29"><a href="plotting-using-ggplot.html#cb41-29"></a>        </span>
+<span id="cb41-30"><a href="plotting-using-ggplot.html#cb41-30"></a>        <span class="cf">if</span> (i<span class="op">==</span><span class="dv">1</span>){</span>
+<span id="cb41-31"><a href="plotting-using-ggplot.html#cb41-31"></a>          p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correct/Go Condition&quot;</span>)</span>
+<span id="cb41-32"><a href="plotting-using-ggplot.html#cb41-32"></a>        } <span class="cf">else</span> <span class="cf">if</span> (i<span class="op">==</span><span class="dv">2</span>) {</span>
+<span id="cb41-33"><a href="plotting-using-ggplot.html#cb41-33"></a>          p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Correct/No-Go Condition&quot;</span>)</span>
+<span id="cb41-34"><a href="plotting-using-ggplot.html#cb41-34"></a>        } <span class="cf">else</span> <span class="cf">if</span> (i<span class="op">==</span><span class="dv">3</span>) {</span>
+<span id="cb41-35"><a href="plotting-using-ggplot.html#cb41-35"></a>          p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Incorrect/No-Go Condition&quot;</span>)</span>
+<span id="cb41-36"><a href="plotting-using-ggplot.html#cb41-36"></a>        } </span>
+<span id="cb41-37"><a href="plotting-using-ggplot.html#cb41-37"></a>        plot_list[[i]] &lt;-<span class="st"> </span>p1</span>
+<span id="cb41-38"><a href="plotting-using-ggplot.html#cb41-38"></a>      }</span>
+<span id="cb41-39"><a href="plotting-using-ggplot.html#cb41-39"></a>      <span class="co"># Let&#39;s create our y axis label</span></span>
+<span id="cb41-40"><a href="plotting-using-ggplot.html#cb41-40"></a>      tmp_lbl &lt;-<span class="st"> </span><span class="kw">unique</span>(tmp2<span class="op">$</span>ERP_component)</span>
+<span id="cb41-41"><a href="plotting-using-ggplot.html#cb41-41"></a>      underscoreLocation &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">gregexpr</span>(<span class="dt">pattern =</span><span class="st">&#39;_&#39;</span>,tmp_lbl)) <span class="co">#Gather the location of the underscore needed to create the labels</span></span>
+<span id="cb41-42"><a href="plotting-using-ggplot.html#cb41-42"></a>      </span>
+<span id="cb41-43"><a href="plotting-using-ggplot.html#cb41-43"></a>      <span class="cf">if</span> (<span class="kw">endsWith</span>(tmp_lbl,<span class="st">&quot;Lat&quot;</span>) <span class="op">==</span><span class="dv">1</span>){</span>
+<span id="cb41-44"><a href="plotting-using-ggplot.html#cb41-44"></a>        <span class="co">#Here I need to get the ERP Component Name. I had this in a loop but because of the different sizes (N2 = 2 vs ERN = 3 characters)</span></span>
+<span id="cb41-45"><a href="plotting-using-ggplot.html#cb41-45"></a>        tmp_CompName =<span class="st"> </span><span class="kw">substr</span>(tmp_lbl,<span class="dt">start=</span><span class="dv">1</span>,<span class="dt">stop=</span>underscoreLocation<span class="dv">-1</span>)</span>
+<span id="cb41-46"><a href="plotting-using-ggplot.html#cb41-46"></a>        tmp_lbl2 &lt;-<span class="st"> </span><span class="kw">paste</span>(electName[i],tmp_CompName,<span class="st">&quot;Local Peak Latency (ms)&quot;</span>)</span>
+<span id="cb41-47"><a href="plotting-using-ggplot.html#cb41-47"></a>        p &lt;-<span class="st"> </span><span class="kw">grid.arrange</span>(plot_list[[<span class="dv">1</span>]],plot_list[[<span class="dv">2</span>]],plot_list[[<span class="dv">3</span>]], <span class="dt">layout_matrix =</span> lay, </span>
+<span id="cb41-48"><a href="plotting-using-ggplot.html#cb41-48"></a>                          <span class="dt">bottom =</span> <span class="kw">textGrob</span>(<span class="st">&quot;Note: Different colors in the jitter represent different athletes&quot;</span>,</span>
+<span id="cb41-49"><a href="plotting-using-ggplot.html#cb41-49"></a>                                            <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">12</span>,<span class="dt">font=</span><span class="dv">3</span>), <span class="dt">hjust=</span><span class="fl">0.1</span>),</span>
+<span id="cb41-50"><a href="plotting-using-ggplot.html#cb41-50"></a>                          <span class="dt">left =</span> <span class="kw">textGrob</span>(<span class="kw">paste</span>(tmp_lbl2), <span class="dt">rot =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="dv">1</span>))</span>
+<span id="cb41-51"><a href="plotting-using-ggplot.html#cb41-51"></a>        <span class="co">#p</span></span>
+<span id="cb41-52"><a href="plotting-using-ggplot.html#cb41-52"></a>        dir_lbl =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;images/ERP_GroupBar/PeakLat/&quot;</span>,tmp_CompName,<span class="st">&quot;PeakLat_&quot;</span>,<span class="kw">unique</span>(tmp2<span class="op">$</span>electNum),<span class="st">&quot;.png&quot;</span>) <span class="co">#using paste0 removes the spaces</span></span>
+<span id="cb41-53"><a href="plotting-using-ggplot.html#cb41-53"></a>        <span class="kw">ggsave</span>(dir_lbl,p, <span class="dt">width=</span><span class="dv">11</span>, <span class="dt">height=</span><span class="fl">8.5</span>, <span class="dt">dpi=</span><span class="dv">400</span>)</span>
+<span id="cb41-54"><a href="plotting-using-ggplot.html#cb41-54"></a>        </span>
+<span id="cb41-55"><a href="plotting-using-ggplot.html#cb41-55"></a>      }<span class="cf">else</span> <span class="cf">if</span> (<span class="kw">endsWith</span>(tmp_lbl,<span class="st">&quot;Amp&quot;</span>) <span class="op">==</span><span class="dv">1</span>){</span>
+<span id="cb41-56"><a href="plotting-using-ggplot.html#cb41-56"></a>        tmp_CompName =<span class="st"> </span><span class="kw">substr</span>(tmp_lbl,<span class="dt">start=</span><span class="dv">1</span>,<span class="dt">stop=</span>underscoreLocation<span class="dv">-1</span>) </span>
+<span id="cb41-57"><a href="plotting-using-ggplot.html#cb41-57"></a>        tmp_lbl2 &lt;-<span class="st"> </span><span class="kw">paste</span>(tmp_CompName,<span class="st">&quot;Local Peak Amplitude (&quot;</span>)</span>
+<span id="cb41-58"><a href="plotting-using-ggplot.html#cb41-58"></a>        </span>
+<span id="cb41-59"><a href="plotting-using-ggplot.html#cb41-59"></a>        p &lt;-<span class="st"> </span><span class="kw">grid.arrange</span>(plot_list[[<span class="dv">1</span>]],plot_list[[<span class="dv">2</span>]],plot_list[[<span class="dv">3</span>]], <span class="dt">layout_matrix =</span> lay,</span>
+<span id="cb41-60"><a href="plotting-using-ggplot.html#cb41-60"></a>                          <span class="dt">bottom =</span> <span class="kw">textGrob</span>(<span class="st">&quot;Note: Different colors in the jitter represent different athletes&quot;</span>,</span>
+<span id="cb41-61"><a href="plotting-using-ggplot.html#cb41-61"></a>                                            <span class="dt">gp=</span><span class="kw">gpar</span>(<span class="dt">fontsize=</span><span class="dv">12</span>,<span class="dt">font=</span><span class="dv">3</span>), <span class="dt">hjust=</span><span class="fl">0.1</span>),</span>
+<span id="cb41-62"><a href="plotting-using-ggplot.html#cb41-62"></a>                          <span class="dt">left =</span> <span class="kw">textGrob</span>(<span class="kw">bquote</span>(.(tmp_lbl2)<span class="op">*</span>mu<span class="op">*</span>.(<span class="st">&quot;V)&quot;</span>)), <span class="dt">rot =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="dv">1</span>))</span>
+<span id="cb41-63"><a href="plotting-using-ggplot.html#cb41-63"></a>        <span class="co">#p</span></span>
+<span id="cb41-64"><a href="plotting-using-ggplot.html#cb41-64"></a>        dir_lbl =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;images/ERP_GroupBar/PeakAmp/&quot;</span>,tmp_CompName,<span class="st">&quot;PeakAmp_&quot;</span>,<span class="kw">unique</span>(tmp2<span class="op">$</span>electNum),<span class="st">&quot;.png&quot;</span>) <span class="co">#using paste0 removes the spaces</span></span>
+<span id="cb41-65"><a href="plotting-using-ggplot.html#cb41-65"></a>        <span class="kw">ggsave</span>(dir_lbl,p, <span class="dt">width=</span><span class="dv">11</span>, <span class="dt">height=</span><span class="fl">8.5</span>, <span class="dt">dpi=</span><span class="dv">400</span>)</span>
+<span id="cb41-66"><a href="plotting-using-ggplot.html#cb41-66"></a>      }</span>
+<span id="cb41-67"><a href="plotting-using-ggplot.html#cb41-67"></a>    }</span>
+<span id="cb41-68"><a href="plotting-using-ggplot.html#cb41-68"></a>  }</span>
+<span id="cb41-69"><a href="plotting-using-ggplot.html#cb41-69"></a>  <span class="kw">rm</span>(underscoreLocation, tmp_CompName, tmp_lbl,tmp_lbl2, dir_lbl, i, ii, xx, electName, erpComp, cond, tmp3, tmp2, lay)</span>
+<span id="cb41-70"><a href="plotting-using-ggplot.html#cb41-70"></a>  </span>
+<span id="cb41-71"><a href="plotting-using-ggplot.html#cb41-71"></a>  <span class="co"># Example 2 ==============</span></span>
+<span id="cb41-72"><a href="plotting-using-ggplot.html#cb41-72"></a>  <span class="co">#Create a string with the y-labels</span></span>
+<span id="cb41-73"><a href="plotting-using-ggplot.html#cb41-73"></a>  <span class="kw">par</span>(<span class="dt">ask=</span><span class="ot">TRUE</span>)</span>
+<span id="cb41-74"><a href="plotting-using-ggplot.html#cb41-74"></a>  out &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb41-75"><a href="plotting-using-ggplot.html#cb41-75"></a>  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(dl), <span class="kw">aes</span>(<span class="dt">x=</span>dl<span class="op">$</span>Groupt), <span class="dt">fill =</span> Groupt) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Groups&quot;</span>)</span>
+<span id="cb41-76"><a href="plotting-using-ggplot.html#cb41-76"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">10</span><span class="op">:</span>(<span class="kw">ncol</span>(dl)<span class="op">-</span><span class="dv">0</span>)) {</span>
+<span id="cb41-77"><a href="plotting-using-ggplot.html#cb41-77"></a>    p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dl, <span class="kw">aes_string</span>(<span class="dt">x=</span><span class="kw">names</span>(dl)[<span class="dv">2</span>], <span class="dt">y =</span> <span class="kw">names</span>(dl)[i], <span class="dt">fill =</span> <span class="kw">names</span>(dl)[<span class="dv">2</span>])) </span>
+<span id="cb41-78"><a href="plotting-using-ggplot.html#cb41-78"></a>    p &lt;-<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_summary</span>(<span class="dt">fun.data =</span> mean_cl_normal, <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="dt">width =</span> <span class="fl">0.2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>CondBt) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>, <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>())</span>
+<span id="cb41-79"><a href="plotting-using-ggplot.html#cb41-79"></a>    <span class="kw">print</span>(p)</span>
+<span id="cb41-80"><a href="plotting-using-ggplot.html#cb41-80"></a>    out[[i<span class="dv">-9</span>]] &lt;-<span class="st"> </span>p</span>
+<span id="cb41-81"><a href="plotting-using-ggplot.html#cb41-81"></a>  }</span>
+<span id="cb41-82"><a href="plotting-using-ggplot.html#cb41-82"></a>  s1 &lt;-<span class="st"> </span><span class="kw">marrangeGrob</span>(<span class="dt">grobs=</span>out, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb41-83"><a href="plotting-using-ggplot.html#cb41-83"></a>  <span class="kw">ggsave</span>(<span class="st">&quot;try2.pdf&quot;</span>,s1)</span>
+<span id="cb41-84"><a href="plotting-using-ggplot.html#cb41-84"></a>  dev.off</span></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="creating-tables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "sepia",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-ggplot.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Lab-Bible.pdf", "Lab-Bible.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

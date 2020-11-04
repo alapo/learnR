@@ -1,0 +1,26 @@
+bookdown::gitbook:
+  css: styles/style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">R_Guide</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+    download: ["pdf", "epub"]
+    fontsettings:
+       theme: sepia
+       family: sans
+       size: 2
+bookdown::pdf_book:
+  includes:
+    in_header: styles/preamble.tex
+    before_body: styles/before_body.tex 
+  latex_engine: xelatex
+  highlight: "espresso"
+  number_sections: yes
+  toc: TRUE
+  toc_depth: 5
+  #citation_package: natbib
+  keep_tex: no
+# bookdown::epub_book

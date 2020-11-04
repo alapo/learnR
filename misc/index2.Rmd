@@ -1,0 +1,326 @@
+---
+title: "fNIRS Guide"
+author: "Andrew P. Lapointe"
+output:
+    pdf_document
+#documentclass: styles/try2         
+documentclass: G:/My Drive/Projects/fNIRS_guide/style/try2.csl
+--- 
+
+<!-- date: "`r Sys.Date()`" -->
+<!-- site: bookdown::bookdown_site -->
+<!-- output: bookdown::gitbook -->
+<!-- documentclass: book -->
+<!-- bibliography: [book.bib, packages.bib] -->
+<!-- biblio-style: apalike -->
+<!-- link-citations: yes -->
+<!-- github-repo: alapo/fNIRS -->
+<!-- cover-image: "images/cover.png" -->
+<!-- includes:  -->
+<!--   in_header: preamble.tex -->
+<!--   before_body: before_body.tex -->
+<!-- description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." -->
+<!-- --- -->
+
+
+
+# Title Page
+
+```{r global_options, include=FALSE}
+# setwd("G:/My Drive/Projects/fNIRS_guide/example2/bookdown-demo-master")
+# library(knitr)
+# knitr::opts_chunk$set(fig.align='center',
+#                       fig.pos = 'H',
+#                       fig.path = 'images/',
+#                       echo = FALSE, 
+#                       warning = FALSE, 
+#                       message = FALSE,
+#                       include = TRUE)
+# use_betterbiblatex = TRUE
+# pacman::p_load(readxl,psych,dplyr,papaja,ggplot2, apastats, data.table, gridExtra, effects,kableExtra,Hmisc, plotly,grid,captioner,stringr,citr)
+```
+
+```{r, echo=FALSE}
+#knitr::include_graphics("G:/My Drive/Projects/fNIRS_guide/example2/bookdown-demo-master/images/cover.png")
+```
+
+
+The `_output.yml` contains the header arguments. I would but them here so its cleaner and easier to read the code. 
+**To/Do **
+
+To render the book used the following code
+
+```r
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+
+```
+- Is there a way I can have matlab code syntax highlighted properly? Maybe [here](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html?tabs=tabid-1%2Ctabid-a)
+- Get Camera to take nice pictures
+- Get example dataset that I can run through
+- Can I export this to github.io?
+The GitHub Repository for this guidebook can be found [here](https://github.com/alapo/fnirs)
+- Add highlight arg to `_output.yml`
+- Upload the MATLAB packages required to GitHub directory
+ 
+ 
+- [x] Finish my changes
+- [ ] Push my commits to GitHub
+- [ ] Open a pull request
+
+```matlab
+% This is a comment in MATLAB
+function y = average(x)
+if ~isvector(x)
+   error('Input must be a vector')
+end
+y = sum(x)/length(x); 
+end
+```
+
+This also seems like a nice format to export to
+https://cran.r-project.org/web//packages/tint/vignettes/tintHTML.html
+
+https://cran.r-project.org/web/packages/prettydoc/vignettes/architect.html
+
+```matlab
+#This is MATLAB code
+```
+
+# Preface
+***Copy from the preface in the Anesthesiology book***
+
+# Background Information
+What is fNIRS?
+
+Functional near-infrared spectroscopy (fNIRS)
+
+fNIRS measures the brain tissue concentration changes in oxyhemoglobin (HbO~2~) and deoxyhemoglobin (HbR) associated with an increased metabolic demand of the brain during neuronal activity, and an increased tissue perfusion. 
+
+What is fNIRS?
+
+Types of boxes
+  laser vs LED (Tekker vs NIRx)
+  
+```octave
+
+% This is a comment in MATLAB
+function y = average(x)
+if ~isvector(x)
+   error('Input must be a vector')
+end
+y = sum(x)/length(x); 
+end
+
+```
+
+## Hemoglobin
+Each Red Blood Cell contains about 250 million molecules of hemoglobin, each cc of blood contains 5 billion Red Blood cells, you have approximately 5,000 cc's of blood in your vascular system. The reason we have so much hemoglobin is because oxygen does not easily dissolve in water (about 3% of all our oxygen is in the serum - the rest is bound to hemoglobin), so we have developed this unique system of oxygen transportation to meet our needs.
+
+Hemoglobin is assumed to be the main chromophore in biological tissue that absorbs light in this near infrared region.
+
+When oxygen is bound to hemoglobin, it is called oxyhemoglobin.
+
+### What is Oxyhemoglobin (HbO~2~)?
+Oxyhemoglobin is the oxygenated form of hemoglobin.
+
+Insert the YouTube video here (https://www.youtube.com/watch?reload=9&v=Fs7eJElU3m8)
+
+### Deoxygenated hemoglobin
+Deoxygenated version of hemoglobin.
+
+
+## So how does this relate back to NIRS?
+Deoxygenated hemoglobin is the form of hemoglobin without the bound oxygen. The absorption spectra of oxyhemoglobin and deoxyhemoglobin differ. The oxyhemoglobin has significantly lower absorption of the 660 nm wavelength than deoxyhemoglobin, while at 940 nm its absorption is slightly higher. This difference is used for the measurement of the amount of oxygen in a patient's blood by an instrument called a pulse oximeter. 
+
+### How do we gather hemoglobin related measures?
+
+Insert figure with optodes here.
+Example in [this publication](https://pdfs.semanticscholar.org/e5fd/89d0c8c3f774e0580be39c0e294bdbecf0e0.pdf)
+
+It might be best to just photoshop something yourself.
+
+### What does Hemoglobin/fNIRS tell us about brain function?
+Here write what we can infer from fNIRS/hemoglobin. Is it related to neurotransmitter release? extra synaptic potentials?
+
+## Some Math
+The science
+If the absorption is known, the Lambert-Beer law can be used to calculate the chromophore's absorption. The Lambert-Beer law is given by:
+
+Taken from [here](https://www.artinis.com/theory-of-nirs/)
+
+ODλ is a dimensionless factor known as the optical density of the medium, I0 is the incident light, I the transmitted light, ελ the chromophore's extinction coefficient (in µM-1•cm-1), c is the concentration (in µM) of the chromophore, L the distance (in cm) between light entry and exit points and λ is the wavelength used (in nm).
+
+```{octave i_steps.m, eval=FALSE}
+% This is a comment in MATLAB
+function y = average(x)
+if ~isvector(x)
+   error('Input must be a vector')
+end
+y = sum(x)/length(x); 
+end
+```
+
+This could also work for Latex only --> https://tex.stackexchange.com/questions/35193/how-to-sweave-matlab-or-mathematica-code-into-latex
+
+```matlab
+% This is a comment in MATLAB
+function y = average(x)
+if ~isvector(x)
+   error('Input must be a vector')
+end
+y = sum(x)/length(x); 
+end
+```
+
+
+So could this
+https://amber.rbind.io/blog/2017/11/15/syntax-highlighting/
+
+# Who is Homer?
+```{r, echo=FALSE}
+knitr::include_graphics("images/homer_simpson.jpg")
+```
+
+## Types of boxes
+laser vs LED (Tekker vs NIRx)
+
+# Common Findings with fNIRS
+This list is by no means exhaustive but provides a slight overview of the more common findings using fNIRS.
+
+**Insert Table with most common findings here** 
+Might be able to rip this off a meta-paper
+
+# Setup 
+Example text here
+
+# Collecting Data
+
+Example text here
+
+## Getting Good Quality Data
+Gel used in ultrasound can help with the recordings.
+They do not have a "reference" electrode like we do with EEG but I did brainstorm some ideas for this.
+
+- Using a laser on the forehead which could be used as a reference.
+# Analyzing Your Data
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/processings.jpg")
+```
+A [statement paper](https://www.frontiersin.org/articles/10.3389/fnhum.2018.00505/full) was released by some of the heavy hitters in fNIRS which is a good read
+Required MATLAB packages.
+
+We would recommend ggplotly. It is a great tool for visualizing several waveforms at once. 
+
+## In MATLAB
+
+The pre-processing steps are as follows
+
+- Load mat file 
+- Convert raw to optical density (DoD)
+- Convert DoD to dConcentration (Hb Concentrations)
+- Assess signal quality and discard if necessary
+- Motion correction with MARA
+- Signal Cleaning - Detrend, Bandpass Filter (0.001Hz - 2Hz), and Downsample (5Hz)
+
+```{octave, eval=FALSE}
+% load the .nirs file into MATLAB
+load('G:\My Drive\Projects\fNIRS_guide\data\VS101_1.nirs', '-mat')
+```
+
+
+## Types of variables you will obtain 
+
+
+### Formats
+Time frequency data 
+  
+  - Show an example of a typical dataframe
+
+## Types of Figure you can Produce
+
+```{r, echo=FALSE, out.width=".9\\textwidth"}
+knitr::include_graphics("images/fNIRS_imageType1.png")
+```
+
+
+
+[another image](http://iopscience.iop.org/article/10.1088/1741-2560/10/5/056001)
+
+[another image](https://www.google.com/imgres?imgurl=x-raw-image%3A%2F%2F%2Ff65e7266e8245f3ecfdef5642c3c729a9898751b884392138b183c6d3722f68d&imgrefurl=https%3A%2F%2Fwww.politesi.polimi.it%2Fbitstream%2F10589%2F131883%2F1%2F2016_12_DiFabio.pdf&docid=uQpkC2XXuU8AmM&tbnid=Pl8k6GZyXvYjMM%3A&vet=12ahUKEwilrqyyy_bfAhVlzVQKHYrAAro4rAIQMyhWMFZ6BAgBEFc..i&w=447&h=246&bih=530&biw=1280&q=nirs%20optode&ved=2ahUKEwilrqyyy_bfAhVlzVQKHYrAAro4rAIQMyhWMFZ6BAgBEFc&iact=mrc&uact=8)
+
+
+This is a great looking image http://www.bic.mni.mcgill.ca/ResearchLabsMFIL/Research
+
+[Another Example](https://www.google.com/imgres?imgurl=https%3A%2F%2Fai2-s2-public.s3.amazonaws.com%2Ffigures%2F2017-08-08%2Fd46db797f3ba7d33037d48fe1b06f64c59a3f4f0%2F7-Figure1-1.png&imgrefurl=https%3A%2F%2Fwww.semanticscholar.org%2Fpaper%2FExploiting-neurovascular-coupling%253A-a-Bayesian-Monte-Croce-Zappasodi%2Fd46db797f3ba7d33037d48fe1b06f64c59a3f4f0&docid=4mD9MzKI9fbZLM&tbnid=zkVspPA8lFPHjM%3A&vet=12ahUKEwjQjMCix_bfAhXGhlQKHWZAD5w4kAMQMyhAMEB6BAgBEEI..i&w=1302&h=1000&bih=530&biw=1280&q=nirs%20optode&ved=2ahUKEwjQjMCix_bfAhXGhlQKHWZAD5w4kAMQMyhAMEB6BAgBEEI&iact=mrc&uact=8)
+
+[Another Image](https://www.semanticscholar.org/paper/Exploiting-neurovascular-coupling%3A-a-Bayesian-Monte-Croce-Zappasodi/d46db797f3ba7d33037d48fe1b06f64c59a3f4f0)
+
+## Types of Analysis
+
+- Linear Discriminant Analysis
+
+# Appendix
+
+## Plotly in MATLAB
+
+Here is example code
+
+```matlab
+% Download the MATLAB plotly package and add it to your directory.
+plotlysetup('alapo', 'FlY6wuJdDgUL5FclfJ8D') % Required to run
+
+plot(1:100); %create any plot
+response = fig2plotly(gcf, 'filename', 'title of my figure');
+plotly_url = response.url;  % This will cause a webpage to open up with your graph.
+
+```
+## fNIRS Books
+[Book #1](https://www.amazon.ca/Technological-advances-prospects-multimodal-neuroimaging/dp/3659616702/ref=sr_1_3?ie=UTF8&qid=1547787983&sr=8-3&keywords=fNIRS)
+
+[Book #2](https://www.amazon.ca/Doing-Neuroimaging-Research-fNIRS-Kang/dp/1138683183/ref=sr_1_1?ie=UTF8&qid=1547787983&sr=8-1&keywords=fNIRS)
+
+[Book #3](https://www.amazon.ca/Neurophotonics-Brain-Mapping-Yu-Chen-ebook/dp/B072KL3T4Z/ref=sr_1_4?ie=UTF8&qid=1547787983&sr=8-4&keywords=fNIRS)
+
+## Setting up your work environment
+
+### Folder Organization
+Check a few of the websites I have bookmarked on this subject
+
+## Experimental Designs
+## Setting up your work environment
+
+I have serveral sites on this (look at my bookmarks)
+
+### Folder Organization
+Check a few of the websites I have bookmarked on this subject
+
+## Experimental Designs
+
+## Top 10 fNIRS Articles to Read
+
+[Paper #1](https://www.researchgate.net/figure/fig1_220580062)
+# Misc code/data
+
+
+```
+gitbook(fig_caption = TRUE, number_sections = TRUE, self_contained = FALSE, 
+   lib_dir = "libs", pandoc_args = NULL, ..., template = "default", 
+   split_by = c("chapter", "chapter+number", "section", "section+number", 
+       "rmd", "none"), split_bib = TRUE, config = list(), table_css = TRUE)
+```
+
+
+# fNIRS/EEG Papers
+
+[Paper #1](https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.frontiersin.org%2Ffiles%2FArticles%2F202687%2Ffnins-10-00261-HTML%2Fimage_m%2Ffnins-10-00261-g003.jpg&imgrefurl=https%3A%2F%2Fwww.frontiersin.org%2Farticles%2F10.3389%2Ffnins.2016.00261%2Ffull&docid=UXQ47jKtr0j1fM&tbnid=HBNaJmUeKeELyM%3A&vet=12ahUKEwi5kJr-xvbfAhWGKnwKHYnpCm04rAIQMygsMCx6BAgBEC4..i&w=667&h=324&bih=530&biw=1280&q=nirs%20optode&ved=2ahUKEwi5kJr-xvbfAhWGKnwKHYnpCm04rAIQMygsMCx6BAgBEC4&iact=mrc&uact=8)
+
+[Paper #2](https://www.semanticscholar.org/paper/Hybrid-EEG-NIRS-based-BCI-for-quadcopter-control-Khan-Hong/f0ff32deb23b2d95a3893817d4e4ec6a964ba78d)
+
+[Paper #3](https://www.semanticscholar.org/paper/Decoding-of-four-movement-directions-using-hybrid-Khan-Hong/2d403a65641d070b70e28382665148798f7d03ae)
+
+[Paper #4](https://www.researchgate.net/figure/A-NIRS-optode-and-B-EEG-electrode-placement-on-the-brain-using-the-International_fig1_323056894)
+
+[Paper #5](https://www.researchgate.net/publication/253280973_Ultracompact_EEG-compatible_NIRS_System)
+

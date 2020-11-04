@@ -1,0 +1,154 @@
+---
+title: "Data Science In RStudio"
+author: "Andrew P. Lapointe"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: styles/LabBible.bib #[book.bib, packages.bib]
+csl: styles/spectroscopy-letters.csl
+#biblio-style: apalike
+link-citations: yes
+linkcolor: blue
+citecolor: red
+urlcolor: blue
+github-repo: alapo/fNIRS
+cover-image: "images/cover.png"
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+# Index
+
+## Things to add
+
+Signe recommended students run a live tutorial in [swirl](https://swirlstats.com/students.html)
+
+## Documentation for Author
+
+```{r global_options2, include=FALSE}
+# setwd("G:/My Drive/Projects/fNIRS_guide/example2/bookdown-demo-master")
+# library(knitr)
+knitr::opts_chunk$set(fig.align='center',
+                      #fig.pos = 'H',
+                      eval = FALSE, 
+                      fig.path = 'images/',
+                      echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      include = TRUE,
+                      out.width = "100%") # needed or else homer image goes off the page when rendering to pdf
+
+```
+
+```{r, echo=FALSE}
+#knitr::include_graphics("G:/My Drive/Projects/fNIRS_guide/example2/bookdown-demo-master/images/cover.png")
+# pacman::p_load(readxl,psych,dplyr,ggplot2, apastats, data.table, gridExtra, effects,kableExtra,Hmisc, plotly,grid,captioner,stringr,citr)
+```
+
+## Andrew's Notes / Ramblings
+
+To render the book used the following code, you must do this before knitting the GitBook (webpage)
+
+```{r}
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book", encoding="UTF-8")
+bookdown::render_book("index.Rmd", "bookdown::epub_book")
+```
+
+The `_output.yml` contains the header arguments. I would but them here so its cleaner and easier to read the code.
+
+## To Do
+
+-   Is there a way I can have matlab code syntax highlighted properly? Maybe [here](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html?tabs=tabid-1%2Ctabid-a)
+
+-   Get Camera to take nice pictures
+
+-   Get example dataset that I can run through
+
+-   Can I export this to github.io? The GitHub Repository for this guidebook can be found [here](https://github.com/alapo/fnirs)
+
+-   Add highlight arg to `_output.yml`
+
+-   Upload the MATLAB packages required to GitHub directory
+
+
+-   [ ] Implement [Open Review](https://benmarwick.github.io/bookdown-ort/intro.html) which will allow people to make comments. An example can be seen [here](https://benmarwick.github.io/bookdown-ort/)
+
+-   [x] Finish my changes
+
+-   [ ] Push my commits to GitHub
+
+-   [ ] Open a pull request
+
+-   [x] Cleaned the main directory to make it easier to interpret for beginners
+
+For Chapter \@ref(datawrangling)
+
+-   [ ] steal logo from [here](https://bioconnector.github.io/workshops/r-dplyr-yeast.html). It would be great to have a logo here that was cowboy themed
+-   [ ] [These](https://github.com/gadenbuie/tidyexplain) animations would be great at explaining some key concepts
+
+## Title word cloud
+
+Titles: inquiry-based R for researchers in a hurry Reproducible science
+
+## Copy from Chapter 1 Example
+
+You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter `\@ref(intro)`. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter `\@ref(methods)`.
+
+Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+
+```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure `\@ref(fig:nice-fig)`. Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table `\@ref(tab:nice-tab)`.
+
+```{r nice-tab, tidy=FALSE}
+knitr::kable(
+  head(iris, 20), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
+
+You can write citations, too. For example, we are using the **bookdown** package in this sample book, which was built on top of R Markdown and **knitr** .
+
+## MATLAB Highlighting
+
+``` {.matlab}
+% This is a comment in MATLAB
+function y = average(x)
+if ~isvector(x)
+   error('Input must be a vector')
+end
+y = sum(x)/length(x); 
+end
+```
+
+So could [this](https://amber.rbind.io/blog/2017/11/15/syntax-highlighting/)
+
+## Misc code/data
+
+    gitbook(fig_caption = TRUE, number_sections = TRUE, self_contained = FALSE, 
+       lib_dir = "libs", pandoc_args = NULL, ..., template = "default", 
+       split_by = c("chapter", "chapter+number", "section", "section+number", 
+           "rmd", "none"), split_bib = TRUE, config = list(), table_css = TRUE)
+
+## Other Resources
+
+<https://medium.com/@huixiangvoice/the-hidden-story-behind-the-suicide-phd-candidate-huixiang-chen-236cd39f79d3?fbclid=IwAR3zJ0zHAhNaHhRdXkiHfHOJV9RjZWDW6KReN6FB9lkxGeWwzWsDoYYTv10>
+
+Book called [Just Enough R](https://benwhalley.github.io/just-enough-r/datasets-dataframes.html)
+
+To test the normality of your data you can use a few different methods
+
+-   <http://www.sthda.com/english/wiki/normality-test-in-r>
+-   <https://rstudio-pubs-static.s3.amazonaws.com/2002_1f803b2bc84c46008d3599a07867a95a.html>
+
+1.  Plot your data
+2.  Check skewness and kurtosis
+3.  Shapiro test.
+
+There should be a section on general access to your df. How to manipulate it effectively (perhaps in the data wrangling section) This would include things like using `df$colname to access a column`
+
+<!-- # ```{r child = 'appendix.Rmd'} -->
