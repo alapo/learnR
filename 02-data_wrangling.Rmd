@@ -1,0 +1,215 @@
+# Data Wrangling {#datawrangling}
+
+## Intro	
+Data Wrangling is the process of cleaning and manipulating your data.frame. I have never obtained a dataset that did not need to be cleaned or organized in some fashion (if you have I am quite jealous).
+
+The `DataExplorer` [package](https://github.com/boxuancui/DataExplorer) allows you to get a preliminary look at your data. It will check for missing data
+
+## Exploratory Data Analysis
+
+Phase I of my "statistics" is usually termed "Data Exploration" or "Exploratory Data Analysis"
+
+The goal of this step is to gain valuable insights through the data so that one can know what is going on with the data, which part needs to be cleaned, what new features can be built, build hypotheses to be tested during the model creation/validation phase, or even just knowing some fun facts about the data ([src](https://towardsdatascience.com/powerful-packages-to-boost-your-exploratory-data-analysis-performance-bb0db4744530)).
+
+My 2 favorite packages to get a glimpse of the data are 
+
+1. SmartEDA
+2. [DataExplorer](https://github.com/boxuancui/DataExplorer)
+3. summarytools
+4. dataMaid
+5. [janitor](https://sfirke.github.io/janitor/articles/janitor.html) and [here](https://github.com/sfirke/janitor)
+
+
+## Creating Report with DataExplorer
+
+```{r, echo=TRUE, eval=FALSE}
+  create_report(
+    df.fa, # the name of your dataframe 
+    #y = 'heart_disease',
+    output_dir   = 'output', # where do you want it to be saved relative to your project directory
+    output_file  = 'data_explorer_fa_report.html', # the filename for the report
+    report_title = 'DTI (FA) Data Description' # the Title of your report
+  )
+```
+
+```{r, echo=TRUE, eval=FALSE}
+
+SmartEDA::ExpNumStat(tbl.desc, round = 1)
+        
+       ExpNumStat(
+         tbl.desc,
+         by = "GA",
+         gp = "Group",
+         Qnt = c(.1, .9),
+         Outlier = TRUE,
+         round = 1
+       )
+       
+       ExpNumViz(tbl.desc, target = 'Group')
+       
+       
+       summarytools::dfSummary(
+         tbl.desc,
+         varnumbers = FALSE,
+         round.digits = 2,
+         plain.ascii = FALSE,
+         style = "grid",
+         graph.magnif = .33,
+         valid.col = FALSE,
+         tmp.img.dir = "img"
+       )
+	   
+```
+### Reading Material : Exploratory Data Analysis
+
+1. https://m-clark.github.io/exploratory-data-analysis-tools/
+2. https://blog.revolutionanalytics.com/2018/02/dataexplorer.html
+3. https://www.avery-robbins.com/2020/06/01/first-post-ever/
+
+## Tasks
+
+### Inspecting the imported data
+
+Among the issues you may encounter with your data is inconsistencies in columnnames. This can be rather annoying. In order to alleviate this, I like to pick one format and stick with it. When I receive a dataset from another researcher I will often use [snakecase](https://github.com/Tazinho/snakecase) to modify their dataset accordingly.
+
+### Choosing good column names
+
+1. Avoid using spaces. This makes it more tedious to refer or call a column later on. In the example below our task is to rename the column "Group Level". It should also be noted that things can get tricky when you are using certain packages and will over time, be a large burden to you. Hence, my advice is to remove spaces. Consider going into snakecase. 
+
+```{r, echo=TRUE, eval = FALSE}
+df$`Group Level` # Column name with spaces
+
+df$GroupLevel # Column name without spaces
+```
+
+### replace strings using pipes
+
+In the code below I want to replace text in the "Test" column. Notice how I call the column once and then use the pipe operator to list the rest
+
+```{r, echo=TRUE, eval=FALSE}
+df %>%
+mutate(Test = str_replace_all(Test, ":", "×") %>%
+         str_replace_all("group2.L", "Group") %>%
+         str_replace_all("mriloc2", "") %>%
+         str_replace_all("hemisphereLeft", "LeftHemi") %>%
+         str_replace_all("hemisphereRight", "RightHemi") 
+)
+```
+
+### Useful Links
+Below is a list of pages I have collected that have come in very useful for beginners
+
+#### Selecting using the tidyverse
+
+https://suzan.rbind.io/2018/02/dplyr-tutorial-3/#filtering-based-on-a-exact-character-variable-matches
+
+#### Working with dates 
+
+We won't cover working with dates much in this guide, because its not typical. However, should you need them the link below provides a general walkthrough.
+https://www.r-bloggers.com/a-comprehensive-introduction-to-handling-date-time-in-r-2/
+
+
+````{r, echo=TRUE, eval = FALSE}
+# Adding Names to Columns ==================
+# This can be required when using certain plotting functions like "likert" --> see ALPH likert4.R
+names(items) <- c(
+  symptoms_decLOC="Did the patient have loss of consciousness?",
+  symptoms_headache="Did the patient have headaches?",
+  symptoms_nausea_vomitting="Did the patient have nausea/vomiting?",
+  symptoms_cranialNerve_paresis="Did the patient have cranial nerve paresis?",
+  symptoms_gait_disturbance="Did the patient have any gait disturbances?")
+# Data Wrangling ----------------
+df1$Group <- rep("Body", length(df1$`File name`))
+df2$Group <- rep("Genu", length(df2$`File name`))
+df3$Group <- rep("Splenium", length(df3$`File name`))
+
+idx <- unique(df3l$`File name`) == df1$`File name`
+
+dfx <- df1 %>%
+  select_if(df1$`File name` == unique(df3$`File name`))  
+combinedDF <- rbind(df1,df2,df3)
+
+df1[!(df1$`File name` %in% df3$`File name`)]
+
+idx <- setdiff(df1$`File name`, df2$`File name`)
+df1 <- df1[,idx]
+
+# Convert several columns to numeric ----------
+ cols <- grep(pattern = "CC_F|Left|Right", x = names(df), value = TRUE)
+ df[, cols] <- lapply(df[ , cols], function(x) suppressWarnings(as.numeric(x))) #supressWarnings is so you don't get "NAs introduced by coercion" in your console output
+# Count the number of NA's in each column of a dataframe ----------
+sapply(df, function(x) sum(is.na(x))) #this is different than "summary(df)" which gives you information on more than NA's
+
+# Add column in specific spot ========
+df <- add_column(df, "DMT_line2" = df$DMT_line, .after = "DMT_line")
+
+# Add a blank column in a specific spot =====
+  items <- add_column(items, "Avg" = replicate(length(items$value.D1), NA) , .after = "value.D7")
+
+# Remove blank rows in a specific column =======
+df <- df[-which(df$start_pc == ""), ]
+
+# Removing a column based on a string match =========
+		df <- filter(df, C != "Foo")
+  # Renaming a variable in a column : str_replace (this won't take exact strings)=============
+  df1$ID <- df$ID	%>%
+    str_replace("pi6437934_2", "S2")
+  
+  # Replace an exact string -------------
+  data$OpenBCI_FileName <- gsub("\\<y\\>","", data$OpenBCI_FileName) # replaces cols with "y" but won't touch something like "My Drive"
+
+  # if you have multiple strings to replace you can use the pipe operator to get everything done in one shot
+  df$ID <- df$ID	%>%
+    str_replace("pi_14344894_9", "S9") %>% #oldstring, newstring
+	  str_replace("pi_3478_03o4_15", "S15")
+
+  # Partial String match in a column----------
+    # __Method 1: str_detect ========
+	  mtcars %>% 
+		filter(str_detect(rowname, "Merc")) # this will filter everything that has the pattern "Merc" in the column
+  
+    # __Method 2 : grepl ==========
+	dplyr::filter(mtcars, !grepl('Toyota|Mazda', type)) # Using grepl
+    cols <- grep(pattern = "symptoms|Previous_shunt", x = names(df), value = TRUE) #Select columns that start with symptoms
+	df[cols] <- as.data.frame(lapply(df[cols],function(x) {factor(x,levels=mylevels, exclude="")}))
+  
+	#__Method 3 : grep (similar to grepl) =====
+	cols <- grep(pattern = "symptoms", x = names(df2), value = TRUE) #Select columns that start with symptoms
+
+  
+  # Renaming a column ================
+  df <- df	%>%
+  df <- df	%>%
+    dplyr::rename(
+      #‘New Column Name’= ‘Old Name’
+      "month"= "Month"
+    )
+
+  # Removing NA's-----------
+    # __Method 1: is.na() ====
+    df <- df %>%
+      filter(!is.na(columnName)) # give me a new dataframe with only the international services.
+    
+    # __Method 2: na.omit() ====
+    df1 <- na.omit(df1)
+
+  # Filtering our data that fits a condition: filter=========
+  new_df <- filter(df, service=="International") # give me a new dataframe with only the international services.
+
+```
+
+To rename parts of a column using `%>%` you need to use `mutate`
+
+```{r, echo=TRUE, eval = FALSE}
+# normal way to replace strings in a column
+df$columnName = str_replace_all(df$columnName, "Contribution_", "")
+
+# Using pipe
+df %>%
+mutate(columnName = str_replace_all(columnName, "Contribution_", ""))
+```
+
+
+## For Item-based data 
+The [`likert`](https://cran.r-project.org/web/packages/sjPlot/vignettes/sjtitemanalysis.html) package seems great. I have used it to great success in past projects.
+

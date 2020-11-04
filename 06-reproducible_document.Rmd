@@ -1,0 +1,39 @@
+Making your first Reproducible Document
+
+## Why should I do this?
+
+The easiest answer is "TIME". In my experience when you finish a project
+
+## Installing Zotero
+If you do plan on being able to write documents then I suggest using Zotero. 
+
+## YAML Explained
+
+`YAML` is the first part of code in your `*.Rmd` document. It controls how your document will be compiled.
+## 
+
+
+# Example Reproducible Document
+
+## Results
+
+There was a significant effect of service on the average journey time 
+
+````{r, echo=FALSE, eval = FALSE}
+r describe.aov(model, "service", sstype = 2)
+```
+
+### Referencing a table 
+
+Descriptive statistics were run and are shown in Table \@ref(tab:journeyTime2) below 
+```{r journeyTime2}
+knitr::kable(iris, longtable=T, caption = "Descriptives")
+```
+
+### Referencing a Figure 
+
+```{r myFigure1, fig.cap = "Caption for my Figure"}
+knitr::include_graphics("images/plot1.png")
+```
+
+A plot is shown in  Figure \@ref(fig:myFigure1)

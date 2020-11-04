@@ -1,0 +1,159 @@
+# Plotting using ggplot
+
+
+-	[ ] Insert the paper comparing grammar of graphics vs MATLAB
+-	[ ] You can look at this [page](http://robertgrantstats.co.uk/drawmydata.html) to create weird data
+
+When inserting images into your RMarkdown document you can use the ([Aspect Ratio Calculator](https://andrew.hedges.name/experiments/aspect_ratio/)]
+This chapter could be a book on its own, but we are going to go over a few different principles. First without many exceptions, we use `ggplot2` to create plots in R. There are a few other packages that depend on `ggplot2` which I use to model statistical data, but we will get to those at a later time.  
+
+For inspiration here are a couple of sites you can browse through
+
+1. [R-Graph Gallery](https://www.r-graph-gallery.com/interactive-charts.html)
+2. [Top 50 ggplot Visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Scatterplot)
+	
+[ggforce](https://ggforce.data-imaginist.com/reference/index.html) might be a good package to use for my 10-20 figures
+
+```{r, eval=TRUE, echo=FALSE, fig.cap="My experience with MATLAB plots"}
+knitr::include_graphics("https://i.imgur.com/7PuGUEt.gif")
+```
+
+
+```{r, echo=TRUE}
+# Plotting -------------
+journey_time$year <- as.factor(journey_time$year)
+
+	ggplot(data = df, aes(x= ..., y = ..., color = , )) 
+  
+plot1 <- ggplot(journey_time) +
+ aes(x = service, fill = year, weight = journey_time_avg) +
+ geom_bar(position = "dodge") +
+ scale_fill_hue() +
+ labs(x = "Service", y = "Journey Time Average", title = "My Plot Name", fill = "Year") +
+ theme_minimal()
+
+  # Save the plot we created in "/images" folder ====================
+    ggsave("images/plot1.png",plot1, width=11, height=8.5, dpi=300)
+	
+```
+
+If you find yourself using the same attributes over and over again you can save them in a list beforehand and then call them 
+
+
+```{r}
+ gglayers <- list(
+    geom_boxplot() ,
+      geom_point(size = 15, aes(shape = Gender, color = group2)) ,
+      scale_shape_manual(values=c("👧","👦"), name = "Sex") , # I need 9 values (I for each ID)
+      scale_color_manual(values=c('springgreen4', 'red4'), name = "Group", labels = c("Orthopedic-injured", "Brain-injured")) ,
+      scale_fill_manual(values =c('springgreen4', 'red4'), guide = F) ,
+      #facet_wrap(~hemisphere),
+      theme_minimal() ,
+      theme(legend.position = "top",
+            legend.title = element_text(size = 12),
+            plot.title = element_text(hjust = 0.5),
+            plot.caption = element_text(face = "italic"),
+            #legend.key = element_rect(colour = 'white', fill = 'white', size = 0.5, linetype='dashed'),
+            #legend.key.size = unit(2, "cm"),
+            #legend.key.width = unit(2, "cm"),
+            legend.text = element_text(size = 10)),
+    guides(shape = guide_legend(override.aes = list(size = 5)),
+           color = guide_legend(override.aes = list(size = 5)))
+  ) 
+ 
+ ggplot(data = df.hemi %>%
+           filter(mriloc2 == "CingC", metric == "MD")) +
+    aes(x = hemisphere, y = dtiChange) + 
+   gglayers
+  
+```
+
+Below is another example using a loop, which is a common task you might need to accomplish
+
+```{r, echo=TRUE}
+# Making a loop to plot several items --------
+# I have an example of this in JumpCut projects
+  # Example 1 =====================
+  #Now this will be for(i in 1:length(ERP_Component)) && each electNum
+  electName <- unique(erp$electNum)
+  erpComp <- unique(erp$ERP_component) 
+  cond <- unique(erp$Condition)
+  cond <- cond[sort.list(cond)]
+  
+  for(ii in 1:(length(erpComp))) {
+    for(xx in 1:(length(electName))) {
+      tmp_erp <- subset(erp, ERP_component == erpComp[ii] & electNum == electName[xx]) 
+      #tmp_erp <- subset(erp, ERP_component == "P3b_Lat" & electNum == "E015") 
+      
+      #Now get each condition
+      lay = rbind(c(1,2), c(3,4)) #sets up the layout of my arranged plots
+      plot_list = list()
+      #p1 <- ggplot(data.frame(tmp2), aes(x=AthleteType), fill = AthleteType) + xlab("Athlete Type")
+      
+      for(i in 1:(length(cond))) {
+        tmp2 <- subset(tmp_erp, Condition == cond[i]) #Creates a subset that has only GoC data when i=1
+        tmp3 <- tmp2 %>% group_by(Timet, AthleteType) %>%
+          summarise(mean=ci(ERP_value)[1], lowCI=ci(ERP_value)[2], hiCI=ci(ERP_value)[3], sd=ci(ERP_value)[4])
+        p1 <- ggplot(tmp3, aes_string(x=names(tmp3)[2],y=names(tmp3)[3],fill=names(tmp3)[2]))  #dl[2] = Group
+        p1 <- p1 + geom_bar(stat="identity") + geom_errorbar(aes(ymin=lowCI, ymax=hiCI),width=.2) + facet_wrap(~Timet) + scale_fill_grey() +
+          theme(legend.position="none", axis.text=element_text(size=8),axis.title.x=element_blank(), axis.title.y=element_blank(),plot.title = element_text(hjust = 0.5))
+        p1 <- p1 + 
+		geom_jitter(data=tmp2,mapping= aes_string(x=names(tmp2)[10], y = names(tmp2)[8], color = names(tmp2)[1]),position=position_jitter(width=.25, height=0),size = 2.9, alpha = 9/10) + theme(legend.position="none")
+        
+        if (i==1){
+          p1 <- p1 + labs(title = "Correct/Go Condition")
+        } else if (i==2) {
+          p1 <- p1 + labs(title = "Correct/No-Go Condition")
+        } else if (i==3) {
+          p1 <- p1 + labs(title = "Incorrect/No-Go Condition")
+        } 
+        plot_list[[i]] <- p1
+      }
+      # Let's create our y axis label
+      tmp_lbl <- unique(tmp2$ERP_component)
+      underscoreLocation <- unlist(gregexpr(pattern ='_',tmp_lbl)) #Gather the location of the underscore needed to create the labels
+      
+      if (endsWith(tmp_lbl,"Lat") ==1){
+        #Here I need to get the ERP Component Name. I had this in a loop but because of the different sizes (N2 = 2 vs ERN = 3 characters)
+        tmp_CompName = substr(tmp_lbl,start=1,stop=underscoreLocation-1)
+        tmp_lbl2 <- paste(electName[i],tmp_CompName,"Local Peak Latency (ms)")
+        p <- grid.arrange(plot_list[[1]],plot_list[[2]],plot_list[[3]], layout_matrix = lay, 
+                          bottom = textGrob("Note: Different colors in the jitter represent different athletes",
+                                            gp=gpar(fontsize=12,font=3), hjust=0.1),
+                          left = textGrob(paste(tmp_lbl2), rot = 90, vjust = 1))
+        #p
+        dir_lbl = paste0("images/ERP_GroupBar/PeakLat/",tmp_CompName,"PeakLat_",unique(tmp2$electNum),".png") #using paste0 removes the spaces
+        ggsave(dir_lbl,p, width=11, height=8.5, dpi=400)
+        
+      }else if (endsWith(tmp_lbl,"Amp") ==1){
+        tmp_CompName = substr(tmp_lbl,start=1,stop=underscoreLocation-1) 
+        tmp_lbl2 <- paste(tmp_CompName,"Local Peak Amplitude (")
+        
+        p <- grid.arrange(plot_list[[1]],plot_list[[2]],plot_list[[3]], layout_matrix = lay,
+                          bottom = textGrob("Note: Different colors in the jitter represent different athletes",
+                                            gp=gpar(fontsize=12,font=3), hjust=0.1),
+                          left = textGrob(bquote(.(tmp_lbl2)*mu*.("V)")), rot = 90, vjust = 1))
+        #p
+        dir_lbl = paste0("images/ERP_GroupBar/PeakAmp/",tmp_CompName,"PeakAmp_",unique(tmp2$electNum),".png") #using paste0 removes the spaces
+        ggsave(dir_lbl,p, width=11, height=8.5, dpi=400)
+      }
+    }
+  }
+  rm(underscoreLocation, tmp_CompName, tmp_lbl,tmp_lbl2, dir_lbl, i, ii, xx, electName, erpComp, cond, tmp3, tmp2, lay)
+  
+  # Example 2 ==============
+  #Create a string with the y-labels
+  par(ask=TRUE)
+  out <- NULL
+  p <- ggplot(data.frame(dl), aes(x=dl$Groupt), fill = Groupt) + xlab("Groups")
+  for(i in 10:(ncol(dl)-0)) {
+    p <- ggplot(dl, aes_string(x=names(dl)[2], y = names(dl)[i], fill = names(dl)[2])) 
+    p <- p + stat_summary(fun.y = mean, geom = "bar") + stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) + facet_wrap(~CondBt) + theme(legend.position="none", axis.title.x=element_blank())
+    print(p)
+    out[[i-9]] <- p
+  }
+  s1 <- marrangeGrob(grobs=out, nrow = 2, ncol=2)
+  ggsave("try2.pdf",s1)
+  dev.off
+
+```

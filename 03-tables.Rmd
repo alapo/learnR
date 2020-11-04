@@ -1,0 +1,61 @@
+# Creating tables
+
+In our final document we will want tables to describe our data. Below we create a table which contains demographic information on our sample. 
+
+
+```{r, echo=TRUE}
+# Taking the mean and confidence interval =============
+    # __Method #1 - Easy #########
+      journey_time <- Rmisc::summarySE(data = df,
+                                       measurevar = "journey_time_avg",
+                                       groupvars = c("service","year"),
+                                       conf.interval = 0.95,
+                                       na.rm = TRUE,
+                                       .drop = TRUE)
+									   
+    # To get a descriptive table
+
+  tbl.descFullACAP <- Rmisc::summarySE(data = df.mri %>%
+                           filter(metric == "FA", mriloc == "CC_FMajor"),
+                         measurevar = "age",
+                         groupvars = c("group","gender"),
+                         conf.interval = 0.95,
+                         na.rm = TRUE,
+                         .drop = TRUE) %>%
+          janitor::clean_names("upper_camel") %>%
+          rename(
+            "CI" = "Ci",
+            "SE" = "Se",
+            "SD" = "Sd"
+          ) %>%
+            mutate_at(vars(Age,SD,SE,CI), funs(round(., 3)))
+    
+	          cgwtools::resave(tbl.descFullACAP, file = "data/tables.RData") #resave a list of tables that I'll use in the .Rmd file.
+
+	# __Method 2 - More options
+	df %>%
+		group_by(Channel) %>%
+		summarise_each(funs(mean, sd))
+		
+		
+	dt <- data.table(df)
+	group_by(dt, Channel_46)
+    # __Method 2b -  Not so Easy ##################
+
+        # descriptives <- demo%>%dplyr::group_by(AthleteType)%>%
+        #   dplyr::summarise(
+        #     "Mean Height (cm)" = round(mean(Height_cm),2)
+        #     , "Mean Weight (kg)" = round(mean(Weight_kg),2)
+        #     , "Mean Age (Years)" = round(mean(AgeInYears),2)
+        #     , "Number of Concussions" = round(mean(NumPriorConc),2)
+        #     , "Number of Diagnosed Concussions" = round(mean(NumDiagConc),2)
+        #     , "Number of Undiagnosed Concussions" = round(mean(NumUndiagConc),2)
+        #   )
+```
+
+You may also choose to write these to an xlsx file 
+
+```{r, echo=TRUE}
+df <- iris
+xlsx::write.xlsx2(df, "test.xlsx", row.names = FALSE, sheetName = "SheetNumber1", append = TRUE) # uses the xlsx package
+```

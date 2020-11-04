@@ -1,0 +1,101 @@
+# Creating your first script {#first_script}
+
+A script can be broken down into a few layers which we are going to go through in detail, but here's a general overview.
+
+1. Load/install required packages
+2. Load your data
+3. Perform data wrangling tasks
+4. Then what?
+	a. create figures
+	b. run statistics
+	c. create tables
+5. Save outputs
+
+Figures are saved in your `/images` directory, whereas the statistics and tables are saved in `/data` for future use. Each section is coded so that I can fold/unfold a given section. This allows me to only focus on the section of code that is important at that given point and time.
+
+
+## Part 1: Loading/installing packages needed
+
+At the very top of my script I will load the packages I need to get things done. This will vary slightly depending on the script. For example some of my packages (e.g., `lme4` or `easystats`) are only loaded when I run statistics. There's a few example below, I suggest skipping to the section that applies to your situation.
+
+```{r, echo = TRUE}
+# Load/Install required packages ---------------------
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(conflicted,readxl, ggplot2, esquisse, Rmisc, tidyverse, car, easystats, apastats, sjlabelled) #p_load This function is a wrapper for library and require. It checks to see if a package is installed, if 
+```
+
+## Part 2: Loading your data
+
+You should have data that you are trying to manipulate. Below I show the most common examples. I generally always call my data `df`. This allows me to easily copy/paste code between projects. Its good practice to do this if you can. Therefore, as you advance with your R scripts you won't need to spend precious time using `Find/Replace`.
+
+
+### xlsx 
+
+```{r, echo = TRUE, eval=FALSE}
+# Load your dataset ---------------------
+df <- read_excel("raw/CC_Body_FA.xlsx", sheet = "Sheet1" ) # import your dataset - uses 'readxl'
+```
+
+### csv
+When I have particularly large files to write from MATLAB, I prefer to use `*.csv` files over `*.xlsx` because they write faster. If you are dealing with datasets that are larger than 1GB in size you should consider using `data.table` instead of `data.frame`.  
+
+```{r, echo = TRUE, eval=FALSE}
+# Load your dataset ---------------------
+df = data.table::fread("C:/Users/DunnLab/Google Drive/Aty_fNIRS - Seven Day/raw/TimeSeriesDatasetLobesMean.csv", header = TRUE)  # requires 'data.table' library
+```
+
+### Google Sheet 
+It is also possible to read from a Google Sheet using the `googlesheets4` package.
+
+```{r, echo = TRUE, eval=FALSE}
+df <- read_sheet("https://docs.google.com/spreadsheets/d/1V99DMca-Qdy3G7kyg9zTONvBVagtnBrj4nm78Fj1vU8", sheet = "Head Measures & Information") # requires 'googlesheets4' library
+```
+
+### sav (SPSS)
+
+This is the general data format for SPSS. You can do so by using the `foreign` package.
+
+
+A full tutorial on importing other data types can be seen here on [DataCamp](https://www.datacamp.com/community/tutorials/r-data-import-tutorial). In general, try and stick to the formats shown above.
+
+Finally, its possible you want to open data from other forms including
+	1. *.txt
+	2. *.
+	3. SPSS
+	4. Mini-table
+
+## Cleaning your imported data.
+
+It's possible to clean up your dataset as it comes in by using the [janitor](https://github.com/sfirke/janitor) package. Click the link for a couple examples. In essence it will scan through the column names and fix them according to a notation you specify. 
+
+
+Now that you have your `df` loaded, lets take a look and see what we have. There are 4 types of data that can be held in a data.frame, in R these are referred to as `class`. 
+
+1. Numeric
+2. Characters
+3. Factors
+4. Dates
+
+You can view the type within a particular column by running the following code
+
+```{r, echo = TRUE}
+sapply(df, class)
+```
+
+The `class` of your columns may not seem important right now, but later on when we manipulate the data, it will be crucial to make sure these are accurate. Below is an example of an `xlsx` file which is imported. We expected `dti_value` to be numeric, but due to a dash in one of the cells, it was imported as character.
+
+## Part 3: Saving Outputs
+
+```{r, echo=TRUE, eval=FALSE}
+# Save your environment ------------
+	# Save it to .RData -----------
+	save(journey_time,modsum, model, file = "data/analyzedData.RData") #Save a list of tables that I'll use in the .Rmd file.
+
+	# Save the tables into data/tables.RData using "patterns" ==================
+	save(list=ls(pattern="table"), file = "data/tables.RData") #Save a list of tables that I'll use in the .Rmd file.
+	save(list=ls(pattern="mod"), file = "data/stats.RData")
+
+# Optional - Save df as xlsx --------
+xlsx::write.xlsx(tmp2, "data/interactions.xlsx", sheetName = "Interaction2", append = TRUE) # uses the xlsx package
+openxlsx::write.xlsx(daily, "data/daily.xlsx") # uses the openxlsx package but you can't append sheets with this package as far as I know.
+```

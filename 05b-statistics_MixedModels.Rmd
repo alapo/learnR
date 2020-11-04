@@ -1,0 +1,241 @@
+# Mixed Models 
+
+## To-Do
+Look at the presentation (Google Slides) I made for Keith's lab (the one Ashley asked me to make). It has a ton of information I can use here.
+
+## Preamble
+I made mixed models its own section because it is not your typical analyses. I would highly recommend that any student starts with more traditional analyses such as ANOVA or linear regression before taking on mixed model analyses.
+
+```{r, echo=TRUE, eval=FALSE}
+# to speed up computation, let's use only 50% of the data
+set.seed(123)
+
+# linear model (model summaries across grouping combinations)
+broomExtra::grouped_glance(
+  data = dplyr::sample_frac(tbl = ggplot2::diamonds, size = 0.5),
+  grouping.vars = c(cut, color),
+  formula = price ~ carat - 1,
+  ..f = stats::lm,
+  na.action = na.omit
+)
+
+# linear mixed effects model (model summaries across grouping combinations)
+broomExtra::grouped_glance(
+  data = dplyr::sample_frac(tbl = ggplot2::diamonds, size = 0.5),
+  grouping.vars = cut,
+  ..f = lme4::lmer,4
+  formula = price ~ carat + (carat | color) - 1,
+  control = lme4::lmerControl(optimizer = "bobyqa")
+  
+  
+  fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
+
+# df.residual in `glance`
+broom.mixed::tidy(fm1)
+
+broom.mixed::glance(fm1)
+
+# fetch the p-values
+parameters::model_parameters(fm1) %>%
+  broomExtra::easystats_to_tidy_names()
+)
+
+
+# p-values across groups in mixed-model
+iris %>%
+  group_by(Species) %>%
+  group_modify(., ~ broomExtra::easystats_to_tidy_names(as.data.frame(parameters::model_parameters(
+    lme4::lmer(Sepal.Length ~ Petal.Length + Petal.Width + Petal.Length * Petal.Width + (1 | Sepal.Width),
+               data = .x,
+               control = lme4::lmerControl(optimizer = "bobyqa")
+    )
+  ))))
+```
+
+Here is code I used from a recent project
+
+```{r}
+tmp <- clear.labels(df.nirs) %>%
+  group_by(metric) %>%
+  group_modify(., ~ broomExtra::easystats_to_tidy_names(as.data.frame(parameters::model_parameters(
+    lme4::lmer(value ~ Connection*Task + group*Connection + group*Task + group*Connection*Task + (1|Subject),
+               data = .x,
+               control = lme4::lmerControl(optimizer = "bobyqa")
+    )
+  )))) %>%
+  filter(term != "(Intercept)") %>% # remove intercept from report
+  mutate(term =  str_replace_all(term, ":", "×") %>% 
+           str_replace_all("Connection", "") %>%
+           str_replace_all("Task", "") %>%
+           str_replace_all("group.L", "Group") %>%
+           str_replace_all("->", "→")
+  ) %>%
+  janitor::clean_names("upper_camel") %>%
+  dplyr::rename(
+    "p" = "PValue",
+    "dferror" = "DfError"
+  ) %>%
+  filter((str_detect(Term, "Group")) & p < .1) %>% # Give me only the results that show group differences, set p @.1
+  mutate_if(is.numeric, round, 5) # round to 5 digits (makes it easier to read)
+
+View(tmp)
+```
+
+To visualize your mixed model you can use sjPlot as shown [below](https://cran.r-project.org/web/packages/sjPlot/vignettes/plot_interactions.html) or [here](https://strengejacke.github.io/sjPlot/articles/plot_marginal_effects.html)
+
+```
+pacman::p_load(sjPlot, sjmisc, ggplot2)
+data(efc)
+theme_set(theme_sjplot())
+
+# make categorical
+efc$c161sex <- to_factor(efc$c161sex)
+
+# fit model with interaction
+fit <- lm(neg_c_7 ~ c12hour + barthtot * c161sex, data = efc)
+
+plot_model(fit, type = "pred", terms = c("barthtot", "c161sex"))
+
+
+
+plot_model(fit, type = "int")
+
+plot_model(fit, type = "pred", terms = c("c161sex", "barthtot [0, 100]"))
+
+fit <- lm(neg_c_7 ~ c12hour + c161sex * barthtot, data = efc)
+plot_model(fit, type = "int")
+
+plot_model(fit, type = "int", mdrt.values = "meansd")
+
+
+# fit model with 3-way-interaction
+fit <- lm(neg_c_7 ~ c12hour * barthtot * c161sex, data = efc)
+
+# select only levels 30, 50 and 70 from continuous variable Barthel-Index
+plot_model(fit, type = "pred", terms = c("c12hour", "barthtot [30,50,70]", "c161sex"))
+
+plot_model(fit, type = "int")
+
+```
+
+## Post-hoc in mixed models
+
+This can be a bit tricky because you want to include your random effect.
+
+You could [use](https://stats.stackexchange.com/questions/237512/how-to-perform-post-hoc-test-on-lmer-model) 
+
+1. `emmeans::emmeans()`
+2. `lmerTest::difflsmeans()`
+3. `multcomp::glht()`
+
+
+# Running your models
+
+For starters I am a big fan of using something that allows me to run through several models to get an overall *feel* for the data. This usually involves either [broom](http://varianceexplained.org/r/broom-intro/) or [rstatix](https://rpkgs.datanovia.com/rstatix/) package which allows for pipe friendly modelling. I will commonly do this in order to evaluate if random factors should be included in my final model. If you are running mixed models you can use [broomExtra](https://indrajeetpatil.github.io/broomExtra/) or [broom.mixed](https://github.com/bbolker/broom.mixed). I would recommend broomExtra which depends on broom.mixed (so its hits 2 birds with one stone).
+
+```{r, eval = FALSE, echo = TRUE}
+# Question: Is there a subject effect in our data?
+# if there is then we introduce it as a random effect.
+
+tbl.SubjectEffect <- df.nirs %>% 
+  group_by(metric) %>% 
+  do(tidy(lm(value ~ Subject, .))) # requires broom
+
+tbl.SubjectEffect <- df.nirs %>% 
+  group_by(metric) %>% 
+  rstatix::anova_test(value~Subject)
+# answer is yes. There is a subject effect that we must accomodate
+```
+
+For a very complete guide on running ANOVAs in R for your first time. [This](https://www.datanovia.com/en/lessons/anova-in-r/) post is immaculate.
+
+You can see some exercises [here](https://stats.idre.ucla.edu/r/seminars/interactions-r/)
+
+# Modeling your data
+
+To test the normality of your data you can use a few different methods
+
+1. Plot your data
+2. Check skewness and kurtosis
+3. Shapiro test.
+
+In order to visualize your linear model I use a few packages
+
+1. [sjPlot](http://www.strengejacke.de/sjPlot/reference/plot_model.html) and sjmisc
+2. [jtools](
+https://cran.r-project.org/web/packages/jtools/vignettes/summ.html)
+2. [interactions](https://github.com/jacob-long/interactions)
+3. [ggeffects](https://strengejacke.github.io/ggeffects/]) (used less)
+4. To visualize lmer mixed models see [here](https://rstudio-pubs-static.s3.amazonaws.com/38628_54b19baf70b64eb5936a3f1f84beb7da.html)
+5. To follow up a mixed-model [here](https://benwhalley.github.io/just-enough-r/contrasts-lmer.html)
+
+
+```{r}
+# Load typical packages
+pacman::p_load(sjPlot, sjmisc, ggplot2, lme4)
+
+model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+r <- report::report(model)
+table_short(r)
+
+performance::check_model(Model) # will make some plots to check your model 
+
+# Individually checking model. 
+# Note: I will do this if I see something problematic after running `check_model`
+
+parameters::model_parameters(model)
+
+performance::check_collinearity(model)
+performance::plot(check_collinearity(model))
+```
+
+I am still working on code that will do this when I run my mixed models in a loop. But the [GitHub](https://github.com/IndrajeetPatil/broomExtra/) page should help 
+
+```{r}
+# Load typical packages
+pacman::p_load(sjPlot, sjmisc, ggplot2, lme4)
+
+model <- lm(mpg ~ wt + cyl + gear + disp, data = mtcars)
+r <- report::report(model)
+table_short(r)
+
+performance::check_model(Model) # will make some plots to check your model 
+
+# Individually checking model. 
+# Note: I will do this if I see something problematic after running `check_model`
+
+parameters::model_parameters(model)
+
+performance::check_collinearity(model)
+performance::plot(check_collinearity(model))
+```
+
+
+
+### Mixed Models: Misc Info
+
+* [Contrast Analysis](https://easystats.github.io/modelbased/articles/estimate_contrasts.html) post-hoc mixed models
+* [Visualize](https://easystats.github.io/modelbased/index.html) your mixed models
+* Good introduction: https://ourcodingclub.github.io/tutorials/mixed-models/
+* More intro: https://www.jaredknowles.com/journal/2013/11/25/getting-started-with-mixed-effect-models-in-r
+* https://dynamicecology.wordpress.com/2015/02/05/how-many-terms-in-your-model-before-statistical-machismo/
+* https://m-clark.github.io/mixed-models-with-R/random_slopes.html
+
+* Package that gives pseudo-R^2 for mixed models
+	+ https://cran.r-project.org/web/packages/jtools/vignettes/summ.html#report_robust_standard_errors
+	
+	+ https://rinterested.github.io/statistics/mixed_effects_comparison.html
+* [easystats](https://easystats.github.io/blog/posts/) blog. Has some great posts with code included.
+				
+## Looking at interactions
+
+src: https://cran.r-project.org/web/packages/emmeans/vignettes/interactions.html
+			
+### Packages
+mertool is a gui for modelling --> https://www.jaredknowles.com/journal/2015/8/12/announcing-mertools
+tidymodels: https://www.tidymodels.org/learn/statistics/tidy-analysis/
+
+To assess model performance I use the [performance](https://easystats.github.io/performance/) package. You can visualize your model using this [vignette](https://easystats.github.io/modelbased/articles/estimate_contrasts.html)
+
+
+

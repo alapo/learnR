@@ -1,0 +1,50 @@
+Working with Time Series Data
+
+The first think you will need to do is convert you data.frame into a time series 
+
+```{r, echo = TRUE, eval=FALSE}
+timeseries <- ts(myDataFrame)
+```
+
+
+
+## Useful Links
+
+https://a-little-book-of-r-for-time-series.readthedocs.io/en/latest/src/timeseries.html
+https://rstudio-pubs-static.s3.amazonaws.com/84226_ad792383c050483bbae4676bc76a4038.html
+
+[RcppRoll](https://cran.r-project.org/web/packages/RcppRoll/RcppRoll.pdf) package seems very useful.
+
+## Installing Zotero
+If you do plan on being able to write documents then I suggest using Zotero. 
+
+## YAML Explained
+
+`YAML` is the first part of code in your `*.Rmd` document. It controls how your document will be compiled.
+## 
+
+
+# Example Reproducible Document
+
+## Results
+
+There was a significant effect of service on the average journey time 
+
+````{r, echo=FALSE, eval = FALSE}
+r describe.aov(model, "service", sstype = 2)
+```
+
+### Referencing a table 
+
+Descriptive statistics were run and are shown in Table \@ref(tab:journeyTime) below 
+```{r journeyTime}
+knitr::kable(iris, longtable=T, caption = "Descriptives")
+```
+
+### Referencing a Figure 
+
+```{r myFigure, fig.cap = "Caption for my Figure"}
+knitr::include_graphics("images/plot1.png")
+```
+
+A plot is shown in  Figure \@ref(fig:myFigure)

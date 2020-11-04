@@ -1,0 +1,85 @@
+# Introduction {#intro}
+
+## Preamble 
+
+This documents original purpose was my own cheat sheet to keep notes on data science problems I encountered in R during my work. I transitioned to R from MATLAB after experiencing tremendous frustration making plots for a paper I [published](https://pubmed.ncbi.nlm.nih.gov/28818697/). 
+
+As I continued throughout my PhD, I remember writing 10 pages for my thesis when suddenly...my document froze and I lost all my work. From my mentors at the time I used a very traditional workflow 
+
+- MATLAB was used to process data which was then
+- Imported into SPSS so I could run statistics
+- The output from SPSS was then brought into Excel or MATLAB again so I could make nice figure (SPSS isnt great at this)
+- Finally everything was compiled into a Word (*.docx) document
+- References were handled using EndNote.
+
+I remember leaving the lab that day in frustration, knowing that I would have to rewrite all those pages. I vowed to find a better way to do things, and that way for me has been RStudio. Its not perfect, but its the closest thing I have found. 
+
+This book will bring you through several tasks that an everyday scientist has to accomplish and demonstrates them using YouTube videos and examples. 
+
+**Add figures and content from the Data Battles presentations**
+
+## How this book is structured
+
+Maybe add description here for this.
+
+## Keys to Learning
+
+Do not try to memorize code you can easily look up.
+
+In my experience, the best way to get things done is to have a "Template" with good description. When I start a new project I simply make a copy of it. 
+
+
+
+## Quick Introduction to reproducible science
+I am guilty of this in my older projects. Have you ever looked back on data you ran several years ago only to realize you have no idea what data was used to create certain figures or tables? Traditional project pipelines usually involve some combination of 
+
+1. Data processing in MATLAB
+2. Statistics in SPSS, SAS, GraphPad etc
+3. Writing the document in Microsoft Word
+
+The issue with this pipeline is shown below. Where we go through a very plausible situation where your supervisor asks for changes to be made in your data. 
+
+**Add figures with Jeff/ Academic pipeline from the Data Battles presentations**
+
+
+## How to use this book
+
+For the most part, this book is based on my own learning style. Which emanates from actually "using" the code. Think of this book as a recipe that you can follow. In most cases you should be able to `copy` / `paste` the code chunks and modify them slightly to work with your code. My general advice is to get used to spotting patterns in code. You may not need to understand every argument within a function. If your particular problem does require more specific code, you can always look up your given function on [rdocumentation.org](https://www.rdocumentation.org/packages/ggplot2/versions/3.3.2)
+
+## Reproducible Science Link
+
+[This](https://reproduciblescience.org/) site contains a list of curated sources discussing reproducibility.  You can find academic papers, blog posts, popular media articles, talks, tools, and more.
+
+List of Resources
+
+* https://github.com/qinwf/awesome-R#awesome-
+* List of resources from [easystats](https://easystats.github.io/blog/resources/) blog
+
+## How to make a provocative Conference Poster
+
+This [link](https://www.youtube.com/watch?v=1RwJbhkCA58&feature=youtu.be) gives one of the best overviews I have seen into what should be included in an academic poster.
+
+Here are a few more links
+
+- https://odeleongt.github.io/postr/
+- https://github.com/GerkeLab/betterposter
+- https://wytham.rbind.io/post/making-a-poster-in-r/#fnref1
+- https://hsp.berkeley.edu/sites/default/files/ScientificPosters.pdf
+
+
+## Misc Student Resources 
+
+* *sci-hub.tw*
+	+ Gets you full-length research articles without the paywall. I recommend [integrating](https://github.com/ethanwillis/zotero-scihub) it inside Zotero. [Link 1](https://medium.com/@gagarine/use-sci-hub-with-zotero-as-a-fall-back-pdf-resolver-cf139eb2cea7)
+* *EndNote Click* (previously Kopernio)
+	+ Is an alternative to sci-hub but its directly integrated into your browser (requires institutional login).
+* *https://b-ok.cc/*
+	+ This is similar to sci-hub but it works for books. Not sure where the ethical line falls on this one. You can use it to get pdfs on Books such as "Writing your first paper".
+* *QuillBot*
+	+ AI Paraphrasing Tool. Can be useful when you have writers block and need some suggestions. Be careful of plagiarism.
+* *[Corporate BS Generator](https://www.atrixnet.com/bs-generator.html)*
+	+ There are a few of these you can Google. The words they can provide can be good to include in grants to sound fancy.
+
+
+
+

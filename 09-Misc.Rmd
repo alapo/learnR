@@ -1,0 +1,9 @@
+# How to create a GitHub key
+
+You are going to be installing packages from multiple sources. When installing a package for the first time you might need to install it from GitHub. It's a great source for packages that have not yet been released on CRAN. 
+
+Under normal circumstances your ability to install packages from GitHub is limited. However you can create an authentication key which will give you unlimited power. I would highly suggest doing this during your setup.
+
+
+
+
