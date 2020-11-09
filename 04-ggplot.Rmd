@@ -4,6 +4,9 @@
 -	[ ] Insert the paper comparing grammar of graphics vs MATLAB
 -	[ ] You can look at this [page](http://robertgrantstats.co.uk/drawmydata.html) to create weird data
 
+Why should you use ggplot? Well its based on the grammar of graphics which is an efficient way to plot your data. [here](https://joss.theoj.org/papers/10.21105/joss.00568) is a paper which demonstrates the efficiency of the grammar of graphics in MATLAB.
+
+
 When inserting images into your RMarkdown document you can use the ([Aspect Ratio Calculator](https://andrew.hedges.name/experiments/aspect_ratio/)]
 This chapter could be a book on its own, but we are going to go over a few different principles. First without many exceptions, we use `ggplot2` to create plots in R. There are a few other packages that depend on `ggplot2` which I use to model statistical data, but we will get to those at a later time.  
 
