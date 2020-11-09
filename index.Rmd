@@ -136,8 +136,6 @@ So could [this](https://amber.rbind.io/blog/2017/11/15/syntax-highlighting/)
 
 ## Other Resources
 
-<https://medium.com/@huixiangvoice/the-hidden-story-behind-the-suicide-phd-candidate-huixiang-chen-236cd39f79d3?fbclid=IwAR3zJ0zHAhNaHhRdXkiHfHOJV9RjZWDW6KReN6FB9lkxGeWwzWsDoYYTv10>
-
 Book called [Just Enough R](https://benwhalley.github.io/just-enough-r/datasets-dataframes.html)
 
 To test the normality of your data you can use a few different methods
