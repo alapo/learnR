@@ -127,6 +127,12 @@ end
 
 So could [this](https://amber.rbind.io/blog/2017/11/15/syntax-highlighting/)
 
+## CSS / Templates
+
+-	https://bookdown.org/yihui/bookdown/templates.html
+-	[CSS course](https://rstudio4edu.github.io/rstudio4edu-book/css-crash.html#css-crash)
+-	[Blogdown Themes](https://bookdown.org/yihui/blogdown/themes.html)
+
 ## Misc code/data
 
     gitbook(fig_caption = TRUE, number_sections = TRUE, self_contained = FALSE, 

@@ -1,10 +1,11 @@
 # Plotting using ggplot
 
-
+-	[ ] Go through each element in a ggplot. See [here for scales](https://www.datanovia.com/en/blog/ggplot-colors-best-tricks-you-will-love/)
 -	[ ] Insert the paper comparing grammar of graphics vs MATLAB
 -	[ ] You can look at this [page](http://robertgrantstats.co.uk/drawmydata.html) to create weird data
+-	[ ] Add suggestion to join #tidytuesday which shows off just how fancy you can get. Its personally too much for my purposes and projects but it does give you an idea of what is possible. Try to notice the concepts that are being used. They are the same core principles that are shown here.
 
-Why should you use ggplot? Well its based on the grammar of graphics which is an efficient way to plot your data. [here](https://joss.theoj.org/papers/10.21105/joss.00568) is a paper which demonstrates the efficiency of the grammar of graphics in MATLAB.
+Why should you use ggplot? Well its based on the grammar of graphics which is an efficient way to plot your data. [Here](https://joss.theoj.org/papers/10.21105/joss.00568) is a paper which demonstrates the efficiency of the grammar of graphics in MATLAB.
 
 
 When inserting images into your RMarkdown document you can use the ([Aspect Ratio Calculator](https://andrew.hedges.name/experiments/aspect_ratio/)]
@@ -20,6 +21,8 @@ For inspiration here are a couple of sites you can browse through
 ```{r, eval=TRUE, echo=FALSE, fig.cap="My experience with MATLAB plots"}
 knitr::include_graphics("https://i.imgur.com/7PuGUEt.gif")
 ```
+
+You can find the ggplot [cheatsheet](https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf) here which you can refer to in case you are in need of inspiration.
 
 
 ```{r, echo=TRUE}

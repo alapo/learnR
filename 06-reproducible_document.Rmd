@@ -1,4 +1,4 @@
-Making your first Reproducible Document
+# Making your first Reproducible Document
 
 ## Why should I do this?
 
@@ -13,9 +13,9 @@ If you do plan on being able to write documents then I suggest using Zotero.
 ## 
 
 
-# Example Reproducible Document
+## Example Reproducible Document
 
-## Results
+### Results
 
 There was a significant effect of service on the average journey time 
 
@@ -25,7 +25,7 @@ r describe.aov(model, "service", sstype = 2)
 
 ### Referencing a table 
 
-Descriptive statistics were run and are shown in Table \@ref(tab:journeyTime2) below 
+Descriptive statistics were run and are shown in Table `\@ref(tab:journeyTime2)` below 
 ```{r journeyTime2}
 knitr::kable(iris, longtable=T, caption = "Descriptives")
 ```
@@ -36,4 +36,4 @@ knitr::kable(iris, longtable=T, caption = "Descriptives")
 knitr::include_graphics("images/plot1.png")
 ```
 
-A plot is shown in  Figure \@ref(fig:myFigure1)
+A plot is shown in  Figure `\@ref(fig:myFigure1)`

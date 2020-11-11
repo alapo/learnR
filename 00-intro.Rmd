@@ -79,7 +79,15 @@ Here are a few more links
 	+ AI Paraphrasing Tool. Can be useful when you have writers block and need some suggestions. Be careful of plagiarism.
 * *[Corporate BS Generator](https://www.atrixnet.com/bs-generator.html)*
 	+ There are a few of these you can Google. The words they can provide can be good to include in grants to sound fancy.
+*  *[Microsoft Academic](https://academic.microsoft.com/home)* 
+	+ Decent alternative with a user-friendly GUI for searching papers
 
 
+## List of R Resources
 
+Below are a list of resources that might be of interest if you want more than this book offers. The first list was accessed from a [Google Doc](https://docs.google.com/document/u/1/d/1qtdiLbU32F_AVNRlF7d23wvPSgTCYqr5TFeBwbncPcw/mobilebasic)
 
+*	[Data Science for Social Scientists](http://datascience.tntlab.org/)
+*	[UO Psych R Bootcamp](https://uopsych-r-bootcamp-2020.netlify.app/)
+*	[Another list of R resources](https://github.com/Joscelinrocha/Learning-R-Resources/wiki)
+*	[Learning Statistics with R](http://tidylsr.djnavarro.net/)

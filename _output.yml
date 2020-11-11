@@ -5,8 +5,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./">R_Guide</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+        <li><a href="https://github.com/alapo/learnR" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/alapo/learnR/edit/main/%s
     download: ["pdf", "epub"]
     fontsettings:
        theme: sepia
@@ -17,7 +17,7 @@ bookdown::pdf_book:
     in_header: styles/preamble.tex
     before_body: styles/before_body.tex 
   latex_engine: xelatex
-  highlight: "espresso"
+  highlight: "default"
   number_sections: yes
   toc: TRUE
   toc_depth: 5
